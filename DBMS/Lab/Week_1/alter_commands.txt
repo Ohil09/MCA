@@ -1,0 +1,193 @@
+SQL> ALTER TABLE proj ADD CONSTRAINT PK_PROJ primary key(dno,prj_no);
+
+Table altered.
+
+SQL> desc proj;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DNO                                       NOT NULL CHAR(3)
+ PRJ_NO                                    NOT NULL CHAR(3)
+ PRJ_NAME                                  NOT NULL VARCHAR2(20)
+ PRJ_CREDIT                                         NUMBER(2)
+ STRT_DATE                                 NOT NULL DATE
+ END_DATE                                           DATE
+
+SQL> ALTER TABLE TASK ADD CONSTRAINT FK_PRJ_DNO_ID foreign key(prj_id,dno) references proj ON DELETE SET NULL;
+
+Table altered.
+
+SQL> desc task;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PRJ_ID                                             CHAR(3)
+ DNO                                                CHAR(3)
+ TASK_ID                                            NUMBER(3)
+ TASK_NAME                                 NOT NULL VARCHAR2(30)
+ S_DATE                                    NOT NULL DATE
+ E_DATE                                             DATE
+ STATUS                                             VARCHAR2(12)
+
+SQL> ALTER TABLE EMP ADD proj_id char(3);
+
+Table altered.
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(3)
+ ENAME                                     NOT NULL VARCHAR2(15)
+ JOB                                                VARCHAR2(15)
+ MGRID                                              NUMBER(3)
+ DATE_BIRTH                                         DATE
+ SAL                                                NUMBER(10,2)
+ COMM                                               NUMBER(10,2)
+ DEPTNO                                             CHAR(3)
+ DATE_JOIN                                          DATE
+ PROJ_ID                                            CHAR(3)
+
+SQL> ALTER TABLE EMP ADD CONSTRAINT FK_dept_no_proj_id foreign key(deptno,proj_id) referencing proj;
+
+Table altered.
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(3)
+ ENAME                                     NOT NULL VARCHAR2(15)
+ JOB                                                VARCHAR2(15)
+ MGRID                                              NUMBER(3)
+ DATE_BIRTH                                         DATE
+ SAL                                                NUMBER(10,2)
+ COMM                                               NUMBER(10,2)
+ DEPTNO                                             CHAR(3)
+ DATE_JOIN                                          DATE
+ PROJ_ID                                            CHAR(3)
+
+
+SQL> ALTER TABLE EMP ADD CONSTRAINT VALID_EMPNO_Cons check(empno > 100);
+
+Table altered.
+
+SQL> ALTER TABLE dept ADD dept_budget number(7);
+
+Table altered.
+
+SQL> desc dept;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DNO                                                CHAR(3)
+ DNAME                                     NOT NULL VARCHAR2(15)
+ LOCATION                                           CHAR(3)
+ DEPT_BUDGET                                        NUMBER(7)
+
+SQL> ALTER TABLE proj ADD prj_fund number(7);
+
+Table altered.
+
+SQL> desc proj;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DNO                                       NOT NULL CHAR(3)
+ PRJ_NO                                    NOT NULL CHAR(3)
+ PRJ_NAME                                  NOT NULL VARCHAR2(20)
+ PRJ_CREDIT                                         NUMBER(2)
+ STRT_DATE                                 NOT NULL DATE
+ END_DATE                                           DATE
+ PRJ_FUND                                           NUMBER(7)
+
+SQL> ALTER TABLE task ADD CONSTRAINT CHK_STATUS check(status IN('PENDING','IN-PROGRESS','COMPLETED'));
+
+Table altered.
+
+SQL> desc task;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PRJ_ID                                             CHAR(3)
+ DNO                                                CHAR(3)
+ TASK_ID                                            NUMBER(3)
+ TASK_NAME                                 NOT NULL VARCHAR2(30)
+ S_DATE                                    NOT NULL DATE
+ E_DATE                                             DATE
+ STATUS                                             VARCHAR2(12)
+
+SQL> ALTER TABLE task ADD CONSTRAINT PK_task_dno_prj_id Primary key(task_id,dno,prj_id);
+
+Table altered.
+
+SQL> desc task;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PRJ_ID                                    NOT NULL CHAR(3)
+ DNO                                       NOT NULL CHAR(3)
+ TASK_ID                                   NOT NULL NUMBER(3)
+ TASK_NAME                                 NOT NULL VARCHAR2(30)
+ S_DATE                                    NOT NULL DATE
+ E_DATE                                             DATE
+ STATUS                                             VARCHAR2(12)
+
+SQL> ALTER TABLE emp ADD bonus number(8,2) DEFAULT 0;
+
+Table altered.
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(3)
+ ENAME                                     NOT NULL VARCHAR2(15)
+ JOB                                                VARCHAR2(15)
+ MGRID                                              NUMBER(3)
+ DATE_BIRTH                                         DATE
+ SAL                                                NUMBER(10,2)
+ COMM                                               NUMBER(10,2)
+ DEPTNO                                             CHAR(3)
+ DATE_JOIN                                          DATE
+ BONUS                                              NUMBER(8,2)
+
+SQL> ALTER TABLE emp MODIFY(bonus number(6,2));
+
+Table altered.
+
+SQL> ALTER TABLE emp RENAME bonus to bonuses;
+ALTER TABLE emp RENAME bonus to bonuses
+                       *
+ERROR at line 1:
+ORA-14155: missing PARTITION, PARTITIONS, SUBPARTITION, or SUBPARTITIONS 
+keyword 
+
+
+SQL> ALTER TABLE emp RENAME COLUMN bonus to bonuses;
+
+Table altered.
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(3)
+ ENAME                                     NOT NULL VARCHAR2(15)
+ JOB                                                VARCHAR2(15)
+ MGRID                                              NUMBER(3)
+ DATE_BIRTH                                         DATE
+ SAL                                                NUMBER(10,2)
+ COMM                                               NUMBER(10,2)
+ DEPTNO                                             CHAR(3)
+ DATE_JOIN                                          DATE
+ BONUSES                                            NUMBER(6,2)
+
+SQL> ALTER TABLE emp DROP COLUMN bonuses;
+
+Table altered.
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(3)
+ ENAME                                     NOT NULL VARCHAR2(15)
+ JOB                                                VARCHAR2(15)
+ MGRID                                              NUMBER(3)
+ DATE_BIRTH                                         DATE
+ SAL                                                NUMBER(10,2)
+ COMM                                               NUMBER(10,2)
+ DEPTNO                                             CHAR(3)
+ DATE_JOIN                                          DATE
+
+SQL> spool off;
