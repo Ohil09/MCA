@@ -1,1 +1,105 @@
-delete from emp where proj_id ='P3';
+1.
+
+DELETE FROM EMP WHERE PROJ_ID = 'P3';
+DELETE FROM EMP WHERE PROJ_ID = 'P3'
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (OHIL.SYS_C008250) violated - child record found
+
+Oracle will not allow you to delete an employee while dependent records still reference that employee.
+
+2.
+
+SQL> DELETE FROM DEPT WHERE DNAME = 'Accounts';
+DELETE FROM DEPT
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (OHIL.C_FKDEPT) violated - child record found
+
+
+3.
+SQL> delete from emp where empno = 125 OR proj_id = 'p2';
+delete from emp where empno = 125 OR proj_id = 'p2'
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (OHIL.C_FK_MGRID) violated - child record found
+
+
+C_FK_MGRID indicates that EMP.MGRID is a foreign key referencing another employee's EMPNO (a self-referencing foreign key).
+
+4.
+
+DELETE FROM TASK WHERE PRJ_ID = 'P2';
+
+2 rows deleted.
+
+SQL> SELECT * FROM TASK WHERE PRJ_ID = 'P2';
+
+no rows selected
+
+
+5.
+SQL> select * from task where status = 'PENDING';
+
+PRJ DNO    TASK_ID TASK_NAME                      S_DATE    E_DATE
+--- --- ---------- ------------------------------ --------- ---------
+STATUS
+------------
+P4  D5           1 REQUIREMENT GATHERING          10-APR-22
+PENDING
+
+
+SQL> delete from task where status = 'PENDING';
+
+1 row deleted.
+
+SQL> ROLLBACK;
+
+Rollback complete.
+
+SQL> select * from task where status = 'PENDING';
+
+PRJ DNO    TASK_ID TASK_NAME                      S_DATE    E_DATE
+--- --- ---------- ------------------------------ --------- ---------
+STATUS
+------------
+P4  D5           1 REQUIREMENT GATHERING          10-APR-22
+PENDING
+
+
+SQL>
+
+
+6.
+
+SQL> select * from task where status = 'PENDING';
+
+PRJ DNO    TASK_ID TASK_NAME                      S_DATE    E_DATE
+--- --- ---------- ------------------------------ --------- ---------
+STATUS
+------------
+P4  D5           1 REQUIREMENT GATHERING          10-APR-22
+PENDING
+
+
+SQL> update emp set job= 'MGR', sal = 35000, mgrid = 111 where empno = 123;
+
+1 row updated.
+
+SQL> SELECT EMPNO, ENAME, JOB, SAL, MGRID FROM EMP WHERE EMPNO = 123;
+
+     EMPNO ENAME           JOB                    SAL      MGRID
+---------- --------------- --------------- ---------- ----------
+       123 Mahesh          MGR                  35000        111
+
+
+7.
+update emp set comm = 10000 where job = 'MGR';
+
+2 rows updated.
+
+
+8.
+
+
+SQL> update emp set sal = sal * 1.10 where job = 'ENG';

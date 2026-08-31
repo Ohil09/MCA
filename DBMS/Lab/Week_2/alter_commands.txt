@@ -45,7 +45,7 @@ SQL> desc emp;
  DATE_JOIN                                          DATE
  PROJ_ID                                            CHAR(3)
 
-SQL> ALTER TABLE EMP ADD CONSTRAINT FK_dept_no_proj_id foreign key(deptno,proj_id) referencing proj;
+SQL> ALTER TABLE EMP ADD CONSTRAINT FK_DEPT_NO_PROJ_ID FOREIGN KEY (DEPTNO, PROJ_ID)  REFERENCES PROJ (DNO, PRJ_NO);
 
 Table altered.
 
