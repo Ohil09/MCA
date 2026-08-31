@@ -1,0 +1,676 @@
+SQL> INSERT INTO dept VALUES('&dno','&dname','&location','&dept_budget');
+Enter value for dno: D1
+Enter value for dname: Marketing
+Enter value for location: CHN
+Enter value for dept_budget: 500000
+old   1: INSERT INTO dept VALUES('&dno','&dname','&location','&dept_budget')
+new   1: INSERT INTO dept VALUES('D1','Marketing','CHN','500000')
+
+1 row created.
+
+SQL> INSERT INTO dept VALUES('&dno','&dname','&location','&dept_budget');
+Enter value for dno: D2
+Enter value for dname: Research
+Enter value for location: MNG
+Enter value for dept_budget: 300000
+old   1: INSERT INTO dept VALUES('&dno','&dname','&location','&dept_budget')
+new   1: INSERT INTO dept VALUES('D2','Research','MNG','300000')
+
+1 row created.
+
+SQL> INSERT INTO dept VALUES('&dno','&dname','&location','&dept_budget');
+Enter value for dno: D3
+Enter value for dname: IT
+Enter value for location: BNG
+Enter value for dept_budget: 400000
+old   1: INSERT INTO dept VALUES('&dno','&dname','&location','&dept_budget')
+new   1: INSERT INTO dept VALUES('D3','IT','BNG','400000')
+
+1 row created.
+
+SQL> INSERT INTO dept VALUES('&dno','&dname','&location','&dept_budget');
+Enter value for dno: D4
+Enter value for dname: HR
+Enter value for location: BGG
+Enter value for dept_budget: 200000
+old   1: INSERT INTO dept VALUES('&dno','&dname','&location','&dept_budget')
+new   1: INSERT INTO dept VALUES('D4','HR','BGG','200000')
+INSERT INTO dept VALUES('D4','HR','BGG','200000')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA010.C_LOC) violated 
+
+
+SQL> INSERT INTO dept VALUES('&dno','&dname','&location','&dept_budget');
+Enter value for dno: D4
+Enter value for dname: HR
+Enter value for location: BNG
+Enter value for dept_budget: 200000
+old   1: INSERT INTO dept VALUES('&dno','&dname','&location','&dept_budget')
+new   1: INSERT INTO dept VALUES('D4','HR','BNG','200000')
+
+1 row created.
+
+SQL> INSERT INTO dept VALUES('&dno','&dname','&location','&dept_budget');
+Enter value for dno: D5
+Enter value for dname: Accounts
+Enter value for location: BNG
+Enter value for dept_budget: 500000
+old   1: INSERT INTO dept VALUES('&dno','&dname','&location','&dept_budget')
+new   1: INSERT INTO dept VALUES('D5','Accounts','BNG','500000')
+
+1 row created.
+
+SQL> INSERT INTO dept VALUES('&dno','&dname','&location','&dept_budget');
+Enter value for dno: NULL
+Enter value for dname: Corporate
+Enter value for location: HYD
+Enter value for dept_budget: 700000
+old   1: INSERT INTO dept VALUES('&dno','&dname','&location','&dept_budget')
+new   1: INSERT INTO dept VALUES('NULL','Corporate','HYD','700000')
+INSERT INTO dept VALUES('NULL','Corporate','HYD','700000')
+                        *
+ERROR at line 1:
+ORA-12899: value too large for column "MCA010"."DEPT"."DNO" (actual: 4, 
+maximum: 3) 
+
+
+SQL> INSERT INTO dept VALUES('&dno','&dname','&location','&dept_budget');
+Enter value for dno: D6
+Enter value for dname: Corporate
+Enter value for location: HYD
+Enter value for dept_budget: 700000
+old   1: INSERT INTO dept VALUES('&dno','&dname','&location','&dept_budget')
+new   1: INSERT INTO dept VALUES('D6','Corporate','HYD','700000')
+
+1 row created.
+
+SQL> INSERT INTO dept VALUES('&dno','&dname','&location','&dept_budget');
+Enter value for dno: D7
+Enter value for dname: Physics
+Enter value for location: MNG
+Enter value for dept_budget: 400000
+old   1: INSERT INTO dept VALUES('&dno','&dname','&location','&dept_budget')
+new   1: INSERT INTO dept VALUES('D7','Physics','MNG','400000')
+
+1 row created.
+
+SQL> INSERT INTO dept VALUES('&dno','&dname','&location','&dept_budget');
+Enter value for dno: D8
+Enter value for dname: Sales
+Enter value for location: MUB
+Enter value for dept_budget: 300000
+old   1: INSERT INTO dept VALUES('&dno','&dname','&location','&dept_budget')
+new   1: INSERT INTO dept VALUES('D8','Sales','MUB','300000')
+
+1 row created.
+
+
+SQL> INSERT INTO emp VALUES('&empno','&ename','&job','&mgrid','&date_birth','&sal','&comm','&deptno','&date_join','&proj_id');
+Enter value for empno: 100
+Enter value for ename: Ravi
+Enter value for job: MGR
+Enter value for mgrid: 111
+Enter value for date_birth: 10-10-1995
+Enter value for sal: 32000
+Enter value for comm: 19000
+Enter value for deptno: D1
+Enter value for date_join: 2-10-2006
+Enter value for proj_id: P1
+old   1: INSERT INTO emp VALUES('&empno','&ename','&job','&mgrid','&date_birth','&sal','&comm','&deptno','&date_join','&proj_id')
+new   1: INSERT INTO emp VALUES('100','Ravi','MGR','111','10-10-1995','32000','19000','D1','2-10-2006','P1')
+INSERT INTO emp VALUES('100','Ravi','MGR','111','10-10-1995','32000','19000','D1','2-10-2006','P1')
+                                                *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> INSERT INTO emp VALUES('&empno','&ename','&job','&mgrid','&date_birth','&sal','&comm','&deptno','&date_join','&proj_id');
+Enter value for empno: 100
+Enter value for ename: Ravi
+Enter value for job: MGR
+Enter value for mgrid: 111
+Enter value for date_birth: 10-OCT-1995
+Enter value for sal: 32000
+Enter value for comm: 19000
+Enter value for deptno: D1
+Enter value for date_join: 2-OCT-2006
+Enter value for proj_id: P1
+old   1: INSERT INTO emp VALUES('&empno','&ename','&job','&mgrid','&date_birth','&sal','&comm','&deptno','&date_join','&proj_id')
+new   1: INSERT INTO emp VALUES('100','Ravi','MGR','111','10-OCT-1995','32000','19000','D1','2-OCT-2006','P1')
+INSERT INTO emp VALUES('100','Ravi','MGR','111','10-OCT-1995','32000','19000','D1','2-OCT-2006','P1')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA010.VALID_EMPNO_CONS) violated 
+
+
+SQL> INSERT INTO emp VALUES('&empno','&ename','&job','&mgrid','&date_birth','&sal','&comm','&deptno','&date_join','&proj_id');
+Enter value for empno: 101
+Enter value for ename: Ravi
+Enter value for job: MGR
+Enter value for mgrid: 111
+Enter value for date_birth: 10-OCT-1995
+Enter value for sal: 32000
+Enter value for comm: 19000
+Enter value for deptno: D1
+Enter value for date_join: 2-OCT-2006
+Enter value for proj_id: P1
+old   1: INSERT INTO emp VALUES('&empno','&ename','&job','&mgrid','&date_birth','&sal','&comm','&deptno','&date_join','&proj_id')
+new   1: INSERT INTO emp VALUES('101','Ravi','MGR','111','10-OCT-1995','32000','19000','D1','2-OCT-2006','P1')
+INSERT INTO emp VALUES('101','Ravi','MGR','111','10-OCT-1995','32000','19000','D1','2-OCT-2006','P1')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA010.FK_DEPT_NO_PROJ_ID) violated - parent 
+key not found 
+
+
+
+SQL> INSERT INTO proj VALUES('&dno','&prj_no','&prj_name','&prj_credit','&strt_date','&end_date','&prj_fund');
+Enter value for dno: D1
+Enter value for prj_no: P1
+Enter value for prj_name: PAYROLL AUTOMATION
+Enter value for prj_credit: 4
+Enter value for strt_date: 01-JAN-2022
+Enter value for end_date: 30-JUN-2022
+Enter value for prj_fund: 500000
+old   1: INSERT INTO proj VALUES('&dno','&prj_no','&prj_name','&prj_credit','&strt_date','&end_date','&prj_fund')
+new   1: INSERT INTO proj VALUES('D1','P1','PAYROLL AUTOMATION','4','01-JAN-2022','30-JUN-2022','500000')
+
+1 row created.
+
+SQL> INSERT INTO proj VALUES('&dno','&prj_no','&prj_name','&prj_credit','&strt_date','&end_date','&prj_fund');
+Enter value for dno: D2
+Enter value for prj_no: P1
+Enter value for prj_name: AI RESEARCH PLATFORM
+Enter value for prj_credit: 7
+Enter value for strt_date: 15-FEB-2022
+Enter value for end_date: 14-FEB-2023
+Enter value for prj_fund: 900000
+old   1: INSERT INTO proj VALUES('&dno','&prj_no','&prj_name','&prj_credit','&strt_date','&end_date','&prj_fund')
+new   1: INSERT INTO proj VALUES('D2','P1','AI RESEARCH PLATFORM','7','15-FEB-2022','14-FEB-2023','900000')
+
+1 row created.
+
+SQL> INSERT INTO proj VALUES('&dno','&prj_no','&prj_name','&prj_credit','&strt_date','&end_date','&prj_fund');
+Enter value for dno: D3
+Enter value for prj_no: P2
+Enter value for prj_name: DATA WAREHOUSE MIGR.
+Enter value for prj_credit: 8
+Enter value for strt_date: 01-MAR-2022
+Enter value for end_date: 31-AUG-2022
+Enter value for prj_fund: 650000
+old   1: INSERT INTO proj VALUES('&dno','&prj_no','&prj_name','&prj_credit','&strt_date','&end_date','&prj_fund')
+new   1: INSERT INTO proj VALUES('D3','P2','DATA WAREHOUSE MIGR.','8','01-MAR-2022','31-AUG-2022','650000')
+
+1 row created.
+
+SQL> INSERT INTO proj VALUES('&dno','&prj_no','&prj_name','&prj_credit','&strt_date','&end_date','&prj_fund');
+Enter value for dno: D4
+Enter value for prj_no: P3
+Enter value for prj_name: CRM REVAMP
+Enter value for prj_credit: 5
+Enter value for strt_date: 10-APR-2022
+Enter value for end_date: 09-OCT-2022
+Enter value for prj_fund: 400000
+old   1: INSERT INTO proj VALUES('&dno','&prj_no','&prj_name','&prj_credit','&strt_date','&end_date','&prj_fund')
+new   1: INSERT INTO proj VALUES('D4','P3','CRM REVAMP','5','10-APR-2022','09-OCT-2022','400000')
+
+1 row created.
+
+SQL> INSERT INTO proj VALUES('&dno','&prj_no','&prj_name','&prj_credit','&strt_date','&end_date','&prj_fund');
+Enter value for dno: D1
+Enter value for prj_no: P3
+Enter value for prj_name: ERP REVAMP
+Enter value for prj_credit: 9
+Enter value for strt_date: 11-JAN-2020
+Enter value for end_date: 12-DEC-2021
+Enter value for prj_fund: 500000
+old   1: INSERT INTO proj VALUES('&dno','&prj_no','&prj_name','&prj_credit','&strt_date','&end_date','&prj_fund')
+new   1: INSERT INTO proj VALUES('D1','P3','ERP REVAMP','9','11-JAN-2020','12-DEC-2021','500000')
+
+1 row created.
+
+SQL> INSERT INTO proj VALUES('&dno','&prj_no','&prj_name','&prj_credit','&strt_date','&end_date','&prj_fund');
+Enter value for dno: D5
+Enter value for prj_no: P4
+Enter value for prj_name: WAREHOUSE AUTOMATION
+Enter value for prj_credit: 10
+Enter value for strt_date: 05-MAY-2022
+Enter value for end_date: 04-NOV-2022
+Enter value for prj_fund: 700000
+old   1: INSERT INTO proj VALUES('&dno','&prj_no','&prj_name','&prj_credit','&strt_date','&end_date','&prj_fund')
+new   1: INSERT INTO proj VALUES('D5','P4','WAREHOUSE AUTOMATION','10','05-MAY-2022','04-NOV-2022','700000')
+
+1 row created.
+
+SQL> INSERT INTO proj VALUES('&dno','&prj_no','&prj_name','&prj_credit','&strt_date','&end_date','&prj_fund');
+Enter value for dno: D6
+Enter value for prj_no: P5
+Enter value for prj_name: DATA SECURITY
+Enter value for prj_credit: 7
+Enter value for strt_date: 05-JAN-2022
+Enter value for end_date: 16-DEC-2023
+Enter value for prj_fund: 500000
+old   1: INSERT INTO proj VALUES('&dno','&prj_no','&prj_name','&prj_credit','&strt_date','&end_date','&prj_fund')
+new   1: INSERT INTO proj VALUES('D6','P5','DATA SECURITY','7','05-JAN-2022','16-DEC-2023','500000')
+
+1 row created.
+
+SQL> INSERT INTO proj VALUES('&dno','&prj_no','&prj_name','&prj_credit','&strt_date','&end_date','&prj_fund');
+Enter value for dno: D5
+Enter value for prj_no: P2
+Enter value for prj_name: AI MIGR.
+Enter value for prj_credit: 7
+Enter value for strt_date: 04-FEB-2020
+Enter value for end_date: 17-JUN-2021
+Enter value for prj_fund: 550000
+old   1: INSERT INTO proj VALUES('&dno','&prj_no','&prj_name','&prj_credit','&strt_date','&end_date','&prj_fund')
+new   1: INSERT INTO proj VALUES('D5','P2','AI MIGR.','7','04-FEB-2020','17-JUN-2021','550000')
+
+1 row created.
+
+Commit complete.
+
+
+SQL> INSERT INTO emp VALUES('&empno','&ename','&job','&mgrid','&date_birth','&sal','&comm','&deptno','&date_join','&proj_id');
+Enter value for empno: 101
+Enter value for ename: Ravi
+Enter value for job: MGR
+Enter value for mgrid: 111
+Enter value for date_birth: 10-OCT-1995
+Enter value for sal: 32000
+Enter value for comm: 19000
+Enter value for deptno: D1
+Enter value for date_join: 2-OCT-2006
+Enter value for proj_id: P1
+old   1: INSERT INTO emp VALUES('&empno','&ename','&job','&mgrid','&date_birth','&sal','&comm','&deptno','&date_join','&proj_id')
+new   1: INSERT INTO emp VALUES('101','Ravi','MGR','111','10-OCT-1995','32000','19000','D1','2-OCT-2006','P1')
+INSERT INTO emp VALUES('101','Ravi','MGR','111','10-OCT-1995','32000','19000','D1','2-OCT-2006','P1')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA010.C_FK_MGRID) violated - parent key not 
+found 
+
+
+SQL> 
+SQL> insert into emp values(150,'Jhon','CEO',NULL,'10-DEC-1990',60000,30000,NULL,'3-DEC-2008',NULL);
+
+1 row created.
+
+
+ EMPNO ENAME           JOB              MGRID DATE_BIRT       SAL      COMM DEP DATE_JOIN  PRO                                                        
+------ --------------- --------------- ------ --------- --------- --------- --- ---------- ---                                                        
+   150 Jhon            CEO                    10-DEC-90     60000     30000     03-DEC-08                                                             
+
+
+//Correcting NULL value insertion in dept table : 
+
+SQL> insert into dept values(NULL,'Corporate','HYD',700000);
+
+1 row created.
+
+
+SQL> insert into proj values('D4','P4','SALES AUTOMATION',10,'05-MAY-2022','04-NOV-2022',700000);
+
+1 row created.
+
+
+SQL> spool off;
+
+
+
+ EMPNO ENAME           JOB              MGRID DATE_BIRT       SAL      COMM DEP DATE_JOIN  PRO                                                        
+------ --------------- --------------- ------ --------- --------- --------- --- ---------- ---                                                        
+   150 Jhon            CEO                    10-DEC-90     60000     30000     03-DEC-08                                                             
+
+
+
+
+SQL> insert into emp values(100,'Ravi','MGR',111,'10-OCT-1995',32000,15000,'D1','2-OCT-2006','P1');
+insert into emp values(100,'Ravi','MGR',111,'10-OCT-1995',32000,15000,'D1','2-OCT-2006','P1')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA010.VALID_EMPNO_CONS) violated 
+
+
+SQL> insert into emp values(101,'Ravi','MGR',111,'10-OCT-1995',32000,15000,'D1','2-OCT-2006','P1');
+insert into emp values(101,'Ravi','MGR',111,'10-OCT-1995',32000,15000,'D1','2-OCT-2006','P1')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA010.C_FK_MGRID) violated - parent key not found 
+
+
+SQL> insert into emp values(111,'Raghu','ENG',150,'10-DEC-1984',45000,15000,NULL,'3-FEB-2005',NULL);
+
+1 row created.
+
+SQL> set NULL 'NULL'
+
+                                               
+                                                                                                                                                      
+
+SQL> insert into emp values(125,'Manu','DEV',150,'10-DEC-1980',35000,5000,'D4','2-OCT-2002','P3');
+
+1 row created.
+
+SQL> spool off;
+
+
+
+ QL> insert into emp values(123,'Mahesh','CLRK',150,'10-DEC-1984',25000,5000,'D3','23-DEC-2008','P2');
+insert into emp values(123,'Mahesh','CLRK',150,'10-DEC-1984',25000,5000,'D3','23-DEC-2008','P2')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA010.C_JOBCHK) violated
+
+
+SQL> insert into emp values(123,'Mahesh','CLK',150,'10-DEC-1984',25000,5000,'D3','23-DEC-2008','P2');
+
+1 row created.
+SQL> insert into emp values(101,'Ravi','MGR',111,'10-OCT-1995',32000,15000,'D1','2-OCT-2006','P1');
+
+1 row created.
+
+SQL> insert into emp values(103,'Varun','DEV',111,'10-DEC-1980',22000,7000,'D1','22-SEP-2001','P1');
+
+1 row created.
+
+SQL> insert into emp values(103,'Charan','CLK',111,'02-AUG-1980',23000,17000,'D1','12-OCT-2002','P3');
+insert into emp values(103,'Charan','CLK',111,'02-AUG-1980',23000,17000,'D1','12-OCT-2002','P3')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (MCA010.SYS_C0032507) violated 
+
+
+SQL> insert into emp values(104,'Charan','CLK',111,'02-AUG-1980',23000,17000,'D1','12-OCT-2002','P3');
+
+1 row created.
+
+SQL> insert into emp values(106,'Sandy','A.MGR',111,'02-OCT-1986',33000,7000,'D2','24-NOV-1985','P1');
+insert into emp values(106,'Sandy','A.MGR',111,'02-OCT-1986',33000,7000,'D2','24-NOV-1985','P1')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA010.C_DJ) violated 
+
+
+SQL> 
+SQL> insert into emp values(106,'Sandy','A.MGR',111,'02-OCT-1986',33000,7000,'D2','24-NOV-2006','P1');
+
+1 row created.
+
+SQL> insert into emp values(105,'Goutham','DEV',111,'10-JUL-1980',43000,23000,'D1','21-JUN-2001','P3');
+
+1 row created.
+
+SQL> insert into emp values(102,'Krithi','ENG',106,'10-JAN-1985',33000,8000,'D1','12-NOV-2010','P3');
+
+1 row created.
+
+SQL> insert into emp values(104,'James','CLK',125,'02-OCT-1980',20000,3000,'D2','26-NOV-2005','P1');
+insert into emp values(104,'James','CLK',125,'02-OCT-1980',20000,3000,'D2','26-NOV-2005','P1')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (MCA010.SYS_C0032507) violated 
+
+
+SQL> Update emp set empno = 107 where empno=104;
+
+1 row updated.
+
+SQL> insert into emp values(104,'James','CLK',125,'02-OCT-1980',20000,3000,'D2','26-NOV-2005','P1');
+insert into emp values(104,'James','CLK',125,'02-OCT-1980',20000,3000,'D2','26-NOV-2005','P1')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA010.C_SALCHK) violated 
+
+
+SQL> insert into emp values(104,'James','CLK',125,'02-OCT-1980',21000,3000,'D2','26-NOV-2005','P1');
+
+1 row created.
+
+SQL> insert into emp values(108,'Claire','DEV',106,'10-NOV-1980',31000,13000,'D9','02-OCT-2005','P3');
+insert into emp values(108,'Claire','DEV',106,'10-NOV-1980',31000,13000,'D9','02-OCT-2005','P3')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA010.SYS_C0032509) violated - parent key not found 
+
+
+
+SQL> insert into emp values(108,'Claire','DEV',106,'10-NOV-1980',31000,13000,'D5','02-OCT-2005','P2');
+
+1 row created.
+
+SQL> insert into emp values(NULL,'Kishan','CLK',106,'10-JAN-1985',18000,4000,'D5','10-DEC-2007','P3');
+insert into emp values(NULL,'Kishan','CLK',106,'10-JAN-1985',18000,4000,'D5','10-DEC-2007','P3')
+                       *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("MCA010"."EMP"."EMPNO") 
+
+
+SQL> insert into emp values(110,'Kishan','CLK',106,'10-JAN-1985',18000,4000,'D5','10-DEC-2007','P3');
+insert into emp values(110,'Kishan','CLK',106,'10-JAN-1985',18000,4000,'D5','10-DEC-2007','P3')
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA010.C_SALCHK) violated 
+
+
+SQL> insert into emp values(110,'Kishan','CLK',106,'10-JAN-1985',28000,4000,'D5','10-DEC-2007','P3');
+insert into emp values(110,'Kishan','CLK',106,'10-JAN-1985',28000,4000,'D5','10-DEC-2007','P3')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA010.FK_DEPT_NO_PROJ_ID) violated - parent key not found 
+
+
+SQL> insert into emp values(110,'Kishan','CLK',106,'10-JAN-1985',28000,4000,'D5','10-DEC-2007','P2');
+
+1 row created.
+
+
+
+SQL> spool off;
+
+
+SQL> insert into task values('P1','D1',1,'REQUIREMENT ANALYSIS','01-JAN-2022','15-JAN-2022','COMPLETED');
+
+1 row created.
+
+SQL> insert into task values('P1','D2',2,'MODULE DESIGN','16-JAN-2022','10-FEB-2022','COMPLETED');
+
+1 row created.
+                                                
+
+SQL> insert into task values('P2','D3',3,'CODING AND TESTING','11-FEB-2022',NULL,'IN-PROGRESS');
+
+1 row created.
+                                                                  
+
+SQL> insert into task values('P3','D4',1,'DATASET COLLECTION','15-FEB-2022','28-FEB-2022','COMPLETED');
+
+1 row created.
+
+SQL> insert into task values('P3','D1',2,'MODEL TRAINING','01-MAR-2022',NULL,'IN-PROGRESS');
+
+1 row created.
+
+SQL> insert into task values('P3','D1',1,'SCHEMA MAPPING','01-MAR-2022','20-MAR-2022','COMPLETED');
+
+1 row created.
+
+SQL> insert into task values('P4','D5',1,'REQUIREMENT GATHERING','10-APR-2022',NULL,'PENDING');
+
+1 row created.
+
+SQL> insert into task values('P4','D5',2,'SITE SURVEY','05-MAY-2022','20-MAY-2022','COMPLETED');
+
+1 row created.
+
+
+
+SQL> insert into dependent values(1,100,'LATHA KUMAR','F','10-MAY-1982','SPOUSE',50,'YES');
+insert into dependent values(1,100,'LATHA KUMAR','F','10-MAY-1982','SPOUSE',50,'YES')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA010.SYS_C0033079) violated - parent key not found 
+
+
+SQL> insert into dependent values(1,101,'LATHA KUMAR','F','10-MAY-1982','SPOUSE',50,'YES');
+
+1 row created.
+
+SQL> insert into dependent values(2,101,'ARUN KUMAR','M','19-JUN-2000','CHILD',25,'YES');
+
+1 row created.
+
+SQL> insert into dependent values(3,102,'SEEMA RAVI','F','01-JAN-1980','SPOUSE',60,'YES');
+
+1 row created.
+
+SQL> insert into dependent values(4,103,'MOHAN RAO','M','12-DEC-1950','PARENT',30,'NO');
+
+1 row created.
+
+SQL> insert into dependent values(5,106,'NEHA RAHUL','F','22-JUL-1990','SPOUSE',70,'YES');
+
+1 row created.
+
+
+SQL> insert into dependent values(6,108,'ROHAN MEERA','M','03-MAR-2015','CHILD',100,'YES');
+
+1 row created.
+
+SQL> insert into dependent values(7,104,'MEERA ROHAN','F','06-MAR-2015','CHILD',100,'YES');
+
+1 row created.
+
+SQL> insert into dependent values(5,103,'RAHUL NEHA','M','02-JUL-1990','SPOUSE',75,'YES');
+insert into dependent values(5,103,'RAHUL NEHA','M','02-JUL-1990','SPOUSE',75,'YES')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (MCA010.SYS_C0033078) violated 
+
+
+SQL> insert into dependent values(8,103,'RAHUL NEHA','M','02-JUL-1990','SPOUSE',75,'YES');
+
+1 row created.
+
+SQL> insert into task values('P3','D1',2,'SCHEMA DESIGNING','11-MAR-2022','22-MAR-2022','COMPLETED');
+insert into task values('P3','D1',2,'SCHEMA DESIGNING','11-MAR-2022','22-MAR-2022','COMPLETED')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (MCA010.PK_TASK_DNO_PRJ_ID) violated 
+
+
+SQL> insert into task values('P3','D1',3,'SCHEMA DESIGNING','11-MAR-2022','22-MAR-2022','COMPLETED');
+
+1 row created.
+
+SQL> insert into task values('P2','D3',4,'DEPLOYMENT','15-FEB-2022',NULL,'IN-PROGRESS');
+
+1 row created.
+
+SQL> insert into emp values(112,'OHIL','CLK',106,'10-JAN-1985',38000,14000,'D5','10-DEC-2007','P3');
+insert into emp values(112,'OHIL','CLK',106,'10-JAN-1985',38000,14000,'D5','10-DEC-2007','P3')
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (MCA010.FK_DEPT_NO_PROJ_ID) violated - parent key not found 
+
+
+SQL> insert into emp values(112,'OHIL','CLK',106,'10-JAN-1985',38000,14000,'D1','10-DEC-2007','P1');
+
+1 row created.
+
+SQL> insert into emp values(113,'RIAN','MGR',111,'13-JAN-1985',44000,14000,'D1','10-JAN-2007','P1');
+
+1 row created.
+
+SQL> select * from dept;
+
+DNO DNAME           LOC DEPT_BUDGET                                                                                                                   
+--- --------------- --- -----------                                                                                                                   
+D1  Marketing       CHN      500000                                                                                                                   
+D2  Research        MNG      300000                                                                                                                   
+D3  IT              BNG      400000                                                                                                                   
+D4  HR              BNG      200000                                                                                                                   
+D5  Accounts        BNG      500000                                                                                                                   
+D7  Physics         MNG      400000                                                                                                                   
+D8  Sales           MUB      300000                                                                                                                   
+NUL Corporate       HYD      700000                                                                                                                   
+L                                                                                                                                                     
+                                                                                                                                                      
+
+8 rows selected.
+
+SQL> select * from proj;
+
+DNO PRJ PRJ_NAME             PRJ_CREDIT STRT_DATE END_DATE    PRJ_FUND                                                                                
+--- --- -------------------- ---------- --------- --------- ----------                                                                                
+D1  P1  PAYROLL AUTOMATION            4 01-JAN-22 30-JUN-22     500000                                                                                
+D2  P1  AI RESEARCH PLATFORM          7 15-FEB-22 14-FEB-23     900000                                                                                
+D3  P2  DATA WAREHOUSE MIGR.          8 01-MAR-22 31-AUG-22     650000                                                                                
+D4  P3  CRM REVAMP                    5 10-APR-22 09-OCT-22     400000                                                                                
+D1  P3  ERP REVAMP                    9 11-JAN-20 12-DEC-21     500000                                                                                
+D5  P4  WAREHOUSE AUTOMATION         10 05-MAY-22 04-NOV-22     700000                                                                                
+D5  P2  AI MIGR.                      7 04-FEB-20 17-JUN-21     550000                                                                                
+D4  P4  SALES AUTOMATION             10 05-MAY-22 04-NOV-22     700000                                                                                
+
+8 rows selected.
+
+SQL> select * from emp;
+
+ EMPNO ENAME           JOB              MGRID DATE_BIRT       SAL      COMM DEP DATE_JOIN  PRO                                                        
+------ --------------- --------------- ------ --------- --------- --------- --- ---------- ---                                                        
+   150 Jhon            CEO             NULL   10-DEC-90     60000     30000 NUL 03-DEC-08  NUL                                                        
+                                                                            L              L                                                          
+                                                                                                                                                      
+   111 Raghu           ENG                150 10-DEC-84     45000     15000 NUL 03-FEB-05  NUL                                                        
+                                                                            L              L                                                          
+                                                                                                                                                      
+   125 Manu            DEV                150 10-DEC-80     35000      5000 D4  02-OCT-02  P3                                                         
+   123 Mahesh          CLK                150 10-DEC-84     25000      5000 D3  23-DEC-08  P2                                                         
+   101 Ravi            MGR                111 10-OCT-95     32000     15000 D1  02-OCT-06  P1                                                         
+   103 Varun           DEV                111 10-DEC-80     22000      7000 D1  22-SEP-01  P1                                                         
+   107 Charan          CLK                111 02-AUG-80     23000     17000 D1  12-OCT-02  P3                                                         
+   106 Sandy           A.MGR              111 02-OCT-86     33000      7000 D2  24-NOV-06  P1                                                         
+   105 Goutham         DEV                111 10-JUL-80     43000     23000 D1  21-JUN-01  P3                                                         
+   102 Krithi          ENG                106 10-JAN-85     33000      8000 D1  12-NOV-10  P3                                                         
+   104 James           CLK                125 02-OCT-80     21000      3000 D2  26-NOV-05  P1                                                         
+   108 Claire          DEV                106 10-NOV-80     31000     13000 D5  02-OCT-05  P2                                                         
+   110 Kishan          CLK                106 10-JAN-85     28000      4000 D5  10-DEC-07  P2                                                         
+   112 OHIL            CLK                106 10-JAN-85     38000     14000 D1  10-DEC-07  P1                                                         
+   113 RIAN            MGR                111 13-JAN-85     44000     14000 D1  10-JAN-07  P1                                                         
+
+15 rows selected.
+
+SQL> select * from task;
+
+PRJ DNO    TASK_ID TASK_NAME                      S_DATE    E_DATE    STATUS                                                                          
+--- --- ---------- ------------------------------ --------- --------- ------------                                                                    
+P1  D1           1 REQUIREMENT ANALYSIS           01-JAN-22 15-JAN-22 COMPLETED                                                                       
+P1  D2           2 MODULE DESIGN                  16-JAN-22 10-FEB-22 COMPLETED                                                                       
+P2  D3           3 CODING AND TESTING             11-FEB-22 NULL      IN-PROGRESS                                                                     
+P3  D4           1 DATASET COLLECTION             15-FEB-22 28-FEB-22 COMPLETED                                                                       
+P3  D1           2 MODEL TRAINING                 01-MAR-22 NULL      IN-PROGRESS                                                                     
+P3  D1           1 SCHEMA MAPPING                 01-MAR-22 20-MAR-22 COMPLETED                                                                       
+P4  D5           1 REQUIREMENT GATHERING          10-APR-22 NULL      PENDING                                                                         
+P4  D5           2 SITE SURVEY                    05-MAY-22 20-MAY-22 COMPLETED                                                                       
+P3  D1           3 SCHEMA DESIGNING               11-MAR-22 22-MAR-22 COMPLETED                                                                       
+P2  D3           4 DEPLOYMENT                     15-FEB-22 NULL      IN-PROGRESS                                                                     
+
+10 rows selected.
+
+SQL> select * from dependent;
+
+     DEPID  EMPNO DEPENDENT_NAME       G DOBIRTH   RELATIONSHIP       NOM_PCT MED                                                                     
+---------- ------ -------------------- - --------- --------------- ---------- ---                                                                     
+         1    101 LATHA KUMAR          F 10-MAY-82 SPOUSE                  50 YES                                                                     
+         2    101 ARUN KUMAR           M 19-JUN-00 CHILD                   25 YES                                                                     
+         3    102 SEEMA RAVI           F 01-JAN-80 SPOUSE                  60 YES                                                                     
+         4    103 MOHAN RAO            M 12-DEC-50 PARENT                  30 NO                                                                      
+         5    106 NEHA RAHUL           F 22-JUL-90 SPOUSE                  70 YES                                                                     
+         6    108 ROHAN MEERA          M 03-MAR-15 CHILD                  100 YES                                                                     
+         7    104 MEERA ROHAN          F 06-MAR-15 CHILD                  100 YES                                                                     
+         8    103 RAHUL NEHA           M 02-JUL-90 SPOUSE                  75 YES                                                                     
+
+8 rows selected.
+
+SQL> spool off;
