@@ -1,48 +1,42 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
 int main() {
-    int coins[] = {1, 2, 5, 10, 20, 50, 100, 200, 500};
+    int bill, amt, change;
+    int totalCoins = 0;
 
-    int n;
-    cout << "Enter the change amount: ";
-    cin >> n;
+    cout << "Enter the bill amount: ";
+    cin >> bill;
 
-    vector<int> dp(n + 1);
-    vector<int> selectedCoin(n + 1);
+    cout << "Enter the amount given by the customer: ";
+    cin >> amt;
 
-    dp[0] = 0;
-
-    for (int k = 1; k <= n; k++) {
-        dp[k] = 1000;
-
-        for (int i = 0; i < 9; i++) {
-            if (coins[i] <= k) {
-
-                if (dp[k - coins[i]] + 1 < dp[k]) {
-                    dp[k] = dp[k - coins[i]] + 1;
-                    selectedCoin[k] = coins[i];
-                }
-
-            }
-        }
+    if (amt < bill) {
+        cout << "Insufficient amount given." << endl;
+        return 0;
     }
 
-    cout << "Minimum number of coins: " << dp[n] << endl;
+    change = amt - bill;
 
-    cout << "Coins used: ";
+    cout << "Change to be returned: " << change << endl;
+    cout << "Denominations: ";
 
-    int k = n;
+    int denominations[] = { 500, 200, 100, 50, 20, 10, 5, 2, 1};
 
-    while (k > 0) {
-        cout << selectedCoin[k] << " ";
+    for (int i = 0; i < 9; i++) {
+        int note = denominations[i];
+        int count = change / note;
 
-        k = k - selectedCoin[k];
+        for (int j = 0; j < count; j++) {
+            cout << note << " ";
+            totalCoins++;
+        }
+
+        change %= note;
     }
 
     cout << endl;
+    cout << "Minimum number of notes/coins: " << totalCoins << endl;
 
     return 0;
 }
-

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+	<meta charset='UTF-8'>
+	<title>Passport Reg form</title>
+	<style>
+	body{
+		font-family: Arial, sans-serif;
+		font-size:13px;
+	}
+	form {
+		width: 100%;
+		margin-left:200px;
+	}
+
+	.row {
+		display: grid;
+		grid-template-columns: 160px 150px 1fr;
+		align-items: center;
+		column-gap: 10px;
+		margin-bottom: 8px;
+	}
+
+	
+	input[type="text"],
+	input[type="email"],
+	input[type="password"],
+	input[type="date"],
+	select {
+		width: 145px;
+		height: 22px;
+		box-sizing: border-box;
+	}
+
+	.heading{
+		text-align:center;
+	}
+	.star {
+		color: red;
+	}
+	
+	</style>
+</head>
+<body>
+<div class='container'>
+	<div>
+	<h1 class="heading">User Registration</h1><br>
+	<p><b>Important Information: </b> Passport application can be processed at any <span class ="info">Fields marked with asterik </span>(<span class="star">*</span>) are mandatory
+		<br>PSK/POPSK/PSLK WITHIN INDIA irrespective of your residential address.</p>
+	</div>
+	<form method="GET" action="">
+		<div class="row">
+		<div class="form-label">Register to apply at <span class="star">*</span></div>
+		<div>
+			<input type="radio" id = "CPV" name="register" >CPV Delhi<br>
+			<input type="radio" id = "office" name="register"> Passport Office
+		</div>
+		<div class="help-text">
+			<p>Select the "CPV Delhi" option to apply for Diplomatic / Official <br>
+				passport at Consular, Passport and Visa (CPV) division, Delhi.</p>
+		</div>
+		</div>
+		<div class="row">
+		<div class="form-label">Passport Office <span class="star">*</span><br>(As per Presend Residential Address)</div>
+		<div>
+			<select name="pass_office">
+				<option value="" disabled selected hidden>---- Select -----</option>
+				<option>Ahmedabad, Gujarat</option>
+				<option>Bengaluru, Karnataka</option>
+				<option>Amritsar, Punjab</option>
+				<option>Chennai, Tamil Nadu</option>
+				<option>Kolkata, West Bengal</option>
+				<option>Pune, Maharashtra</option>
+			</select>
+		</div>
+		<div class="help-text">
+			<p>Tibetian Refugees applying for Identity Certificate must Register 
+				<br>with 'Delhi Passport Office.</p>
+		</div>
+		</div>
+		
+		<div class="row">
+		<div class="form-label">Given Name(Max 45 Character)<span class="star">*</span></div>
+		<div>
+			<input type="text" name="name" required autofocus>
+		</div>
+		<div class="help-text">
+			<p><b>First Name + Middle Name <br>
+				Initials and honorifics(eg. Dr.Cole etc)are not allowed</p>
+		</div>
+		</div>
+		
+		
+		<div class="row">
+		<div class="form-label">Surname(Max 25 Characters)<span class="star">*</span></div>
+		<div>
+			<input type="text" name="surname" required>
+		</div>
+		</div>
+		
+		<div class="row">
+		<div class="form-label">Date of Birth (DD/MM/YYYY) <span class="star">*</span></div>
+		<div>
+			<input type="date" id="start-date" name="start-date">
+		</div>
+		</div>
+		
+		<div class="row">
+		<div class="form-label">E-mail Id(Max 35 Characters)<span class="star">*</span></div>
+		<div>
+			<input type="email" name="e_mail" required>
+		</div>
+		</div>
+		
+		<div class="row">
+		<div class="form-label">Do you want your Login Id<br>
+			to be same as E-mail Id?<span class="star">*</span></div>
+		<div>
+			Yes<input type="radio" id = "yes" name="login" >
+			No<input type="radio" id = "no" name="login">
+		</div>
+		</div>
+		
+		
+		<div class="row">
+		<div class="form-label">Login Id<span class="star">*</span></div>
+		<div>
+			<input type="text" name="login_id" required>
+		</div>
+		<div class="help-text">
+			Check Availibility
+		</div>
+		</div>
+		
+		<div class="row">
+		<div class="form-label">Password<span class="star">*</span></div>
+		<div>
+			<input type="password" name="pass" required>
+		</div>
+		<div class="help-text">
+			Password Policy
+		</div>
+		</div>
+		
+		<div class="row">
+		<div class="form-label">Confirm Password<span class="star">*</span></div>
+		<div>
+			<input type="password" name="c_pass" required>
+		</div>
+		</div>
+		
+		<div class="row">
+		<div class="form-label">Hint Questions<span class="star">*</span></div>
+		<div>
+			<select name="hint">
+				<option value="" disabled selected hidden>---- Select -----</option>
+				<option>What is the opposite of the word "cold"?</option>
+				<option>If a cow has 4 legs, how many legs do 2 cows have?</option>
+				<option>Please type the word "human" backward in all lowercase</option>
+				<option>Which is larger: a mouse or an elephant?</option>	
+			</select>
+		</div>
+		</div>
+		
+		<div class="row">
+		<div class="form-label">Hint Answer<span class="star">*</span></div>
+		<div>
+			<input type="text" name="hint_ans" required>
+		</div>
+		</div>
+		
+	<div class="row">
+    
+        <div class="form-label">Enter Displayed Captcha<span class="star">*</span></div>
+        <div class="captcha-box">
+            <img src="photo\captcha.png" alt="CAPTCHA Image" id="captcha-img">
+            <button type="button" onclick="">Refresh</button>
+        <br>
+        <input type="text" name="captcha_code" placeholder="Enter code above" required>
+		</div>
+	</div>
+		<hr>
+		<input type="submit" name="submit" value="Register">
+		<input type="reset" name="clear" value="Clear">
+		
+	</form>
+	
+</div>
+</body>
+</html>
