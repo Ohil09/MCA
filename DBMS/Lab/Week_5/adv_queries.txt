@@ -1,0 +1,16 @@
+SELECT
+    UPPER(ename) AS uppercase_ename,
+    LOWER(ename) AS lowercase_ename,
+    INITCAP(ename) AS init_cap,
+    LENGTH(ename) AS number_of_characters,
+    SUBSTR(ename, 2, 3) AS three_characters_from_2nd_position
+FROM emp;
+
+
+SELECT ename
+FROM emp
+WHERE mgr = (
+    SELECT empno
+    FROM emp
+    WHERE ename = 'Raghu'
+);

@@ -27,8 +27,8 @@ class flight{
 			cin >> flight_num;
 			cout<<"Enter the flight Destination : ";
 			cin >> destination;
-			cout<<"Enter the flight distance : ";
-			cin>>distance;
+//			cout<<"Enter the flight distance : ";
+//			cin>>distance;
 			
 			
 			calculate_fuel();
@@ -44,7 +44,7 @@ class flight{
 };
 int main(){
 	flight f1;
-	
+	flight f2;
 	f1.information_entry();
 	f1.display_info();
 //	f2.display_info();

@@ -7,9 +7,7 @@ int main(){
 	cm = dist / 10;
 	inch = cm / 2.5;
 	feet = inch / 12;
-	if(inch >= 12){
-		inch = inch % 12;
-	}
-	cout <<"Distance in cm = "<<cm<<" in feet = "<<feet<<" in inches = "<<inch;
+
+	cout <<"Distance in cm = "<<cm<<"\n"<<feet<<" feet and "<<(int)inch % 12<<" inches";
 	return 0;
 }

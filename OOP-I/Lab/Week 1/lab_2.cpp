@@ -1,7 +1,13 @@
 #include<iostream>
 using namespace std;
 int main(){
-	int a = 12, b = 10, c = 13;
+	int a,b,c;
+	cout<< "Enter A =  ";
+	cin>>a;
+	cout <<"Enter B = ";
+	cin>>b;
+	cout <<"Enter C = ";
+	cin>>c;
 	if(a <= b && a <= c)
 		cout <<"A = "<<a <<" is the smallest !";
 	else if(b <= c)

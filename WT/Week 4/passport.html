@@ -2,43 +2,107 @@
 <html lang='en'>
 <head>
 	<meta charset='UTF-8'>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
 	<title>Passport Reg form</title>
 	<style>
-	body{
-		font-family: Arial, sans-serif;
-		font-size:13px;
+	
+
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		overflow-x: hidden;
 	}
+
+	body {
+		font-family: Arial, sans-serif;
+		font-size: 13px;
+	}
+
+	.container {
+		width: min(95%, 1000px);
+		margin: 20px auto;
+		padding: 20px;
+	}
+
 	form {
 		width: 100%;
-		margin-left:200px;
+		margin: 0 auto;
 	}
 
 	.row {
 		display: grid;
-		grid-template-columns: 160px 150px 1fr;
+		grid-template-columns: 180px minmax(150px, 1fr) minmax(200px, 1.5fr);
 		align-items: center;
-		column-gap: 10px;
-		margin-bottom: 8px;
+		column-gap: 15px;
+		margin-bottom: 12px;
 	}
 
-	
+	.heading {
+		text-align: center;
+	}
+
+	.star {
+		color: red;
+	}
+
 	input[type="text"],
 	input[type="email"],
 	input[type="password"],
 	input[type="date"],
 	select {
-		width: 145px;
-		height: 22px;
-		box-sizing: border-box;
+		width: 100%;
+		max-width: 250px;
+		height: 30px;
 	}
 
-	.heading{
-		text-align:center;
+	.help-text {
+		max-width: 100%;
 	}
-	.star {
-		color: red;
+
+	.captcha-box img {
+		max-width: 100%;
+		height: auto;
 	}
-	
+
+	input[type="submit"],
+	input[type="reset"] {
+		padding: 8px 20px;
+		margin-right: 10px;
+	}
+
+
+	@media (max-width: 600px) {
+
+		.container {
+			width: 100%;
+			padding: 12px;
+		}
+
+		.row {
+			grid-template-columns: 1fr;
+			gap: 5px;
+		}
+
+		.help-text {
+			grid-column: auto;
+		}
+
+		input[type="text"],
+		input[type="email"],
+		input[type="password"],
+		input[type="date"],
+		select {
+			width: 100%;
+			max-width: none;
+		}
+
+		.heading {
+			font-size: 24px;
+		}
+
+	}
 	</style>
 </head>
 <body>
@@ -47,8 +111,12 @@
 	<h1 class="heading">User Registration</h1><br>
 	<p><b>Important Information: </b> Passport application can be processed at any <span class ="info">Fields marked with asterik </span>(<span class="star">*</span>) are mandatory
 		<br>PSK/POPSK/PSLK WITHIN INDIA irrespective of your residential address.</p>
+		<ul>
+			<li><a href="">click here</a> to check appointment availability at all PSK/POPSK/PSLK.</li>
+			<li><a href="">click here</a> to know more about Apply Anywhere in India Scheme for Passport services.</li>
+		</ul>
 	</div>
-	<form method="GET" action="">
+	<form method="GET">
 		<div class="row">
 		<div class="form-label">Register to apply at <span class="star">*</span></div>
 		<div>
@@ -82,11 +150,11 @@
 		<div class="row">
 		<div class="form-label">Given Name(Max 45 Character)<span class="star">*</span></div>
 		<div>
-			<input type="text" name="name" required autofocus>
+			<input type="text" name="name" tabindex="2" required autofocus>
 		</div>
 		<div class="help-text">
 			<p><b>First Name + Middle Name <br>
-				Initials and honorifics(eg. Dr.Cole etc)are not allowed</p>
+				Initials and honorifics(eg. Dr.Cole etc)are not allowed</b></p>
 		</div>
 		</div>
 		
@@ -94,7 +162,7 @@
 		<div class="row">
 		<div class="form-label">Surname(Max 25 Characters)<span class="star">*</span></div>
 		<div>
-			<input type="text" name="surname" required>
+			<input type="text" name="surname" tabindex="1" required>
 		</div>
 		</div>
 		
@@ -128,7 +196,7 @@
 			<input type="text" name="login_id" required>
 		</div>
 		<div class="help-text">
-			Check Availibility
+			<a href="">Check Availibility</a>
 		</div>
 		</div>
 		
@@ -138,7 +206,7 @@
 			<input type="password" name="pass" required>
 		</div>
 		<div class="help-text">
-			Password Policy
+			<a href="">Password Policy</a>
 		</div>
 		</div>
 		
@@ -173,7 +241,7 @@
     
         <div class="form-label">Enter Displayed Captcha<span class="star">*</span></div>
         <div class="captcha-box">
-            <img src="photo\captcha.png" alt="CAPTCHA Image" id="captcha-img">
+            <img src="photo/captcha.png" alt="CAPTCHA Image" id="captcha-img">
             <button type="button" onclick="">Refresh</button>
         <br>
         <input type="text" name="captcha_code" placeholder="Enter code above" required>

@@ -34,8 +34,8 @@ int main(){
 			for(int j = i - 1; j >= 0; j--){
 				cout<<arr[j];
 			}
-	}
 			break;
+		}
 		default:
 			cout<<"Enter a valid choice please !";
 	}

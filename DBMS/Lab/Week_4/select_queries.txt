@@ -1,0 +1,246 @@
+1.Display records of Employees who have salary more than 25000 or working in 
+department D1 .
+
+SQL> select * from emp where sal > 25000 OR deptno = 'D1';
+
+EMP NO ENAME           JOB             MGR ID DOB        SALARY   COMM DEPT   JOIN DATE  PROJ                                                                                                                                                             
+------ --------------- --------------- ------ ---------- ------ ------ ------ ---------- -------                                                                                                                                                          
+   150 Jhon            CEO                    10-DEC-90   60000  30000        03-DEC-08                                                                                                                                                                   
+   111 Raghu           ENG                150 10-DEC-84   49500  15000        03-FEB-05                                                                                                                                                                   
+   125 Manu            DEV                150 10-DEC-80   35000   5000 D4     02-OCT-02  P3                                                                                                                                                               
+   123 Mahesh          MGR                111 10-DEC-84   35000  10000 D3     23-DEC-08  P2                                                                                                                                                               
+   101 Ravi            MGR                111 10-OCT-95   32000  10000 D1     02-OCT-06  P1                                                                                                                                                               
+   103 Varun           DEV                111 10-DEC-80   22000   7000 D1     22-SEP-01  P1                                                                                                                                                               
+   107 Charan          CLK                111 02-AUG-80   23000  17000 D1     12-OCT-02  P3                                                                                                                                                               
+   106 Sandy           A.MGR              111 02-OCT-86   33000   7000 D2     24-NOV-06  P1                                                                                                                                                               
+   105 Goutham         DEV                111 10-JUL-80   43000  23000 D1     21-JUN-01  P3                                                                                                                                                               
+   102 Krithi          ENG                106 10-JAN-85   36300   8000 D1     12-NOV-10  P3                                                                                                                                                               
+   108 Claire          DEV                106 10-NOV-80   31000  13000 D5     02-OCT-05  P2                                                                                                                                                               
+   110 Kishan          CLK                106 10-JAN-85   28000   4000 D5     10-DEC-07  P2                                                                                                                                                               
+   112 OHIL            CLK                106 10-JAN-85   38000  14000 D1     10-DEC-07  P1                                                                                                                                                               
+   113 RIAN            MGR                111 13-JAN-85   44000  10000 D1     10-JAN-07  P1                                                                                                                                                               
+
+14 rows selected.
+
+
+2. List all employee with their names as “Employee Name”  and their salaries as “SALARY”, 
+whose salary lies between 25200/- and 35200/- both inclusive
+
+SQL> Select ename AS "Employee Name", sal AS "SALARY" from emp where sal BETWEEN 25200 AND 35200;
+
+Employee Name       SALARY                                                                                                                                                                                                                                
+--------------- ----------                                                                                                                                                                                                                                
+Manu                 35000                                                                                                                                                                                                                                
+Mahesh               35000                                                                                                                                                                                                                                
+Ravi                 32000                                                                                                                                                                                                                                
+Sandy                33000                                                                                                                                                                                                                                
+Claire               31000                                                                                                                                                                                                                                
+Kishan               28000                                                                                                                                                                                                                                
+
+6 rows selected.
+
+SQL> spool off;
+
+3. List the name of employees who is working at Locations (BNG,MUB,HYD) (using both OR 
+, IN operator).
+
+SQL> Select e.ename from emp e join dept d ON e.deptno = d.dno where d.location IN('BNG','MUB','HYD');
+
+ENAME                                                                                                                                                                                                                                                     
+---------------                                                                                                                                                                                                                                           
+Manu                                                                                                                                                                                                                                                      
+Mahesh                                                                                                                                                                                                                                                    
+Claire                                                                                                                                                                                                                                                    
+Kishan                                                                                                                                                                                                                                                    
+
+SQL> Select e.ename from emp e join dept d ON e.deptno = d.dno where d.location='BNG' OR d.location='MUB' OR d.location='HYD';
+
+ENAME                                                                                                                                                                                                                                                     
+---------------                                                                                                                                                                                                                                           
+Manu                                                                                                                                                                                                                                                      
+Mahesh                                                                                                                                                                                                                                                    
+Claire                                                                                                                                                                                                                                                    
+Kishan                                                                                                                                                                                                                                                    
+
+SQL> spool off;
+
+4. Display the records in the EMP table in the ascending order of Deptno and descending 
+order of salary. 
+
+SQL> select * from emp order by deptno asc, sal desc;
+
+EMP NO ENAME           JOB             MGR ID DOB        SALARY   COMM DEPT   JOIN DATE  PROJ                                                                                                                                                             
+------ --------------- --------------- ------ ---------- ------ ------ ------ ---------- -------                                                                                                                                                          
+   113 RIAN            MGR                111 13-JAN-85   44000  10000 D1     10-JAN-07  P1                                                                                                                                                               
+   105 Goutham         DEV                111 10-JUL-80   43000  23000 D1     21-JUN-01  P3                                                                                                                                                               
+   112 OHIL            CLK                106 10-JAN-85   38000  14000 D1     10-DEC-07  P1                                                                                                                                                               
+   102 Krithi          ENG                106 10-JAN-85   36300   8000 D1     12-NOV-10  P3                                                                                                                                                               
+   101 Ravi            MGR                111 10-OCT-95   32000  10000 D1     02-OCT-06  P1                                                                                                                                                               
+   107 Charan          CLK                111 02-AUG-80   23000  17000 D1     12-OCT-02  P3                                                                                                                                                               
+   103 Varun           DEV                111 10-DEC-80   22000   7000 D1     22-SEP-01  P1                                                                                                                                                               
+   106 Sandy           A.MGR              111 02-OCT-86   33000   7000 D2     24-NOV-06  P1                                                                                                                                                               
+   104 James           CLK                125 02-OCT-80   21000   3000 D2     26-NOV-05  P1                                                                                                                                                               
+   123 Mahesh          MGR                111 10-DEC-84   35000  10000 D3     23-DEC-08  P2                                                                                                                                                               
+   125 Manu            DEV                150 10-DEC-80   35000   5000 D4     02-OCT-02  P3                                                                                                                                                               
+   108 Claire          DEV                106 10-NOV-80   31000  13000 D5     02-OCT-05  P2                                                                                                                                                               
+   110 Kishan          CLK                106 10-JAN-85   28000   4000 D5     10-DEC-07  P2                                                                                                                                                               
+   150 Jhon            CEO                    10-DEC-90   60000  30000        03-DEC-08                                                                                                                                                                   
+   111 Raghu           ENG                150 10-DEC-84   49500  15000        03-FEB-05                                                                                                                                                                   
+
+15 rows selected.
+
+5. Display the task details for the project P3. 
+
+SQL> select * from task where prj_id = 'P3';
+
+PRJ DNO   TASK ID TASK NAME                      START DATE END DATE   STATUS                                                                                                                                                                             
+--- ----- ------- ------------------------------ ---------- ---------- ---------------                                                                                                                                                                    
+P3  D1          1 SCHEMA MAPPING                 01-MAR-22  20-MAR-22  COMPLETED                                                                                                                                                                          
+P3  D4          1 DATASET COLLECTION             15-FEB-22  28-FEB-22  COMPLETED                                                                                                                                                                          
+P3  D1          2 MODEL TRAINING                 01-MAR-22             IN-PROGRESS                                                                                                                                                                        
+P3  D1          3 SCHEMA DESIGNING               11-MAR-22  22-MAR-22  COMPLETED                                                                                                                                                                          
+
+6. List out the employees who are not receiving commission.
+
+SQL> select * from emp where comm IS NULL;
+
+no rows selected
+
+SQL> spool off;
+
+7. Create a table Manager with columns Empno, Ename, Job, Deptno, Salary with structure 
+and data copied from the EMP table. 
+
+SQL> create table manager AS SELECT empno,ename,job,deptno,sal from emp;
+
+Table created.
+
+SQL> select * from manager;
+
+EMP NO ENAME           JOB             DEPT   SALARY                                                                                                                                                                                                      
+------ --------------- --------------- ------ ------                                                                                                                                                                                                      
+   150 Jhon            CEO                     60000                                                                                                                                                                                                      
+   111 Raghu           ENG                     49500                                                                                                                                                                                                      
+   125 Manu            DEV             D4      35000                                                                                                                                                                                                      
+   123 Mahesh          MGR             D3      35000                                                                                                                                                                                                      
+   101 Ravi            MGR             D1      32000                                                                                                                                                                                                      
+   103 Varun           DEV             D1      22000                                                                                                                                                                                                      
+   107 Charan          CLK             D1      23000                                                                                                                                                                                                      
+   106 Sandy           A.MGR           D2      33000                                                                                                                                                                                                      
+   105 Goutham         DEV             D1      43000                                                                                                                                                                                                      
+   102 Krithi          ENG             D1      36300                                                                                                                                                                                                      
+   104 James           CLK             D2      21000                                                                                                                                                                                                      
+   108 Claire          DEV             D5      31000                                                                                                                                                                                                      
+   110 Kishan          CLK             D5      28000                                                                                                                                                                                                      
+   112 OHIL            CLK             D1      38000                                                                                                                                                                                                      
+   113 RIAN            MGR             D1      44000                                                                                                                                                                                                      
+
+15 rows selected.
+
+SQL> spool off;
+
+8. List the Project Number, Project Name of all the projects handled by the department D2 
+and having project credits more than 5.  
+
+SQL> select prj_no, prj_name from proj where dno = 'D2' and prj_credit > 5;
+
+PRJ PRJ_NAME                                                                                                                                                                                                                                              
+--- --------------------                                                                                                                                                                                                                                  
+P1  AI RESEARCH PLATFORM                                                                                                                                                                                                                                  
+
+9. List all employees reporting to manager with empno 111. 
+
+SQL> select * from emp where mgrid = 111;
+
+EMP NO ENAME           JOB             MGR ID DOB        SALARY   COMM DEPT   JOIN DATE  PROJ                                                                                                                                                             
+------ --------------- --------------- ------ ---------- ------ ------ ------ ---------- -------                                                                                                                                                          
+   123 Mahesh          MGR                111 10-DEC-84   35000  10000 D3     23-DEC-08  P2                                                                                                                                                               
+   101 Ravi            MGR                111 10-OCT-95   32000  10000 D1     02-OCT-06  P1                                                                                                                                                               
+   103 Varun           DEV                111 10-DEC-80   22000   7000 D1     22-SEP-01  P1                                                                                                                                                               
+   107 Charan          CLK                111 02-AUG-80   23000  17000 D1     12-OCT-02  P3                                                                                                                                                               
+   106 Sandy           A.MGR              111 02-OCT-86   33000   7000 D2     24-NOV-06  P1                                                                                                                                                               
+   105 Goutham         DEV                111 10-JUL-80   43000  23000 D1     21-JUN-01  P3                                                                                                                                                               
+   113 RIAN            MGR                111 13-JAN-85   44000  10000 D1     10-JAN-07  P1                                                                                                                                                               
+
+7 rows selected.
+
+10. Display name of employees whose 2nd & 3rd character is ‘av’,name length is 6 and ends 
+with ’j’.
+
+SQL> select * from emp where ename like '_av__j';
+
+no rows selected
+
+
+11. Display the task details for the task with the duration less than 1 week. 
+
+SQL> select * from task where e_date - s_date < 7;
+
+no rows selected
+
+
+12. Find the name of the Projects starting after 1-Mar-2022 with credit above 5.
+
+SQL> select prj_name from proj where strt_date > TO_DATE('01-MAR-2022', 'DD-MON-YYYY') AND prj_credit > 5;
+
+PRJ_NAME                                                                                                                                                                                                                                                  
+--------------------                                                                                                                                                                                                                                      
+WAREHOUSE AUTOMATION                                                                                                                                                                                                                                      
+SALES AUTOMATION                                                                                                                                                                                                                                          
+ 
+13. Find projects that have tasks starting after Feb 1, 2022. 
+
+SQL> select DISTINCT prj_id from task where s_date > TO_DATE('01-FEB-2022','DD-MON-YYYY');
+
+PRJ                                                                                                                                                                                                                                                       
+---                                                                                                                                                                                                                                                       
+P2                                                                                                                                                                                                                                                        
+P3                                                                                                                                                                                                                                                        
+P4                                                                                                                                                                                                                                                        
+
+14. List the Employees in department , ordered by salary descending 
+
+SQL> select * from emp where deptno IS NOT NULL order by sal desc;
+
+EMP NO ENAME           JOB             MGR ID DOB        SALARY   COMM DEPT   JOIN DATE  PROJ                                                                                                                                                             
+------ --------------- --------------- ------ ---------- ------ ------ ------ ---------- -------                                                                                                                                                          
+   113 RIAN            MGR                111 13-JAN-85   44000  10000 D1     10-JAN-07  P1                                                                                                                                                               
+   105 Goutham         DEV                111 10-JUL-80   43000  23000 D1     21-JUN-01  P3                                                                                                                                                               
+   112 OHIL            CLK                106 10-JAN-85   38000  14000 D1     10-DEC-07  P1                                                                                                                                                               
+   102 Krithi          ENG                106 10-JAN-85   36300   8000 D1     12-NOV-10  P3                                                                                                                                                               
+   125 Manu            DEV                150 10-DEC-80   35000   5000 D4     02-OCT-02  P3                                                                                                                                                               
+   123 Mahesh          MGR                111 10-DEC-84   35000  10000 D3     23-DEC-08  P2                                                                                                                                                               
+   106 Sandy           A.MGR              111 02-OCT-86   33000   7000 D2     24-NOV-06  P1                                                                                                                                                               
+   101 Ravi            MGR                111 10-OCT-95   32000  10000 D1     02-OCT-06  P1                                                                                                                                                               
+   108 Claire          DEV                106 10-NOV-80   31000  13000 D5     02-OCT-05  P2                                                                                                                                                               
+   110 Kishan          CLK                106 10-JAN-85   28000   4000 D5     10-DEC-07  P2                                                                                                                                                               
+   107 Charan          CLK                111 02-AUG-80   23000  17000 D1     12-OCT-02  P3                                                                                                                                                               
+   103 Varun           DEV                111 10-DEC-80   22000   7000 D1     22-SEP-01  P1                                                                                                                                                               
+   104 James           CLK                125 02-OCT-80   21000   3000 D2     26-NOV-05  P1                                                                                                                                                               
+
+13 rows selected.
+
+15.  List the tasks that are still pending or in progress.
+
+SQL> select * from task where status IN ('PENDING','IN-PROGRESS');
+
+PRJ DNO   TASK ID TASK NAME                      START DATE END DATE   STATUS                                                                                                                                                                             
+--- ----- ------- ------------------------------ ---------- ---------- ---------------                                                                                                                                                                    
+P2  D3          3 CODING AND TESTING             11-FEB-22             IN-PROGRESS                                                                                                                                                                        
+P3  D1          2 MODEL TRAINING                 01-MAR-22             IN-PROGRESS                                                                                                                                                                        
+P4  D5          1 REQUIREMENT GATHERING          10-APR-22             PENDING                                                                                                                                                                            
+P2  D3          4 DEPLOYMENT                     15-FEB-22             IN-PROGRESS                                                                                                                                                                        
+
+
+16.  List the name of the female dependents with medical coverage
+
+SQL> select * from dependent where gender='F' AND med_cover = 'YES';
+
+DEPID EMP NO DEPENDENT_NAME       G DOBIRTH    RELATIONSHIP    NOM_PCT MED                                                                                                                                                                                
+----- ------ -------------------- - ---------- --------------- ------- ---                                                                                                                                                                                
+    1    101 LATHA KUMAR          F 10-MAY-82  SPOUSE               50 YES                                                                                                                                                                                
+    3    102 SEEMA RAVI           F 01-JAN-80  SPOUSE               60 YES                                                                                                                                                                                
+    5    106 NEHA RAHUL           F 22-JUL-90  SPOUSE               70 YES                                                                                                                                                                                
+    7    104 MEERA ROHAN          F 06-MAR-15  CHILD               100 YES                                                                                                                                                                                
+
+SQL> spool off;

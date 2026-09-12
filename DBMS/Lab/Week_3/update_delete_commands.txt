@@ -96,10 +96,12 @@ SQL> SELECT EMPNO, ENAME, JOB, SAL, MGRID FROM EMP WHERE EMPNO = 123;
 7.
 update emp set comm = 10000 where job = 'MGR';
 
-2 rows updated.
+3 rows updated.
 
 
 8.
 
 
 SQL> update emp set sal = sal * 1.10 where job = 'ENG';
+
+2 rows updated.
