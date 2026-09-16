@@ -229,29 +229,9 @@ P2  AI MIGR.
 P5  DATA SECURITY                                                                                                                                     
 
 SQL> spool off;
-SQL> select e.name,t.task_id from emp e JOIN task t ON e.deptno = t.dno AND e.prj_id=t.prj_id;
-select e.name,t.task_id from emp e JOIN task t ON e.deptno = t.dno AND e.prj_id=t.prj_id
-                                                                       *
-ERROR at line 1:
-ORA-00904: "E"."PRJ_ID": invalid identifier 
 
 
-SQL> desc emp;
- Name                                                                                Null?    Type
- ----------------------------------------------------------------------------------- -------- --------------------------------------------------------
- EMPNO                                                                               NOT NULL NUMBER(3)
- ENAME                                                                               NOT NULL VARCHAR2(15)
- JOB                                                                                          VARCHAR2(15)
- MGRID                                                                                        NUMBER(3)
- DATE_BIRTH                                                                                   DATE
- SAL                                                                                          NUMBER(10,2)
- COMM                                                                                         NUMBER(10,2)
- DEPTNO                                                                                       CHAR(3)
- DATE_JOIN                                                                                    DATE
- PROJ_ID                                                                                      CHAR(3)
-
-
-
+select e.ename,t.task_id,t.prj_id from emp e JOIN task t ON e.deptno = t.dno AND e.proj_id=t.prj_id;
 ENAME              TASK_ID PRJ                                                                                                                        
 --------------- ---------- ---                                                                                                                        
 Manu                     1 P3                                                                                                                         
@@ -289,11 +269,6 @@ Physics                  500000
 
 6 rows selected.
 
-SQL> select status,COUNT(task_id), from task GROUP BY status;
-select status,COUNT(task_id), from task GROUP BY status
-                              *
-ERROR at line 1:
-ORA-00936: missing expression 
 
 
 SQL> select status,COUNT(task_id) from task GROUP BY status;
@@ -377,3 +352,22 @@ Manu            HR                   35000
 Claire          Accounts             31000                                                                                                            
 
 SQL> spool off;
+
+
+ select job as job_category, SUM(sal) as total_sal from emp GROUP BY job;
+
+
+
+SQL> select dno,dname from dept where dno IN (select MIN(deptno) from emp where proj_id = 'P1');
+
+DNO DNAME
+--- ---------------
+D1  Marketing
+
+
+
+
+select e.ename,e.job,d.dname from emp e JOIN dept d ON e.deptno = d.dno WHERE dname = 'Marketing' OR dname = 'Research';
+
+
+select ename,sal,job from emp where sal > SOME(select MIN(sal) from emp GROUP BY j
