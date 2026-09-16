@@ -27,12 +27,12 @@ The goal is to keep all laboratory work **organized, accessible, and version-con
 
 ## 📚 SUBJECTS
 
-| 📂 Subject   | 📝 Contents                          | ⚡ Focus                              |
-| ------------ | ------------------------------------ | ------------------------------------ |
-| 🗄️ **DBMS** | Database laboratory programs         | SQL • Queries • Database Concepts    |
-| 🧩 **OOP-I** | Object-Oriented Programming programs | C++ • OOP Concepts • Problem Solving |
-
-> 🔄 More subjects and laboratory work will be added as the semester progresses.
+| 📂 Subject | 📝 Description | ⚡ Focus |
+| ---------- | ------------- | ------- |
+| 🗄️ [**DBMS**](./DBMS/) | Database laboratory exercises and a toy-manufacturing mini project. | SQL • Database Design • Queries |
+| 🧩 [**OOP-I**](./OOP-I/) | C++ laboratory programs covering the fundamentals of object-oriented programming. | C++ • OOP Concepts • Problem Solving |
+| 🌐 [**Web Technology**](./WT/) | HTML and CSS practicals, including resumes, timetables, forms, galleries, and a detailed W3C website. | HTML • CSS • Web Standards |
+| 📖 [**RMTC**](./RMTC/) | Course material and documentation for Research Methodology and Technical Communication. | Research • Technical Writing • Communication |
 
 ---
 
@@ -42,6 +42,8 @@ The goal is to keep all laboratory work **organized, accessible, and version-con
 
 <img src="https://img.shields.io/badge/C++-00599C?style=for-the-badge&logo=cplusplus&logoColor=white">
 <img src="https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
+<img src="https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+<img src="https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white">
 <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white">
 <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white">
 <img src="https://img.shields.io/badge/VS%20Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white">
@@ -73,7 +75,8 @@ Each subject has its own directory to keep programs and practical exercises orga
 | ---------------------- | -------------- |
 | 🗄️ DBMS Lab           | 🟢 In Progress |
 | 🧩 OOP-I Lab           | 🟢 In Progress |
-| 📚 Additional Subjects | 🟡 Upcoming    |
+| 🌐 Web Technology Lab  | 🟢 In Progress |
+| 📖 RMTC               | 🟢 Available    |
 | 📖 Documentation       | 🟢 Maintained  |
 
 ---
