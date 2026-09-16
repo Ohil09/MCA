@@ -1,16 +1,379 @@
-SELECT
-    UPPER(ename) AS uppercase_ename,
-    LOWER(ename) AS lowercase_ename,
-    INITCAP(ename) AS init_cap,
-    LENGTH(ename) AS number_of_characters,
-    SUBSTR(ename, 2, 3) AS three_characters_from_2nd_position
-FROM emp;
+
+SQL> select COUNT(empno) as Total_emp from emp;
+
+ TOTAL_EMP                                                                                                                                            
+----------                                                                                                                                            
+        15                                                                                                                                            
 
 
-SELECT ename
-FROM emp
-WHERE mgr = (
-    SELECT empno
-    FROM emp
-    WHERE ename = 'Raghu'
-);
+
+SQL> select MIN(sal) as Min_sal, MAX(sal) as Max_sal, AVG(sal) as Avg_sal, SUM(sal) as Total_sal from emp;
+
+   MIN_SAL    MAX_SAL    AVG_SAL  TOTAL_SAL                                                                                                           
+---------- ---------- ---------- ----------                                                                                                           
+     21000      60000 35958.6667     539380                                                                                                           
+
+
+
+SQL> select p.prj_name from proj p NATURAL JOIN dept d where d.dname='Marketing';
+
+PRJ_NAME                                                                                                                                              
+--------------------                                                                                                                                  
+PAYROLL AUTOMATION                                                                                                                                    
+ERP REVAMP                                                                                                                                            
+
+
+
+SQL> SELECT UPPER(ename) AS uppercase_ename, LOWER(ename) AS lowercase_ename, INITCAP(ename) AS init_cap, LENGTH(ename) AS number_of_characters, SUBSTR(ename, 2, 3) AS three_characters_from_2nd_position FROM emp;
+
+UPPERCASE_ENAME LOWERCASE_ENAME INIT_CAP        NUMBER_OF_CHARACTERS THREE_CHARAC                                                                     
+--------------- --------------- --------------- -------------------- ------------                                                                     
+JHON            jhon            Jhon                               4 hon                                                                              
+RAGHU           raghu           Raghu                              5 agh                                                                              
+MANU            manu            Manu                               4 anu                                                                              
+MAHESH          mahesh          Mahesh                             6 ahe                                                                              
+RAVI            ravi            Ravi                               4 avi                                                                              
+VARUN           varun           Varun                              5 aru                                                                              
+SANDY           sandy           Sandy                              5 and                                                                              
+GOUTHAM         goutham         Goutham                            7 out                                                                              
+KRITHI          krithi          Krithi                             6 rit                                                                              
+CHARAN          charan          Charan                             6 har                                                                              
+JAMES           james           James                              5 ame                                                                              
+CLAIRE          claire          Claire                             6 lai                                                                              
+KISHAN          kishan          Kishan                             6 ish                                                                              
+OHIL            ohil            Ohil                               4 HIL                                                                              
+RIAN            rian            Rian                               4 IAN                                                                              
+
+15 rows selected.
+
+
+
+
+SQL> SELECT ename FROM emp WHERE mgrid = (SELECT empno FROM emp WHERE ename = 'Raghu');
+
+ENAME                                                                                                                                                 
+---------------                                                                                                                                       
+Mahesh                                                                                                                                                
+Ravi                                                                                                                                                  
+Varun                                                                                                                                                 
+Sandy                                                                                                                                                 
+Goutham                                                                                                                                               
+Charan                                                                                                                                                
+RIAN                                                                                                                                                  
+
+7 rows selected.
+
+
+
+SQL> select d.dname, MAX(e.sal) as Max_sal,MIN(e.sal) as Min_sal from dept d JOIN emp e ON d.dno = e.deptno GROUP BY d.dname;
+
+DNAME              MAX_SAL    MIN_SAL                                                                                                                 
+--------------- ---------- ----------                                                                                                                 
+HR                   35000      35000                                                                                                                 
+IT                   35000      35000                                                                                                                 
+Marketing            44000      22000                                                                                                                 
+Research             33000      21000                                                                                                                 
+Accounts             31000      28000                                                                                                                 
+
+
+
+SQL> select d.dname, COUNT(empno) as Number_of_emp from dept d JOIN emp e ON d.dno = e.deptno GROUP BY d.dname;
+
+DNAME           NUMBER_OF_EMP                                                                                                                         
+--------------- -------------                                                                                                                         
+HR                          1                                                                                                                         
+IT                          1                                                                                                                         
+Marketing                   7                                                                                                                         
+Research                    2                                                                                                                         
+Accounts                    2                                                                                                                         
+
+
+SQL> SELECT * FROM emp WHERE EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM date_join) > 5;
+
+     EMPNO ENAME           JOB                  MGRID DATE_BIRT        SAL       COMM DEP DATE_JOIN PRO                                               
+---------- --------------- --------------- ---------- --------- ---------- ---------- --- --------- ---                                               
+       150 Jhon            CEO                        10-DEC-90      60000      30000     03-DEC-08                                                   
+       111 Raghu           ENG                    150 10-DEC-84      54450      15000     03-FEB-05                                                   
+       125 Manu            DEV                    150 10-DEC-80      35000       5000 D4  02-OCT-02 P3                                                
+       123 Mahesh          MGR                    111 10-DEC-84      35000      10000 D3  23-DEC-08 P2                                                
+       101 Ravi            MGR                    111 10-OCT-95      32000      10000 D1  02-OCT-06 P1                                                
+       103 Varun           DEV                    111 10-DEC-80      22000       7000 D1  22-SEP-01 P1                                                
+       106 Sandy           A.MGR                  111 02-OCT-86      33000       7000 D2  24-NOV-06 P1                                                
+       105 Goutham         DEV                    111 10-JUL-80      43000      23000 D1  21-JUN-01 P3                                                
+       102 Krithi          ENG                    106 10-JAN-85      39930       8000 D1  12-NOV-10 P3                                                
+       107 Charan          CLK                    111 02-AUG-80      23000      17000 D1  12-OCT-02 P3                                                
+       104 James           CLK                    125 02-OCT-80      21000       3000 D2  26-NOV-05 P1                                                
+       108 Claire          DEV                    106 10-NOV-80      31000      13000 D5  02-OCT-05 P2                                                
+       110 Kishan          CLK                    106 10-JAN-85      28000       4000 D5  10-DEC-07 P2                                                
+       112 OHIL            CLK                    106 10-JAN-85      38000      14000 D1  10-DEC-07 P1                                                
+       113 RIAN            MGR                    111 13-JAN-85      44000      10000 D1  10-JAN-07 P1                                                
+
+15 rows selected.
+
+ OR 
+
+SQL> select * from emp where date_join < ADD_MONTHS(SYSDATE, -60);
+
+     EMPNO ENAME           JOB                  MGRID DATE_BIRT        SAL       COMM DEP DATE_JOIN PRO                                               
+---------- --------------- --------------- ---------- --------- ---------- ---------- --- --------- ---                                               
+       150 Jhon            CEO                        10-DEC-90      60000      30000     03-DEC-08                                                   
+       111 Raghu           ENG                    150 10-DEC-84      54450      15000     03-FEB-05                                                   
+       125 Manu            DEV                    150 10-DEC-80      35000       5000 D4  02-OCT-02 P3                                                
+       123 Mahesh          MGR                    111 10-DEC-84      35000      10000 D3  23-DEC-08 P2                                                
+       101 Ravi            MGR                    111 10-OCT-95      32000      10000 D1  02-OCT-06 P1                                                
+       103 Varun           DEV                    111 10-DEC-80      22000       7000 D1  22-SEP-01 P1                                                
+       106 Sandy           A.MGR                  111 02-OCT-86      33000       7000 D2  24-NOV-06 P1                                                
+       105 Goutham         DEV                    111 10-JUL-80      43000      23000 D1  21-JUN-01 P3                                                
+       102 Krithi          ENG                    106 10-JAN-85      39930       8000 D1  12-NOV-10 P3                                                
+       107 Charan          CLK                    111 02-AUG-80      23000      17000 D1  12-OCT-02 P3                                                
+       104 James           CLK                    125 02-OCT-80      21000       3000 D2  26-NOV-05 P1                                                
+       108 Claire          DEV                    106 10-NOV-80      31000      13000 D5  02-OCT-05 P2                                                
+       110 Kishan          CLK                    106 10-JAN-85      28000       4000 D5  10-DEC-07 P2                                                
+       112 OHIL            CLK                    106 10-JAN-85      38000      14000 D1  10-DEC-07 P1                                                
+       113 RIAN            MGR                    111 13-JAN-85      44000      10000 D1  10-JAN-07 P1                                                
+
+15 rows selected.
+
+SQL> select  * from emp where TO_CHAR(date_birth,  'MON') = 'DEC' AND TO_CHAR(date_birth, 'YYYY') = '1984';
+
+     EMPNO ENAME           JOB                  MGRID DATE_BIRT        SAL       COMM DEP DATE_JOIN PRO                                               
+---------- --------------- --------------- ---------- --------- ---------- ---------- --- --------- ---                                               
+       111 Raghu           ENG                    150 10-DEC-84      54450      15000     03-FEB-05                                                   
+       123 Mahesh          MGR                    111 10-DEC-84      35000      10000 D3  23-DEC-08 P2                                                
+
+SQL> spool off;
+SQL> select job, COUNT(ename) as No_of_emp from emp;
+select job, COUNT(ename) as No_of_emp from emp
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> select job, COUNT(ename) as No_of_emp from emp GROUP BY job;
+
+JOB              NO_OF_EMP                                                                                                                            
+--------------- ----------                                                                                                                            
+CEO                      1                                                                                                                            
+ENG                      2                                                                                                                            
+DEV                      4                                                                                                                            
+CLK                      5                                                                                                                            
+MGR                      2                                                                                                                            
+A.MGR                    1                                                                                                                            
+
+6 rows selected.
+
+SQL> select dname from dept where dno IN(select deptno from emp GROUP BY deptno HAVING COUNT(empno) > 3;
+select dname from dept where dno IN(select deptno from emp GROUP BY deptno HAVING COUNT(empno) > 3
+                                                                                                 *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> select dname from dept where dno IN(select deptno from emp GROUP BY deptno HAVING COUNT(empno) > 3);
+
+DNAME                                                                                                                                                 
+---------------                                                                                                                                       
+Marketing                                                                                                                                             
+
+SQL> select * from emp where proj_id IN(select prj_no from proj where prj_name='PAYROLL AUTOMATION');
+
+     EMPNO ENAME           JOB                  MGRID DATE_BIRT        SAL       COMM DEP DATE_JOIN PRO                                               
+---------- --------------- --------------- ---------- --------- ---------- ---------- --- --------- ---                                               
+       101 Ravi            MGR                    111 10-OCT-95      32000      10000 D1  02-OCT-06 P1                                                
+       103 Varun           DEV                    111 10-DEC-80      22000       7000 D1  22-SEP-01 P1                                                
+       106 Sandy           A.MGR                  111 02-OCT-86      33000       7000 D2  24-NOV-06 P1                                                
+       104 James           CLK                    125 02-OCT-80      21000       3000 D2  26-NOV-05 P1                                                
+       112 OHIL            CLK                    106 10-JAN-85      38000      14000 D1  10-DEC-07 P1                                                
+       113 RIAN            MGR                    111 13-JAN-85      44000      10000 D1  10-JAN-07 P1                                                
+
+6 rows selected.
+
+SQL> select * from emp where proj_id IN(select prj_no from proj where prj_name='PAYROLL AUTOMATION' AND dno = 'D1');
+
+     EMPNO ENAME           JOB                  MGRID DATE_BIRT        SAL       COMM DEP DATE_JOIN PRO                                               
+---------- --------------- --------------- ---------- --------- ---------- ---------- --- --------- ---                                               
+       101 Ravi            MGR                    111 10-OCT-95      32000      10000 D1  02-OCT-06 P1                                                
+       103 Varun           DEV                    111 10-DEC-80      22000       7000 D1  22-SEP-01 P1                                                
+       106 Sandy           A.MGR                  111 02-OCT-86      33000       7000 D2  24-NOV-06 P1                                                
+       104 James           CLK                    125 02-OCT-80      21000       3000 D2  26-NOV-05 P1                                                
+       112 OHIL            CLK                    106 10-JAN-85      38000      14000 D1  10-DEC-07 P1                                                
+       113 RIAN            MGR                    111 13-JAN-85      44000      10000 D1  10-JAN-07 P1                                                
+
+6 rows selected.
+
+SQL> select * from emp where deptno = 'D1' AND proj_id IN(select prj_no from proj where prj_name='PAYROLL AUTOMATION');
+
+     EMPNO ENAME           JOB                  MGRID DATE_BIRT        SAL       COMM DEP DATE_JOIN PRO                                               
+---------- --------------- --------------- ---------- --------- ---------- ---------- --- --------- ---                                               
+       101 Ravi            MGR                    111 10-OCT-95      32000      10000 D1  02-OCT-06 P1                                                
+       103 Varun           DEV                    111 10-DEC-80      22000       7000 D1  22-SEP-01 P1                                                
+       112 OHIL            CLK                    106 10-JAN-85      38000      14000 D1  10-DEC-07 P1                                                
+       113 RIAN            MGR                    111 13-JAN-85      44000      10000 D1  10-JAN-07 P1                                                
+
+SQL> select CEIL(2.83) AS ceil_val, FLOOR(2.83) AS floor_val, TRUNC(2.83) AS trunc_val, ROUND(2.83) AS Trunc_val FROM DUAL;
+
+  CEIL_VAL  FLOOR_VAL  TRUNC_VAL  TRUNC_VAL                                                                                                           
+---------- ---------- ---------- ----------                                                                                                           
+         3          2          2          3                                                                                                           
+
+SQL> select prj_no, prj_name from proj where EXTRACT(YEAR FROM end_date) - EXTRACT(YEAR FROM strt_date) > 1;
+
+no rows selected
+
+SQL> select prj_no, prj_name from proj where end_date > ADD_MONTHS(strt_date,12);
+
+PRJ PRJ_NAME                                                                                                                                          
+--- --------------------                                                                                                                              
+P3  ERP REVAMP                                                                                                                                        
+P2  AI MIGR.                                                                                                                                          
+P5  DATA SECURITY                                                                                                                                     
+
+SQL> spool off;
+SQL> select e.name,t.task_id from emp e JOIN task t ON e.deptno = t.dno AND e.prj_id=t.prj_id;
+select e.name,t.task_id from emp e JOIN task t ON e.deptno = t.dno AND e.prj_id=t.prj_id
+                                                                       *
+ERROR at line 1:
+ORA-00904: "E"."PRJ_ID": invalid identifier 
+
+
+SQL> desc emp;
+ Name                                                                                Null?    Type
+ ----------------------------------------------------------------------------------- -------- --------------------------------------------------------
+ EMPNO                                                                               NOT NULL NUMBER(3)
+ ENAME                                                                               NOT NULL VARCHAR2(15)
+ JOB                                                                                          VARCHAR2(15)
+ MGRID                                                                                        NUMBER(3)
+ DATE_BIRTH                                                                                   DATE
+ SAL                                                                                          NUMBER(10,2)
+ COMM                                                                                         NUMBER(10,2)
+ DEPTNO                                                                                       CHAR(3)
+ DATE_JOIN                                                                                    DATE
+ PROJ_ID                                                                                      CHAR(3)
+
+
+
+ENAME              TASK_ID PRJ                                                                                                                        
+--------------- ---------- ---                                                                                                                        
+Manu                     1 P3                                                                                                                         
+Mahesh                   3 P2                                                                                                                         
+Mahesh                   4 P2                                                                                                                         
+Ravi                     1 P1                                                                                                                         
+Varun                    1 P1                                                                                                                         
+Sandy                    2 P1                                                                                                                         
+Goutham                  1 P3                                                                                                                         
+Goutham                  2 P3                                                                                                                         
+Goutham                  3 P3                                                                                                                         
+Krithi                   1 P3                                                                                                                         
+Krithi                   2 P3                                                                                                                         
+Krithi                   3 P3                                                                                                                         
+Charan                   1 P3                                                                                                                         
+Charan                   2 P3                                                                                                                         
+Charan                   3 P3                                                                                                                         
+James                    2 P1                                                                                                                         
+OHIL                     1 P1                                                                                                                         
+RIAN                     1 P1                                                                                                                         
+
+18 rows selected.
+
+SQL> spool off;
+SQL> select d.dname,SUM(p.prj_fund) from proj p JOIN dept d ON p.dno = d.dno GROUP BY d.dname;
+
+DNAME           SUM(P.PRJ_FUND)                                                                                                                       
+--------------- ---------------                                                                                                                       
+Marketing               1000000                                                                                                                       
+Research                 900000                                                                                                                       
+IT                       650000                                                                                                                       
+HR                       400000                                                                                                                       
+Accounts                1250000                                                                                                                       
+Physics                  500000                                                                                                                       
+
+6 rows selected.
+
+SQL> select status,COUNT(task_id), from task GROUP BY status;
+select status,COUNT(task_id), from task GROUP BY status
+                              *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> select status,COUNT(task_id) from task GROUP BY status;
+
+STATUS       COUNT(TASK_ID)                                                                                                                           
+------------ --------------                                                                                                                           
+COMPLETED                 6                                                                                                                           
+IN-PROGRESS               3                                                                                                                           
+PENDING                   1                                                                                                                           
+
+SQL> select status,COUNT(*) from task GROUP BY status;
+
+STATUS         COUNT(*)                                                                                                                               
+------------ ----------                                                                                                                               
+COMPLETED             6                                                                                                                               
+IN-PROGRESS           3                                                                                                                               
+PENDING               1                                                                                                                               
+
+SQL> select UPPER(ename) AS Emp_name,TO_CHAR(date_join, 'yyyy') AS joining_year from emp;
+
+EMP_NAME        JOIN                                                                                                                                  
+--------------- ----                                                                                                                                  
+JHON            2008                                                                                                                                  
+RAGHU           2005                                                                                                                                  
+MANU            2002                                                                                                                                  
+MAHESH          2008                                                                                                                                  
+RAVI            2006                                                                                                                                  
+VARUN           2001                                                                                                                                  
+SANDY           2006                                                                                                                                  
+GOUTHAM         2001                                                                                                                                  
+KRITHI          2010                                                                                                                                  
+CHARAN          2002                                                                                                                                  
+JAMES           2005                                                                                                                                  
+CLAIRE          2005                                                                                                                                  
+KISHAN          2007                                                                                                                                  
+OHIL            2007                                                                                                                                  
+RIAN            2007                                                                                                                                  
+
+15 rows selected.
+
+SQL> select ename, TRUNC(MONTHS_BETWEEN(SYSDATE, date_join)) AS Months_served from emp;
+
+ENAME           MONTHS_SERVED                                                                                                                         
+--------------- -------------                                                                                                                         
+Jhon                      213                                                                                                                         
+Raghu                     259                                                                                                                         
+Manu                      287                                                                                                                         
+Mahesh                    212                                                                                                                         
+Ravi                      239                                                                                                                         
+Varun                     299                                                                                                                         
+Sandy                     237                                                                                                                         
+Goutham                   302                                                                                                                         
+Krithi                    190                                                                                                                         
+Charan                    287                                                                                                                         
+James                     249                                                                                                                         
+Claire                    251                                                                                                                         
+Kishan                    225                                                                                                                         
+OHIL                      225                                                                                                                         
+RIAN                      236                                                                                                                         
+
+15 rows selected.
+
+SQL> SELECT DISTINCT p.prj_name  FROM proj p JOIN task t ON p.prj_no = t.prj_id  WHERE t.s_date > TO_DATE('01-FEB-2022', 'DD-MON-YYYY');
+
+PRJ_NAME                                                                                                                                              
+--------------------                                                                                                                                  
+DATA WAREHOUSE MIGR.                                                                                                                                  
+AI MIGR.                                                                                                                                              
+CRM REVAMP                                                                                                                                            
+ERP REVAMP                                                                                                                                            
+WAREHOUSE AUTOMATION                                                                                                                                  
+
+SQL> SELECT e.ename, d.dname, e.sal  FROM emp e  JOIN dept d ON e.deptno = d.dno  WHERE e.sal = (     SELECT MAX(e2.sal) FROM emp e2 WHERE e2.deptno = e.deptno );
+
+ENAME           DNAME                  SAL                                                                                                            
+--------------- --------------- ----------                                                                                                            
+RIAN            Marketing            44000                                                                                                            
+Sandy           Research             33000                                                                                                            
+Mahesh          IT                   25000                                                                                                            
+Manu            HR                   35000                                                                                                            
+Claire          Accounts             31000                                                                                                            
+
+SQL> spool off;
