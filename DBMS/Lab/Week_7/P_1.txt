@@ -1,0 +1,17 @@
+SET SERVEROUTPUT ON
+DECLARE
+	CURSOR c_dept IS SELECT dno, dname FROM dept WHERE ROWNUM <= 5;
+	v_dno dept.dno%TYPE;
+	v_dname dept.dname%TYPE;
+BEGIN
+	open c_dept;
+
+	LOOP
+		fetch c_dept into v_dno, v_dname;
+		exit when c_dept%NOTFOUND;
+
+		DBMS_OUTPUT.PUT_LINE(v_dno||v_dname);
+	END LOOP;
+	CLOSE c_dept;
+END;
+/

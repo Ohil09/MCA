@@ -1,0 +1,42 @@
+SET SERVEROUTPUT ON
+
+/*
+CREATE TABLE EMPSAL (
+    Empno NUMBER(3),
+    Empname VARCHAR2(15),
+    Sal NUMBER(10,2),
+    HRA NUMBER(10,2),
+    DA NUMBER(10,2),
+    Gross_Salary NUMBER(10,2),
+    PF NUMBER(10,2),
+    Net_Salary NUMBER(10,2)
+);
+*/
+
+DECLARE
+	v_eno emp.empno%TYPE := &emp_no;
+	v_sal emp.sal%TYPE;
+	v_empname empsal.empname%TYPE;
+	v_HRA empsal.HRA%TYPE;
+	v_DA empsal.DA%TYPE;
+	v_PF empsal.PF%TYPE;
+	v_Gross empsal.Gross_Salary%TYPE;
+	v_NetSal empsal.Net_Salary%TYPE;
+	
+BEGIN
+	SELECT ename, sal INTO v_empname, v_sal FROM EMP WHERE EMPNO = v_eno;
+	v_HRA := v_sal * 0.50;
+	v_DA := v_sal * 0.20;
+	v_PF := v_sal * 0.12;
+	v_Gross := v_sal + v_HRA + v_DA;
+	v_NetSal := v_Gross - v_PF;
+
+	INSERT INTO EMPSAL VALUES(v_eno,v_empname,v_sal,v_HRA,v_DA,v_Gross,v_PF,v_NetSal);
+	DBMS_OUTPUT.PUT_LINE('Values Inserted into EMPSAL table Successfully!');
+EXCEPTION
+	WHEN NO_DATA_FOUND THEN
+	
+	DBMS_OUTPUT.PUT_LINE('Please Enter an valid emp no that exists in EMP table !');
+
+END;
+/

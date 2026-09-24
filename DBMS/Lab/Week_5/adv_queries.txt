@@ -1,4 +1,4 @@
-
+1. List the total number of employees.
 SQL> select COUNT(empno) as Total_emp from emp;
 
  TOTAL_EMP                                                                                                                                            
@@ -6,6 +6,8 @@ SQL> select COUNT(empno) as Total_emp from emp;
         15                                                                                                                                            
 
 
+2. List the minimum, maximum and average salaries and rename the column as          
+min_sal, max_sal, avg_sal, total salary of the employees. 
 
 SQL> select MIN(sal) as Min_sal, MAX(sal) as Max_sal, AVG(sal) as Avg_sal, SUM(sal) as Total_sal from emp;
 
@@ -13,7 +15,7 @@ SQL> select MIN(sal) as Min_sal, MAX(sal) as Max_sal, AVG(sal) as Avg_sal, SUM(s
 ---------- ---------- ---------- ----------                                                                                                           
      21000      60000 35958.6667     539380                                                                                                           
 
-
+3. List the Project names undertaken by Marketing Department.
 
 SQL> select p.prj_name from proj p NATURAL JOIN dept d where d.dname='Marketing';
 
@@ -22,7 +24,8 @@ PRJ_NAME
 PAYROLL AUTOMATION                                                                                                                                    
 ERP REVAMP                                                                                                                                            
 
-
+4. Display the employees name in capital, lower, 1st character only capital, number of 
+characters and 3 characters from 2nd position. 
 
 SQL> SELECT UPPER(ename) AS uppercase_ename, LOWER(ename) AS lowercase_ename, INITCAP(ename) AS init_cap, LENGTH(ename) AS number_of_characters, SUBSTR(ename, 2, 3) AS three_characters_from_2nd_position FROM emp;
 
@@ -47,7 +50,7 @@ RIAN            rian            Rian                               4 IAN
 15 rows selected.
 
 
-
+5. List the name of employees who are working under the manager ‘Raghu’. 
 
 SQL> SELECT ename FROM emp WHERE mgrid = (SELECT empno FROM emp WHERE ename = 'Raghu');
 
@@ -63,7 +66,7 @@ RIAN
 
 7 rows selected.
 
-
+6. Display department name, Max salary and Min salary in each department. 
 
 SQL> select d.dname, MAX(e.sal) as Max_sal,MIN(e.sal) as Min_sal from dept d JOIN emp e ON d.dno = e.deptno GROUP BY d.dname;
 
@@ -75,7 +78,8 @@ Marketing            44000      22000
 Research             33000      21000                                                                                                                 
 Accounts             31000      28000                                                                                                                 
 
-
+7. Display number of employees working in each department and their department 
+name. 
 
 SQL> select d.dname, COUNT(empno) as Number_of_emp from dept d JOIN emp e ON d.dno = e.deptno GROUP BY d.dname;
 
@@ -87,6 +91,7 @@ Marketing                   7
 Research                    2                                                                                                                         
 Accounts                    2                                                                                                                         
 
+8. List the employees whose experience is more than 5 years.
 
 SQL> SELECT * FROM emp WHERE EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM date_join) > 5;
 
@@ -134,6 +139,10 @@ SQL> select * from emp where date_join < ADD_MONTHS(SYSDATE, -60);
 
 15 rows selected.
 
+
+
+9. List the Employees who are born in the month of December and year 1984.
+
 SQL> select  * from emp where TO_CHAR(date_birth,  'MON') = 'DEC' AND TO_CHAR(date_birth, 'YYYY') = '1984';
 
      EMPNO ENAME           JOB                  MGRID DATE_BIRT        SAL       COMM DEP DATE_JOIN PRO                                               
@@ -141,13 +150,7 @@ SQL> select  * from emp where TO_CHAR(date_birth,  'MON') = 'DEC' AND TO_CHAR(da
        111 Raghu           ENG                    150 10-DEC-84      54450      15000     03-FEB-05                                                   
        123 Mahesh          MGR                    111 10-DEC-84      35000      10000 D3  23-DEC-08 P2                                                
 
-SQL> spool off;
-SQL> select job, COUNT(ename) as No_of_emp from emp;
-select job, COUNT(ename) as No_of_emp from emp
-       *
-ERROR at line 1:
-ORA-00937: not a single-group group function 
-
+10. List the Number of employees per job title. 
 
 SQL> select job, COUNT(ename) as No_of_emp from emp GROUP BY job;
 
@@ -162,12 +165,7 @@ A.MGR                    1
 
 6 rows selected.
 
-SQL> select dname from dept where dno IN(select deptno from emp GROUP BY deptno HAVING COUNT(empno) > 3;
-select dname from dept where dno IN(select deptno from emp GROUP BY deptno HAVING COUNT(empno) > 3
-                                                                                                 *
-ERROR at line 1:
-ORA-00907: missing right parenthesis 
-
+11. List the Departments with More Than Three Employees.
 
 SQL> select dname from dept where dno IN(select deptno from emp GROUP BY deptno HAVING COUNT(empno) > 3);
 
@@ -175,31 +173,8 @@ DNAME
 ---------------                                                                                                                                       
 Marketing                                                                                                                                             
 
-SQL> select * from emp where proj_id IN(select prj_no from proj where prj_name='PAYROLL AUTOMATION');
+12. List the employees working under the project ‘Payroll Automation’.
 
-     EMPNO ENAME           JOB                  MGRID DATE_BIRT        SAL       COMM DEP DATE_JOIN PRO                                               
----------- --------------- --------------- ---------- --------- ---------- ---------- --- --------- ---                                               
-       101 Ravi            MGR                    111 10-OCT-95      32000      10000 D1  02-OCT-06 P1                                                
-       103 Varun           DEV                    111 10-DEC-80      22000       7000 D1  22-SEP-01 P1                                                
-       106 Sandy           A.MGR                  111 02-OCT-86      33000       7000 D2  24-NOV-06 P1                                                
-       104 James           CLK                    125 02-OCT-80      21000       3000 D2  26-NOV-05 P1                                                
-       112 OHIL            CLK                    106 10-JAN-85      38000      14000 D1  10-DEC-07 P1                                                
-       113 RIAN            MGR                    111 13-JAN-85      44000      10000 D1  10-JAN-07 P1                                                
-
-6 rows selected.
-
-SQL> select * from emp where proj_id IN(select prj_no from proj where prj_name='PAYROLL AUTOMATION' AND dno = 'D1');
-
-     EMPNO ENAME           JOB                  MGRID DATE_BIRT        SAL       COMM DEP DATE_JOIN PRO                                               
----------- --------------- --------------- ---------- --------- ---------- ---------- --- --------- ---                                               
-       101 Ravi            MGR                    111 10-OCT-95      32000      10000 D1  02-OCT-06 P1                                                
-       103 Varun           DEV                    111 10-DEC-80      22000       7000 D1  22-SEP-01 P1                                                
-       106 Sandy           A.MGR                  111 02-OCT-86      33000       7000 D2  24-NOV-06 P1                                                
-       104 James           CLK                    125 02-OCT-80      21000       3000 D2  26-NOV-05 P1                                                
-       112 OHIL            CLK                    106 10-JAN-85      38000      14000 D1  10-DEC-07 P1                                                
-       113 RIAN            MGR                    111 13-JAN-85      44000      10000 D1  10-JAN-07 P1                                                
-
-6 rows selected.
 
 SQL> select * from emp where deptno = 'D1' AND proj_id IN(select prj_no from proj where prj_name='PAYROLL AUTOMATION');
 
@@ -210,15 +185,17 @@ SQL> select * from emp where deptno = 'D1' AND proj_id IN(select prj_no from pro
        112 OHIL            CLK                    106 10-JAN-85      38000      14000 D1  10-DEC-07 P1                                                
        113 RIAN            MGR                    111 13-JAN-85      44000      10000 D1  10-JAN-07 P1                                                
 
+
+13. Write SQL query to illustrate ceiling, floor, truncate, and round functions on the value 2.83. 
+
+
 SQL> select CEIL(2.83) AS ceil_val, FLOOR(2.83) AS floor_val, TRUNC(2.83) AS trunc_val, ROUND(2.83) AS Trunc_val FROM DUAL;
 
   CEIL_VAL  FLOOR_VAL  TRUNC_VAL  TRUNC_VAL                                                                                                           
 ---------- ---------- ---------- ----------                                                                                                           
          3          2          2          3                                                                                                           
 
-SQL> select prj_no, prj_name from proj where EXTRACT(YEAR FROM end_date) - EXTRACT(YEAR FROM strt_date) > 1;
-
-no rows selected
+14. List the projects which have duration of more than 1 year.
 
 SQL> select prj_no, prj_name from proj where end_date > ADD_MONTHS(strt_date,12);
 
@@ -230,6 +207,8 @@ P5  DATA SECURITY
 
 SQL> spool off;
 
+15. List all employees along with the tasks they are associated with through their 
+department's projects.
 
 select e.ename,t.task_id,t.prj_id from emp e JOIN task t ON e.deptno = t.dno AND e.proj_id=t.prj_id;
 ENAME              TASK_ID PRJ                                                                                                                        
@@ -256,6 +235,9 @@ RIAN                     1 P1
 18 rows selected.
 
 SQL> spool off;
+
+16. List the total project budget sanctioned per department. 
+
 SQL> select d.dname,SUM(p.prj_fund) from proj p JOIN dept d ON p.dno = d.dno GROUP BY d.dname;
 
 DNAME           SUM(P.PRJ_FUND)                                                                                                                       
@@ -269,7 +251,7 @@ Physics                  500000
 
 6 rows selected.
 
-
+17. List the count of tasks based on its status. 
 
 SQL> select status,COUNT(task_id) from task GROUP BY status;
 
@@ -279,6 +261,8 @@ COMPLETED                 6
 IN-PROGRESS               3                                                                                                                           
 PENDING                   1                                                                                                                           
 
+OR
+
 SQL> select status,COUNT(*) from task GROUP BY status;
 
 STATUS         COUNT(*)                                                                                                                               
@@ -286,6 +270,9 @@ STATUS         COUNT(*)
 COMPLETED             6                                                                                                                               
 IN-PROGRESS           3                                                                                                                               
 PENDING               1                                                                                                                               
+
+
+18.  List Employee names in uppercase with joining year
 
 SQL> select UPPER(ename) AS Emp_name,TO_CHAR(date_join, 'yyyy') AS joining_year from emp;
 
@@ -309,6 +296,32 @@ RIAN            2007
 
 15 rows selected.
 
+19.  List the Number of months each employee has served
+
+SELECT ename, MONTHS_BETWEEN(SYSDATE, date_join) AS months_served FROM emp;
+
+ENAME           MONTHS_SERVED
+--------------- -------------
+Jhon               213.665173
+Raghu              259.665173
+Manu               287.697431
+Mahesh                    213
+Ravi               239.697431
+Varun               300.05227
+Charan             287.374851
+Sandy              237.987754
+Goutham            303.084528
+Krithi             190.374851
+James              249.923238
+Claire             251.697431
+Kishan             225.439367
+OHIL               225.439367
+RIAN               236.439367
+
+15 rows selected.
+
+OR
+
 SQL> select ename, TRUNC(MONTHS_BETWEEN(SYSDATE, date_join)) AS Months_served from emp;
 
 ENAME           MONTHS_SERVED                                                                                                                         
@@ -330,18 +343,12 @@ OHIL                      225
 RIAN                      236                                                                                                                         
 
 15 rows selected.
+                                                                                                                        
 
-SQL> SELECT DISTINCT p.prj_name  FROM proj p JOIN task t ON p.prj_no = t.prj_id  WHERE t.s_date > TO_DATE('01-FEB-2022', 'DD-MON-YYYY');
+20.  Display the name of Highest paid employee along with department name for every 
+department. 
 
-PRJ_NAME                                                                                                                                              
---------------------                                                                                                                                  
-DATA WAREHOUSE MIGR.                                                                                                                                  
-AI MIGR.                                                                                                                                              
-CRM REVAMP                                                                                                                                            
-ERP REVAMP                                                                                                                                            
-WAREHOUSE AUTOMATION                                                                                                                                  
-
-SQL> SELECT e.ename, d.dname, e.sal  FROM emp e  JOIN dept d ON e.deptno = d.dno  WHERE e.sal = (     SELECT MAX(e2.sal) FROM emp e2 WHERE e2.deptno = e.deptno );
+SQL> SELECT e.ename, d.dname, e.sal  FROM emp e  JOIN dept d ON e.deptno = d.dno  WHERE e.sal = (SELECT MAX(e2.sal) FROM emp e2 WHERE e2.deptno = e.deptno );
 
 ENAME           DNAME                  SAL                                                                                                            
 --------------- --------------- ----------                                                                                                            
@@ -354,9 +361,23 @@ Claire          Accounts             31000
 SQL> spool off;
 
 
- select job as job_category, SUM(sal) as total_sal from emp GROUP BY job;
+21.  List Job category and total salary paid for the each jobs category by the company.
 
+select job as job_category, SUM(sal) as total_sal from emp GROUP BY job;
 
+JOB_CATEGORY     TOTAL_SAL
+--------------- ----------
+CEO                  60000
+A.MGR                33000
+CLK                 110000
+ENG                  85800
+DEV                 131000
+MGR                 111000
+
+6 rows selected.
+
+22. Display name of the department from which maximum number of employees are 
+working on project P1.(using subquery) 
 
 SQL> select dno,dname from dept where dno IN (select MIN(deptno) from emp where proj_id = 'P1');
 
@@ -365,9 +386,252 @@ DNO DNAME
 D1  Marketing
 
 
-
+23. Select name and job of employees working either in ‘Marketing’ or ‘Research’ 
+department. 
 
 select e.ename,e.job,d.dname from emp e JOIN dept d ON e.deptno = d.dno WHERE dname = 'Marketing' OR dname = 'Research';
 
+ENAME           JOB             DNAME
+--------------- --------------- ---------------
+Ravi            MGR             Marketing
+Varun           DEV             Marketing
+Charan          CLK             Marketing
+Sandy           A.MGR           Research
+Goutham         DEV             Marketing
+Krithi          ENG             Marketing
+James           CLK             Research
+OHIL            CLK             Marketing
+RIAN            MGR             Marketing
 
-select ename,sal,job from emp where sal > SOME(select MIN(sal) from emp GROUP BY j
+9 rows selected.
+
+24. Display name and salary of employees whose salary is greater than minimum salary 
+of the company.(using subquery) 
+
+SELECT ename, sal FROM emp WHERE sal > (SELECT MIN(sal)FROM emp);
+ENAME                  SAL
+--------------- ----------
+Jhon                 60000
+Raghu                49500
+Manu                 35000
+Mahesh               35000
+Ravi                 32000
+Varun                22000
+Charan               23000
+Sandy                33000
+Goutham              43000
+Krithi               36300
+Claire               31000
+Kishan               28000
+OHIL                 38000
+RIAN                 44000
+
+14 rows selected.
+
+25. Display Employees Working on the Most Projects. 
+
+SELECT ename, COUNT(proj_id) AS project_count FROM emp WHERE proj_id IS NOT NULL GROUP BY ename HAVING COUNT(proj_id) = (SELECT MAX(COUNT(proj_id))FROM emp WHERE proj_id IS NOT NULL GROUP BY empno);
+
+ENAME           PROJECT_COUNT
+--------------- -------------
+Manu                        1
+Kishan                      1
+OHIL                        1
+Varun                       1
+Krithi                      1
+RIAN                        1
+Sandy                       1
+James                       1
+Claire                      1
+Mahesh                      1
+Charan                      1
+Goutham                     1
+Ravi                        1
+
+13 rows selected.
+
+26. Display the Deptno of the department that has highest average salary of the 
+company.(Subquery)
+
+SELECT deptno FROM emp WHERE deptno IS NOT NULL GROUP BY deptno HAVING AVG(sal) = (SELECT MAX(avg_sal)FROM (SELECT AVG(sal) AS avg_sal FROM emp WHERE deptno IS NOT NULL GROUP BY deptno));
+
+DEP
+---
+D4
+D3
+
+27. List the name of departments which are working on more than 1 project.(subquery)
+
+SELECT dname FROM dept WHERE dno IN (SELECT dno FROM proj GROUP BY dno HAVING COUNT(*) > 1);
+
+DNAME
+---------------
+Marketing
+HR
+Accounts
+
+28. Display how many employees joined after 15th of all months.
+
+SELECT COUNT(*) AS employee_count FROM emp WHERE EXTRACT(DAY FROM date_join) > 15;
+
+EMPLOYEE_COUNT
+--------------
+             5
+29. Write a query to list Employee number, name and Job of the employees who work in 
+the same job as ‘Mahesh’. 
+
+SELECT empno, ename, job FROM emp WHERE job = (SELECT job FROM emp WHERE ename = 'Mahesh');
+
+     EMPNO ENAME           JOB
+---------- --------------- ---------------
+       123 Mahesh          MGR
+       101 Ravi            MGR
+       113 RIAN            MGR
+
+30. Create a View EMP_PRJ_VW to display records of employees of ‘marketing’         
+department and project in which they are working.
+
+CREATE VIEW EMP_PRJ_VW AS SELECT e.empno, e.ename, e.job, e.deptno, p.prj_no, p.prj_name FROM emp e JOIN dept d ON e.deptno = d.dno JOIN proj p ON e.deptno = p.dno AND e.proj_id = p.prj_no WHERE UPPER(d.dname) = 'MARKETING';
+
+SQL> select * from EMP_PRJ_VW;
+
+     EMPNO ENAME           JOB             DEP PRJ PRJ_NAME
+---------- --------------- --------------- --- --- --------------------
+       101 Ravi            MGR             D1  P1  PAYROLL AUTOMATION
+       103 Varun           DEV             D1  P1  PAYROLL AUTOMATION
+       112 OHIL            CLK             D1  P1  PAYROLL AUTOMATION
+       113 RIAN            MGR             D1  P1  PAYROLL AUTOMATION
+       107 Charan          CLK             D1  P3  ERP REVAMP
+       105 Goutham         DEV             D1  P3  ERP REVAMP
+       102 Krithi          ENG             D1  P3  ERP REVAMP
+
+7 rows selected.
+
+31. Display employee names and projects in which they are working using View         
+EMP_PRJ_VW . 
+
+SELECT ename, prj_name FROM EMP_PRJ_VW;
+
+ENAME           PRJ_NAME
+--------------- --------------------
+Ravi            PAYROLL AUTOMATION
+Varun           PAYROLL AUTOMATION
+OHIL            PAYROLL AUTOMATION
+RIAN            PAYROLL AUTOMATION
+Charan          ERP REVAMP
+Goutham         ERP REVAMP
+Krithi          ERP REVAMP
+
+7 rows selected.
+
+32. Calculate Total and Average Task Duration for Each Project
+
+SQL> SELECT prj_id, SUM(e_date - s_date) AS total_duration, AVG(e_date - s_date) AS average_duration FROM task GROUP BY prj_id;
+
+PRJ TOTAL_DURATION AVERAGE_DURATION
+--- -------------- ----------------
+P2
+P1              39             19.5
+P3              43       14.3333333
+P4              15               15
+
+33. List out the number of employees joined in every month in ascending order.
+
+SELECT EXTRACT(MONTH FROM date_join) AS join_month, COUNT(*) AS employee_count FROM emp GROUP BY EXTRACT(MONTH FROM date_join) ORDER BY join_month ASC;
+
+
+JOIN_MONTH EMPLOYEE_COUNT
+---------- --------------
+         1              1
+         2              1
+         6              1
+         9              1
+        10              4
+        11              3
+        12              4
+
+7 rows selected.
+
+34. Create an index on the columns (name and job) on EMP table. 
+
+CREATE INDEX IDX_EMP_ENAME_JOB ON emp(ename, job);
+
+Index created.
+
+35. Display the employees working in the same department as Ravi.
+
+SELECT empno, ename, job, deptno FROM emp WHERE deptno = (SELECT deptno FROM emp WHERE ename = 'Ravi');
+
+     EMPNO ENAME           JOB             DEP
+---------- --------------- --------------- ---
+       101 Ravi            MGR             D1
+       103 Varun           DEV             D1
+       107 Charan          CLK             D1
+       105 Goutham         DEV             D1
+       102 Krithi          ENG             D1
+       112 OHIL            CLK             D1
+       113 RIAN            MGR             D1
+
+7 rows selected.
+
+36. Display the name of the departments that have at least one project with budget above 
+400000 (correlated). 
+
+SELECT d.dname FROM dept d WHERE EXISTS (SELECT 1 FROM proj p WHERE p.dno = d.dno AND p.prj_fund > 400000);
+
+DNAME
+---------------
+Marketing
+Research
+IT
+Accounts
+HR
+
+37. Display the names of employee who earn more than the average salary of their own 
+department (correlated). 
+
+SELECT e.ename, e.sal, e.deptno FROM emp e WHERE e.sal > (SELECT AVG(e2.sal) FROM emp e2 WHERE e2.deptno = e.deptno);
+
+ENAME                  SAL DEP
+--------------- ---------- ---
+Sandy                33000 D2
+Goutham              43000 D1
+Krithi               36300 D1
+Claire               31000 D5
+OHIL                 38000 D1
+RIAN                 44000 D1
+
+6 rows selected.
+
+38. Display the name of Employees who have no dependents (NOT EXISTS)
+
+SELECT e.ename FROM emp e WHERE NOT EXISTS (SELECT 1 FROM dependent d WHERE d.empno = e.empno);
+
+ENAME
+---------------
+Mahesh
+Raghu
+Manu
+Charan
+Goutham
+Jhon
+RIAN
+OHIL
+Kishan
+
+9 rows selected.
+
+39. List the name of developers  or engineers.(SET OPERATION)
+
+SELECT ename FROM emp WHERE job = 'DEV' UNION SELECT ename FROM emp WHERE job = 'ENG';
+
+ENAME
+---------------
+Claire
+Goutham
+Krithi
+Manu
+Raghu
+Varun
+
+6 rows selected.
