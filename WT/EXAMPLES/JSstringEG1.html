@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript String Methods Example</title>
+</head>
+<body style="font-family: Arial, sans-serif; padding: 20px;">
+
+  <h2>JavaScript String Methods Demo</h2>
+  <pre id="output" style="background:#f0f0f0; padding:15px; border-radius:8px;"></pre>
+
+  <script>
+    let str = "  Hello JavaScript World!  ";
+    let result = "";
+
+    result += "Original String: '" + str + "'\n\n";
+
+    // charAt()
+    result += "charAt(6): " + str.charAt(6) + "   // character at index 6\n\n";
+
+    // concat()
+    let str2 = " Let's learn.";
+    result += "concat(): " + str.concat(str2) + "\n\n";
+
+    // includes()
+    result += "includes('JavaScript'): " + str.includes("JavaScript") + "\n";
+    result += "includes('Python'): " + str.includes("Python") + "\n\n";
+
+    // indexOf()
+    result += "indexOf('World'): " + str.indexOf("World") + "\n";
+    result += "indexOf('Python'): " + str.indexOf("Python") + "\n\n";
+
+    // search() (can use regex too)
+    result += "search('JavaScript'): " + str.search("JavaScript") + "\n";
+    result += "search(/world/i): " + str.search(/world/i) + "   // case-insensitive\n\n";
+
+    // replace()
+    result += "replace('World', 'Universe'): " + str.replace("World", "Universe") + "\n";
+    result += "replace(/hello/i, 'Hi'): " + str.replace(/hello/i, "Hi") + "   // regex replace\n\n";
+
+    // match()
+    let matchExample = str.match(/[A-Z][a-z]+/g); // words starting with uppercase
+    result += "match(/[A-Z][a-z]+/g): " + matchExample + "\n\n";
+
+    // trim()
+    result += "trim(): '" + str.trim() + "'   // removes spaces at start and end\n";
+
+    document.getElementById("output").textContent = result;
+  </script>
+</body>
+</html>

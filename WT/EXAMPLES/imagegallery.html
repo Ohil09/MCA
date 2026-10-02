@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial;
+  
+}
+  .column {
+  /*float: left;*/
+  display:inline-block;
+  width: 100%;
+  padding: 10px;
+  margin: 0;
+  white-space:normal;
+}
+
+.column img {
+  opacity: 0.8; 
+  cursor: pointer; 
+  display:block;
+  width:100%;
+}
+
+.column img:hover {
+  opacity: 1;
+}
+
+@media only screen and (min-width: 992px) {
+  .column {
+  /*float: left;*/
+  width: calc(25% - 20px);
+  padding: 10px;
+  margin:10px;
+}
+}
+
+@media only screen and (min-width: 768px)and (max-width:991px){
+  .column {
+  /*float: left;*/
+  width: 50%;
+  padding: 10px;
+}
+}
+@media (orientation: landscape) {
+  body {
+    background-color: rebeccapurple;
+  }
+}
+</style>
+</head>
+<body>
+
+<div style="text-align:center">
+  <h2>Image Gallery</h2>
+</div>
+
+<!-- The four columns -->
+<div class="row" style="font-size:0">
+  <div class="column"><img src="Library.jpg" alt="No Image"></div>
+  <div class="column"><img src="Library.jpg" alt="No Image"></div>
+  <div class="column"><img src="Library.jpg" alt="No Image"></div>
+  <div class="column"><img src="Library.jpg" alt="No Image"></div>
+</div>
+<p>
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.
+Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.
+</p>
+</body>
+</html>

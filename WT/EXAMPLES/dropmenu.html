@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<title>Javascript Prgms Menu</title>
+	<head>
+	<script>
+		function fnmenu(){
+			var prg=document.getElementById("prglist").value;
+			window.open(prg,"_self","width=400px,height=500px");
+		}
+	</script>	
+	</head>
+	<body>
+		<h1>select a javscript program:</h1>
+		<select id="prglist" name="prgms" value="prgms" onchange="fnmenu()">
+			<option value="prg1.html">Program 1</option>
+			<option value="drawing.html">Program 2</option>
+			<option value="prg3.html">Program 3</option>
+		</select>
+		
+	</body>
+</html>

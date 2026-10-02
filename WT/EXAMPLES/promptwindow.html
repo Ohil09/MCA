@@ -1,0 +1,24 @@
+<html>
+<head>
+<script type="text/javascript">
+function disp_prompt()
+{
+var wind;
+var name = prompt("Please enter your name");
+if (name == "ABC" )
+  {
+  //wind=open("solar.html","_blank","width=400px,height=500px");
+ open("solar.html","_self","width=400px,height=500px");
+  }
+  else
+  {
+	document.write("You are not authorised to access new windows");
+  console.log("xxxxxxxxxxxxxxxxxxxxx");
+  }
+}
+
+</script>
+</head>
+<body onload="disp_prompt()">
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Transform Demo</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background: tomato;
+      margin: 20px;
+      display: inline-block;
+      transition: transform 0.5s ease;
+    }
+
+    /* 1. Move (Translate) */
+    .translate:hover {
+      transform: translate(50px, 20px); /* move right 50px, down 20px */
+    }
+
+    /* 2. Scale (Resize) */
+    .scale:hover {
+      transform: scale(1.5); /* 1.5 times bigger */
+    }
+
+    /* 3. Rotate */
+    .rotate:hover {
+      transform: rotate(45deg); /* rotate 45 degrees */
+    }
+
+    /* 4. Skew (Tilt) */
+    .skew:hover {
+      transform: skew(20deg, 10deg); /* skew X and Y */
+    }
+
+    /* 5. Multiple transforms combined */
+    .combo:hover {
+      transform: translate(30px, 0) scale(1.2) rotate(30deg);
+    }
+  </style>
+</head>
+<body>
+  <h2>CSS Transform Examples</h2>
+  <div class="box translate">Translate</div>
+  <div class="box scale">Scale</div>
+  <div class="box rotate">Rotate</div>
+  <div class="box skew">Skew</div>
+  <div class="box combo">Combo</div>
+</body>
+</html>

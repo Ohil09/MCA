@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Date Methods Example</title>
+</head>
+<body style="font-family: Arial, sans-serif; padding: 20px;">
+
+  <h2>JavaScript Date Formatting Methods</h2>
+  <pre id="output" style="background:#f0f0f0; padding:15px; border-radius:8px;"></pre>
+
+  <script>
+    // Create a fixed Date object
+    const date = new Date("2020-05-12T23:50:21.817Z");
+
+    let result = "";
+    result += "Original Date object: " + date + "\n\n";
+
+    // General string conversions
+    result += "date.toString(): " + date.toString() + "\n";
+    result += "date.toDateString(): " + date.toDateString() + "\n";
+    result += "date.toTimeString(): " + date.toTimeString() + "\n";
+  
+
+    // Standardized formats
+    result += "date.toISOString(): " + date.toISOString() + "\n";
+    result += "date.toJSON(): " + date.toJSON() + "\n";
+    result += "date.toUTCString(): " + date.toUTCString() + "\n\n";
+
+    // Locale sensitive
+    result += "date.toLocaleString(): " + date.toLocaleString() + "\n";
+    result += "date.toLocaleDateString(): " + date.toLocaleDateString() + "\n";
+    result += "date.toLocaleTimeString(): " + date.toLocaleTimeString() + "\n\n";
+
+    // Different locales example
+    result += "date.toLocaleString('en-GB'): " + date.toLocaleString("en-GB") + "\n";
+    result += "date.toLocaleString('de-DE'): " + date.toLocaleString("de-DE") + "\n";
+    result += "date.toLocaleString('ja-JP'): " + date.toLocaleString("ja-JP") + "\n";
+
+    document.getElementById("output").textContent = result;
+  </script>
+</body>
+</html>

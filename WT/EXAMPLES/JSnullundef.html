@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NULL vs Undefined Example</title>
+</head>
+<body>
+  <h2>Difference between NULL and Undefined in JavaScript</h2>
+  <p id="output"></p>
+
+  <script>
+    // Undefined: A variable declared but not assigned any value
+    let a;
+    
+    // Null: Explicitly assigned "nothing"
+    let b = null;
+
+    let result = "";
+    result += "Variable a (undefined): " + a + "<br>";
+    result += "Type of a: " + typeof a + "<br><br>";
+
+    result += "Variable b (null): " + b + "<br>";
+    result += "Type of b: " + typeof b + "<br><br>";
+
+    // Checking equality
+    result += "a == b : " + (a == b) + " (true, because both represent 'no value')<br>";
+    result += "a === b : " + (a === b) + " (false, because undefined and null are different types)<br>";
+
+    document.getElementById("output").innerHTML = result;
+  </script>
+</body>
+</html>

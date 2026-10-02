@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* {
+  box-sizing: border-box;
+} 
+html {
+  font-family: "Lucida Sans", sans-serif;
+}
+header {
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 5px;	 
+}
+section {
+  display: flex;
+  flex-wrap: wrap;
+}
+section nav {
+  line-height: 30px;
+  background-color: #eeeeee;
+  width: 30%;
+  padding: 5px;
+  border: 10px solid black;
+  
+}
+section article {
+  width: 70%;
+  padding: 10px;
+  border: 10px solid black;
+}
+footer {
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 5px;	 	 
+}
+ul {
+  width: 100%;
+  height: 100px;
+  border: 10px solid black;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: gray;
+  /*overflow: hidden;*/
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: orange;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 120px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: teal;
+  color: white;
+  z-index:10;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+[class*="col-"] {
+  width: 100%;
+}
+
+.col-3 {
+  display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .col-1 {width: 8.33%;}
+  .col-2 {width: 16.66%;}
+  .col-3 {width: 25%; display: block;}
+  .col-4 {width: 33.33%;}
+  .col-5 {width: 41.66%;}
+  .col-6 {width: 50%;}
+  .col-7 {width: 58.33%;}
+  .col-8 {width: 66.66%;}
+  .col-9 {width: 75%;}
+  .col-10 {width: 83.33%;}
+  .col-11 {width: 91.66%;}
+  .col-12 {width: 100%;}
+}
+
+/* Resolution-based media queries */
+@media (min-resolution: 2dppx) {
+  p {
+    font-size: 1.5em;
+  }
+}
+
+@media (max-resolution: 3dppx) {
+  p {
+    background: yellow;
+  }
+}
+
+@media (resolution: 3dppx) {
+  p {
+    color: red;
+  }
+}
+
+.bold {
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Header</h1>
+</header>
+
+<nav style="min-width:384px;">
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li class="dropdown">
+      <a href="#" class="dropbtn">About</a>
+      <div class="dropdown-content">
+        <a href="#">History</a>
+        <a href="#">Business</a>
+        <a href="#">Partners</a>
+        <a href="#">Branches</a>	
+      </div>
+    </li>
+    <li><a href="#news">News</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section>
+  <nav class="col-3">
+    Home<br>
+    News<br>
+    Contact<br>
+    About<br>
+  </nav>
+
+  <article class="col-9" style="min-width:384px;">
+    <p>
+      This is a paragraph. This is a paragraph. 
+      <span class="bold">Bold text Bold text</span> 
+      This is a paragraph. This is a paragraph.
+      <span class="bold">Bold text Bold text</span> 
+      This is a paragraph. This is a paragraph.
+      <span class="bold">Bold text Bold text</span> 
+    </p>
+    <h1>Article</h1>
+    <p>Article content Article content Article content Article content Article content Article content</p>
+    <p>Article content Article content Article content Article content Article content Article content</p>
+    <p>Article content Article content Article content Article content Article content Article content</p>
+    <p>Article content Article content Article content Article content Article content Article content</p>
+    <p>Article content Article content Article content Article content Article content Article content</p>
+  </article>
+</section>
+
+<footer>
+  footer
+</footer>
+
+</body>
+</html>

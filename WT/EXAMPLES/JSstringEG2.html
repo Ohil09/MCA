@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>slice vs substr vs substring</title>
+</head>
+<body style="font-family: Arial, sans-serif; padding: 20px;">
+
+  <h2>JavaScript: slice vs substr vs substring</h2>
+  <pre id="output" style="background:#f0f0f0; padding:15px; border-radius:8px;"></pre>
+
+  <script>
+    let str = "JavaScript Example";
+
+    let result = "";
+    result += "Original String: " + str + "\n\n";
+
+    // slice(start, end)
+    result += "slice(0, 10): " + str.slice(0, 10) + "   // from index 0 to 9\n";
+    result += "slice(-7): " + str.slice(-7) + "   // last 7 characters\n\n";
+
+    // substring(start, end)
+    result += "substring(0, 10): " + str.substring(0, 10) + "   // from index 0 to 9\n";
+    result += "substring(10, 0): " + str.substring(10, 0) + "   // swaps args, same as (0,10)\n\n";
+
+    // substr(start, length)
+    result += "substr(0, 10): " + str.substr(0, 10) + "   // from index 0, length 10\n";
+    result += "substr(-7, 5): " + str.substr(-7, 5) + "   // start 7 from end, take 5 chars\n\n";
+
+    document.getElementById("output").textContent = result;
+  </script>
+</body>
+</html>

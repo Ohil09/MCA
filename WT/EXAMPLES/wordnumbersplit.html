@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Word and Number Splitter</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 30px;
+    line-height: 1.6;
+  }
+  #inputText {
+    width: 400px;
+    padding: 6px;
+    font-size: 14px;
+  }
+  button {
+    padding: 6px 14px;
+    font-size: 14px;
+    margin-right: 6px;
+  }
+  p {
+    font-size: 15px;
+  }
+</style>
+
+<script>
+
+function separateWordsAndNumbers(str) {
+  var words   = [];
+  var numbers = [];
+  var token   = "";
+  var i, j, temp, ch;
+
+  str = str + " ";              // so the last token is stored inside the loop
+
+  // ---- Step 1: read the string one character at a time ----
+  for (i = 0; i < str.length; i++) {
+    ch = str.charAt(i);
+
+    if (ch == " " || ch == "," || ch == ";") {
+      if (token.length > 0) {
+        if (isNumber(token)) {
+          numbers[numbers.length] = parseFloat(token);
+        } else {
+          words[words.length] = capitalize(token);
+        }
+        token = "";
+      }
+    } else {
+      token = token + ch;
+    }
+  }
+
+  // ---- Step 2: bubble sort words in ascending order ----
+  for (i = 0; i < words.length - 1; i++) {
+    for (j = 0; j < words.length - 1 - i; j++) {
+      if (words[j] > words[j + 1]) {
+        temp         = words[j];
+        words[j]     = words[j + 1];
+        words[j + 1] = temp;
+      }
+    }
+  }
+
+  // ---- Step 3: bubble sort numbers in descending order ----
+  for (i = 0; i < numbers.length - 1; i++) {
+    for (j = 0; j < numbers.length - 1 - i; j++) {
+      if (numbers[j] < numbers[j + 1]) {
+        temp           = numbers[j];
+        numbers[j]     = numbers[j + 1];
+        numbers[j + 1] = temp;
+      }
+    }
+  }
+
+  return { words: words, numbers: numbers };
+}
+
+
+// checks whether the token is a number (allows one dot and a leading sign)
+function isNumber(token) {
+  var k, c;
+  var dots   = 0;
+  var digits = 0;
+  var start  = 0;
+
+  if (token.charAt(0) == "-" || token.charAt(0) == "+") {
+    start = 1;
+  }
+
+  for (k = start; k < token.length; k++) {
+    c = token.charAt(k);
+
+    if (c == ".") {
+      dots = dots + 1;
+      if (dots > 1) { return false; }
+    } else if (c >= "0" && c <= "9") {
+      digits = digits + 1;
+    } else {
+      return false;
+    }
+  }
+
+  return digits > 0;
+}
+
+
+// first letter uppercase, rest lowercase
+function capitalize(word) {
+  return word.charAt(0).toUpperCase() + word.substring(1).toLowerCase();
+}
+
+
+// ---- reads the textbox and writes into the two paragraphs ----
+function runSplit() {
+  var input  = document.getElementById("inputText").value;
+  var result = separateWordsAndNumbers(input);
+
+  document.getElementById("wordResult").innerHTML   = result.words.join(", ");
+  document.getElementById("numberResult").innerHTML = result.numbers.join(", ");
+}
+
+
+// ---- empties the textbox and both paragraphs ----
+function clearAll() {
+  document.getElementById("inputText").value        = "";
+  document.getElementById("wordResult").innerHTML   = "";
+  document.getElementById("numberResult").innerHTML = "";
+  document.getElementById("inputText").focus();
+}
+
+</script>
+</head>
+
+<body>
+
+<h2>Word and Number Splitter</h2>
+
+<p>
+  Enter a string containing words and numbers:<br>
+  <input type="text" id="inputText" value="mango 45 apple 12 Banana 98 cherry 7 date 56">
+</p>
+
+<p>
+  <button onclick="runSplit()">Separate</button>
+  <button onclick="clearAll()">Clear</button>
+</p>
+
+<hr>
+
+<p><b>Words (ascending):</b></p>
+<p id="wordResult"></p>
+
+<p><b>Numbers (descending):</b></p>
+<p id="numberResult"></p>
+
+</body>
+</html>

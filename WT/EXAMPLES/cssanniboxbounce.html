@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Animation Example</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background: tomato;
+      border-radius: 50px;
+      position: relative;
+      top: 100px;
+      margin: auto auto;
+      animation: bounce 2s ease-in infinite alternate; /* name duration repetition */
+    }
+
+    @keyframes bounce {
+      0%   { transform: translateY(0); }
+      
+      100% { transform: translateY(200px); }
+
+      
+    }
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+</body>
+</html>

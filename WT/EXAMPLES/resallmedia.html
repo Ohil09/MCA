@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Media Types Demo with Nav</title>
+<style>
+  /* Applies everywhere */
+  @media all {
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    nav {
+      margin-bottom: 20px;
+    }
+    nav a {
+      margin-right: 15px;
+      text-decoration: none;
+      color: darkblue;
+      font-weight: bold;
+    }
+  }
+
+  /* Screen styles */
+  @media screen {
+    body { background: #e0f7fa; color: #004d40; }
+    nav { background: #b2ebf2; padding: 10px; border-radius: 8px; }
+  }
+
+  /* Print styles */
+  @media print {
+    body { background: white; color: black; font-size: 12pt; }
+    nav { display: none; } /* Hide nav bar when printing */
+    a::after { content: " (" attr(href) ")"; }
+  }
+
+
+</style>
+</head>
+<body>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <h1>Hello Media Types</h1>
+  <p>This page shows how <b>media types</b> affect the <code>&lt;nav&gt;</code> and other content.</p>
+  <p>Visit <a href="https://example.com">Example</a></p>
+</body>
+</html>

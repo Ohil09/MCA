@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Complete Media Query Demo</title>
+
+<style>
+
+/* =========================================================
+   1. COMMON STYLES
+   Applied to all media
+   ========================================================= */
+
+@media all {
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f8;
+        color: #222;
+        line-height: 1.6;
+    }
+
+    header {
+        background-color: #1f4e79;
+        color: white;
+        padding: 20px;
+    }
+
+    header h1 {
+        margin: 0;
+    }
+
+    nav {
+        margin-top: 15px;
+        display: flex;
+        gap: 20px;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 30px auto;
+    }
+
+    .dashboard {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .card {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+
+        box-shadow:
+            0 2px 8px rgba(0,0,0,0.15);
+
+        transition:
+            transform 0.3s,
+            box-shadow 0.3s;
+    }
+
+    button {
+        border: none;
+        padding: 10px 18px;
+        background-color: #1f4e79;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    footer {
+        margin-top: 30px;
+        padding: 20px;
+        background-color: #333;
+        color: white;
+        text-align: center;
+    }
+}
+
+
+/* =========================================================
+   2. SCREEN MEDIA TYPE
+   ========================================================= */
+
+@media screen {
+
+    .screen-message {
+        display: block;
+    }
+
+}
+
+
+/* =========================================================
+   3. PRINT MEDIA TYPE
+   ========================================================= */
+
+@media print {
+
+    body {
+        background: white;
+        color: black;
+        font-size: 12pt;
+    }
+
+    nav,
+    button,
+    footer,
+    .screen-message {
+        display: none;
+    }
+
+    header {
+        background: white;
+        color: black;
+        padding: 0;
+    }
+
+    .dashboard {
+        display: block;
+    }
+
+    .card {
+        box-shadow: none;
+        border: 1px solid black;
+        margin-bottom: 15px;
+        break-inside: avoid;
+    }
+
+    a::after {
+        content: " (" attr(href) ")";
+    }
+}
+
+
+/* =========================================================
+   4. MOBILE
+   max-width
+   ========================================================= */
+
+@media screen and (max-width: 600px) {
+
+    header {
+        text-align: center;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .container {
+        width: 95%;
+    }
+
+}
+
+
+/* =========================================================
+   5. TABLET
+   min-width + max-width
+   ========================================================= */
+
+@media screen and
+       (min-width: 601px) and
+       (max-width: 900px) {
+
+    .dashboard {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* =========================================================
+   6. LARGE DESKTOP
+   min-width
+   ========================================================= */
+
+@media screen and (min-width: 1200px) {
+
+    .dashboard {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    body {
+        font-size: 18px;
+    }
+
+}
+
+
+/* =========================================================
+   7. SHORT SCREEN
+   max-height
+   ========================================================= */
+
+@media screen and (max-height: 500px) {
+
+    header {
+        padding: 8px 20px;
+    }
+
+    .container {
+        margin-top: 10px;
+    }
+
+}
+
+
+/* =========================================================
+   8. PORTRAIT ORIENTATION
+   ========================================================= */
+
+@media screen and (orientation: portrait) {
+
+    .orientation-info::after {
+        content: " Portrait mode detected";
+        font-weight: bold;
+    }
+
+}
+
+
+/* =========================================================
+   9. LANDSCAPE ORIENTATION
+   ========================================================= */
+
+@media screen and (orientation: landscape) {
+
+    .orientation-info::after {
+        content: " Landscape mode detected";
+        font-weight: bold;
+    }
+
+}
+
+
+/* =========================================================
+   10. ASPECT RATIO
+   ========================================================= */
+
+@media screen and (min-aspect-ratio: 16/9) {
+
+    header {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+}
+
+
+/* =========================================================
+   11. DEVICE SUPPORTS HOVER
+   Usually mouse / trackpad
+   ========================================================= */
+
+@media (hover: hover) {
+
+    .card:hover {
+        transform: translateY(8px);
+
+        box-shadow:
+            0 8px 20px rgba(0,120,0,0.78);
+    }
+
+}
+
+
+/* =========================================================
+   12. DEVICE DOES NOT SUPPORT HOVER
+   Usually touchscreen
+   ========================================================= */
+
+@media (hover: none) {
+
+    .card {
+        border: 2px solid #999;
+    }
+
+}
+
+
+/* =========================================================
+   13. COARSE POINTER
+   Usually finger / touchscreen
+   ========================================================= */
+
+@media (pointer: coarse) {
+
+    button {
+        padding: 18px 28px;
+        font-size: 18px;
+    }
+
+    nav a {
+        padding: 10px;
+    }
+
+}
+
+
+/* =========================================================
+   14. FINE POINTER
+   Usually mouse
+   ========================================================= */
+
+@media (pointer: fine) {
+
+    button {
+        padding: 8px 16px;
+    }
+
+}
+
+
+/* =========================================================
+   15. ANY AVAILABLE DEVICE CAN HOVER
+   ========================================================= */
+
+@media (any-hover: hover) {
+
+    nav a:hover {
+        text-decoration: underline;
+    }
+
+}
+
+
+/* =========================================================
+   16. DARK MODE
+   ========================================================= */
+
+@media (prefers-color-scheme: dark) {
+
+    body {
+        background-color: #121212;
+        color: #eeeeee;
+    }
+
+    .card {
+        background-color: #1e1e1e;
+        color: #eeeeee;
+    }
+
+    header {
+        background-color: #0d2f4f;
+    }
+
+}
+
+
+/* =========================================================
+   17. REDUCED MOTION
+   Accessibility
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+
+}
+
+
+/* =========================================================
+   18. HIGH CONTRAST PREFERENCE
+   ========================================================= */
+
+@media (prefers-contrast: more) {
+
+    .card {
+        border: 3px solid currentColor;
+    }
+
+    button {
+        border: 2px solid currentColor;
+    }
+
+}
+
+
+/* =========================================================
+   19. FORCED COLOR MODE
+   Windows High Contrast etc.
+   ========================================================= */
+
+@media (forced-colors: active) {
+
+    .card {
+        border: 2px solid CanvasText;
+    }
+
+    button {
+        border: 2px solid ButtonText;
+    }
+
+}
+
+
+/* =========================================================
+   20. HIGH RESOLUTION DISPLAY
+   ========================================================= */
+
+@media (min-resolution: 2dppx) {
+
+    .resolution-info::after {
+        content: " High-resolution display detected";
+        font-weight: bold;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>Student Dashboard</h1>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#courses">Courses</a>
+        <a href="#results">Results</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+</header>
+
+
+<main class="container">
+
+    <h2>Dashboard</h2>
+
+    <p class="screen-message">
+        Resize the browser, rotate your device,
+        change dark mode or open Print Preview
+        to test the media queries.
+    </p>
+
+
+    <p class="orientation-info">
+        Device orientation:
+    </p>
+
+
+    <p class="resolution-info">
+        Display:
+    </p>
+
+
+    <section class="dashboard">
+
+
+        <article class="card">
+
+            <h3>Web Technologies</h3>
+
+            <p>
+                Learn HTML, CSS, JavaScript and
+                responsive web development.
+            </p>
+
+            <button>View Course</button>
+
+        </article>
+
+
+        <article class="card">
+
+            <h3>Database Systems</h3>
+
+            <p>
+                Learn relational databases,
+                SQL and database design.
+            </p>
+
+            <button>View Course</button>
+
+        </article>
+
+
+        <article class="card">
+
+            <h3>Machine Learning</h3>
+
+            <p>
+                Explore supervised and
+                unsupervised learning methods.
+            </p>
+
+            <button>View Course</button>
+
+        </article>
+
+
+        <article class="card">
+
+            <h3>Cybersecurity</h3>
+
+            <p>
+                Study security principles,
+                vulnerabilities and protection.
+            </p>
+
+            <button>View Course</button>
+
+        </article>
+
+
+    </section>
+
+
+    <p>
+        Reference:
+        <a href="https://developer.mozilla.org">
+            MDN Web Docs
+        </a>
+    </p>
+
+</main>
+
+
+<footer>
+
+    Student Portal © 2026
+
+</footer>
+
+
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tutorial 2</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        font-family:
+          "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        font-size: 14px;
+      }
+      .container {
+        width: 1000px;
+        height: 400px;
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        transform: translate(-50%, -50%);
+
+        border: 2px solid black;
+      }
+      .title {
+        height: 50px;
+        padding: 10px;
+
+        text-align: left;
+        background-color: darkblue;
+        color: white;
+      }
+      .title h2 {
+        margin: 0;
+      }
+      .table-container {
+        height: calc(100% - 50px);
+        overflow-y: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+        border-left: none;
+        border-right: none;
+        padding: 10px;
+        text-align: center;
+      }
+      th {
+        background-color: lightgray;
+
+        position: sticky;
+        top: 0;
+        z-index: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="title">
+        <h2>Web Technologies Lab Batch - C1</h2>
+      </div>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Roll no</th>
+              <th>Name</th>
+              <th>HTML</th>
+              <th>CSS</th>
+              <th>JavaScript</th>
+              <th>PHP</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>C1-03</td>
+              <td>Rohan Nair</td>
+              <td>12</td>
+              <td>15</td>
+              <td>14</td>
+              <td>13</td>
+              <td>54</td>
+            </tr>
+
+            <tr>
+              <td>C1-04</td>
+              <td>Meera Joshi</td>
+              <td>17</td>
+              <td>18</td>
+              <td>16</td>
+              <td>19</td>
+              <td>70</td>
+            </tr>
+
+            <tr>
+              <td>C1-05</td>
+              <td>Arjun Menon</td>
+              <td>14</td>
+              <td>13</td>
+              <td>15</td>
+              <td>12</td>
+              <td>54</td>
+            </tr>
+
+            <tr>
+              <td>C1-06</td>
+              <td>Diya Patel</td>
+              <td>19</td>
+              <td>16</td>
+              <td>18</td>
+              <td>17</td>
+              <td>70</td>
+            </tr>
+
+            <tr>
+              <td>C1-07</td>
+              <td>Karan Singh</td>
+              <td>11</td>
+              <td>14</td>
+              <td>13</td>
+              <td>15</td>
+              <td>53</td>
+            </tr>
+
+            <tr>
+              <td>C1-08</td>
+              <td>Neha Kapoor</td>
+              <td>16</td>
+              <td>17</td>
+              <td>15</td>
+              <td>18</td>
+              <td>66</td>
+            </tr>
+
+            <tr>
+              <td>C1-09</td>
+              <td>Rahul Verma</td>
+              <td>13</td>
+              <td>12</td>
+              <td>16</td>
+              <td>14</td>
+              <td>55</td>
+            </tr>
+
+            <tr>
+              <td>C1-10</td>
+              <td>Isha Kulkarni</td>
+              <td>18</td>
+              <td>15</td>
+              <td>17</td>
+              <td>16</td>
+              <td>66</td>
+            </tr>
+
+            <tr>
+              <td>C1-11</td>
+              <td>Omkar Bhatt</td>
+              <td>13</td>
+              <td>12</td>
+              <td>12</td>
+              <td>14</td>
+              <td>51</td>
+            </tr>
+
+            <tr>
+              <td>C1-12</td>
+              <td>Priya Raghavan</td>
+              <td>19</td>
+              <td>17</td>
+              <td>18</td>
+              <td>17</td>
+              <td>71</td>
+            </tr>
+
+            <tr>
+              <td>C1-13</td>
+              <td>Rehan Ahmed</td>
+              <td>15</td>
+              <td>16</td>
+              <td>14</td>
+              <td>15</td>
+              <td>60</td>
+            </tr>
+
+            <tr>
+              <td>C1-14</td>
+              <td>Sneha Kamath</td>
+              <td>17</td>
+              <td>18</td>
+              <td>16</td>
+              <td>17</td>
+              <td>68</td>
+            </tr>
+
+            <tr>
+              <td>C1-15</td>
+              <td>Tarun Joshi</td>
+              <td>11</td>
+              <td>13</td>
+              <td>10</td>
+              <td>12</td>
+              <td>46</td>
+            </tr>
+
+            <tr>
+              <td>C1-16</td>
+              <td>Uma Krishnan</td>
+              <td>16</td>
+              <td>15</td>
+              <td>17</td>
+              <td>16</td>
+              <td>64</td>
+            </tr>
+
+            <tr>
+              <td>C1-17</td>
+              <td>Vikram Rao</td>
+              <td>14</td>
+              <td>15</td>
+              <td>13</td>
+              <td>14</td>
+              <td>56</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

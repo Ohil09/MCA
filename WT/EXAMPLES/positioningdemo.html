@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Positioning Demonstration</title>
+
+    <style>
+        html {
+            background-color: #e2e8f0;
+            border: 3px solid #334155;
+        }
+
+        body {
+            background-color: #ffffff;
+            margin: 0;
+            min-height: 1200px;
+            font-family: Arial, sans-serif;
+            color: #1e293b;
+        }
+
+        /* Common styling for all boxes */
+        .box {
+            border: 2px solid #0f172a;
+            height: 50px;
+            padding: 10px;
+            box-sizing: border-box;
+            font-weight: bold;
+        }
+
+        /* STICKY POSITION */
+        .sticky {
+            position: sticky;
+            top: 0px;
+
+            background-color: #0f766e;
+            color: white;
+
+            height: 50px;
+            padding: 15px;
+            z-index: 10;
+        }
+
+        /* Main positioned container */
+        .container {
+            position: relative;
+
+            width: 80%;
+            height: 500px;
+
+          /*  margin: 80px auto;*/
+          /*  padding: 20px;*/
+
+            background-color: #f1f5f9;
+            border: 3px solid #475569;
+        }
+
+        /* STATIC POSITION */
+        .static {
+            position: static;
+
+            top: 30px;       /* No effect */
+            left: 50px;      /* No effect */
+
+            background-color: #2563eb;
+            color: white;
+        }
+
+        /* RELATIVE POSITION */
+        .relative {
+            position: relative;
+
+            top: 120px;
+            left: 40px;
+
+            background-color: #7c3aed;
+            color: white;
+        }
+
+        /* ABSOLUTE POSITION */
+        .absolute {
+            position: absolute;
+
+           top: 20px;
+          left: 0px;
+
+            width: 60%;
+
+            background-color: #c2410c;
+            color: white;
+        }
+
+        /* FIXED POSITION */
+        .fixed {
+            position: fixed;
+
+            right: 20px;
+            bottom: 20px;
+
+            width: 200px;
+
+            background-color: #be123c;
+            color: white;
+
+            z-index: 20;
+        }
+
+        p {
+            position: relative;
+
+            top: 40px;
+
+            line-height: 1.6;
+        }
+
+        .highlight {
+            display: inline-block;
+
+            background-color: #fef3c7;
+            color: #78350f;
+
+            border: 2px solid #d97706;
+            padding: 4px 8px;
+            margin: 3px;
+
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body>
+        <div class="box static">
+            Header
+        </div>
+    <!-- Sticky element -->
+    <div class="sticky">
+        position: sticky — sticks to the top while scrolling
+    </div>
+
+
+    <div class="container">
+
+        <!-- Static -->
+        <div class="box static">
+            STATIC — top and left have no effect
+        </div>
+
+
+        <!-- Relative -->
+        <div class="box">
+            RELATIVE — moved 20px down and 40px right
+        </div>
+
+
+        <!-- Absolute -->
+        <div class="box absolute">
+            ABSOLUTE — positioned relative to the container
+        </div>
+
+
+        <p>
+            This paragraph remains in the normal document flow.
+            The element with
+            <span class="highlight">position: relative</span>
+            keeps its original space even when it is visually moved.
+
+            Absolute positioning, on the other hand, removes an
+            element from the normal document flow.
+
+            This additional text is included so that the behaviour
+            of the positioned elements can be clearly observed.
+        </p>
+
+    </div>
+
+
+    <!-- Fixed element -->
+    <div class="box fixed">
+        FIXED — bottom right
+    </div>
+
+</body>
+</html>
