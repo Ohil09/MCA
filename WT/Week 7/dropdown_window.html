@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dropdown Menu</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        text-align: center;
+        margin-top: 100px;
+      }
+
+      select {
+        padding: 10px;
+        width: 200px;
+        font-size: 16px;
+      }
+
+      button {
+        padding: 10px 20px;
+        margin-left: 10px;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>Select a Page</h2>
+
+      <select id="page" onchange="openPage()">
+        <option value="">-- Select Page --</option>
+        <option value="..\Week 6\newtons_cradle.html">Newtons cradle</option>
+        <option value="..\Week 5\photo_galary.html">Image Galary</option>
+        <option value="..\Week 6\lunar_eclipse.html">Lunar Eclipse</option>
+      </select>
+    </div>
+
+    <script>
+      function openPage() {
+        var page = document.getElementById("page").value;
+
+        if (page != "") {
+          window.location.href = page;
+        }
+      }
+    </script>
+  </body>
+</html>

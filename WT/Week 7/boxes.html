@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JS Boxes</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      .flex-box {
+        width: 100%;
+        height: 100vh;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        width: 500px;
+        padding: 40px;
+
+        text-align: center;
+
+        border: 1px solid #ddd;
+        border-radius: 15px;
+
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      button {
+        margin: 5px;
+        padding: 12px 18px;
+
+        border: none;
+        border-radius: 8px;
+
+        background-color: black;
+        color: white;
+
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="flex-box">
+      <div class="container">
+        <button onclick="alerts()">Alert Box</button>
+        <button onclick="confirms()">Confirm Box</button>
+        <button onclick="prompts()">Prompt Box</button>
+
+        <p id="output" onmouseover="this.innerHTML = ''"></p>
+      </div>
+    </div>
+
+    <script>
+      function alerts() {
+        alert("Hello world!");
+      }
+
+      function confirms() {
+        var v = confirm("Are you happy?");
+
+        if (v) {
+          document.getElementById("output").innerHTML = "You clicked OK!";
+        } else {
+          document.getElementById("output").innerHTML = "You clicked Cancel!";
+        }
+      }
+
+      function prompts() {
+        var v = prompt("Enter your Age");
+
+        document.getElementById("output").innerHTML =
+          "You are " + v + " years old!";
+      }
+    </script>
+  </body>
+</html>
