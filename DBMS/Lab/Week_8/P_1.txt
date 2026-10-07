@@ -1,0 +1,45 @@
+SET SERVEROUTPUT ON
+
+DECLARE
+    v_empno emp.empno%TYPE := &employee_no;
+    v_deptno emp.deptno%TYPE := '&department_no';
+    v_ename emp.ename%TYPE;
+    v_num NUMBER;
+BEGIN
+    -- i. INVALID_NUMBER
+    BEGIN
+        v_num := TO_NUMBER('&ename');
+        DBMS_OUTPUT.PUT_LINE('Converted number: ' || v_num);
+    EXCEPTION
+        WHEN VALUE_ERROR THEN
+            DBMS_OUTPUT.PUT_LINE('INVALID_NUMBER: ENAME cannot be converted into a number.');
+    END;
+
+
+    -- ii. NO_DATA_FOUND
+    BEGIN
+        SELECT ename INTO v_ename FROM emp WHERE empno = v_empno;
+
+        DBMS_OUTPUT.PUT_LINE('Employee Name: ' || v_ename);
+
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            DBMS_OUTPUT.PUT_LINE('NO_DATA_FOUND: No such employee exists.');
+    END;
+
+
+    -- iii. TOO_MANY_ROWS
+    BEGIN
+        SELECT ename INTO v_ename FROM emp WHERE deptno = v_deptno;
+
+        DBMS_OUTPUT.PUT_LINE('Employee Name: ' || v_ename);
+
+    EXCEPTION
+        WHEN TOO_MANY_ROWS THEN
+            DBMS_OUTPUT.PUT_LINE('TOO_MANY_ROWS: More than one employee exists in this department.');
+        WHEN NO_DATA_FOUND THEN
+            DBMS_OUTPUT.PUT_LINE('NO_DATA_FOUND: No employee exists in this department.');
+    END;
+
+END;
+/

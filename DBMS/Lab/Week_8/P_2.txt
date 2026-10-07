@@ -1,0 +1,43 @@
+SET SERVEROUTPUT ON
+
+DECLARE
+    v_principal  NUMBER := &principal;
+    v_rate       NUMBER := &interest_rate;
+    v_years      NUMBER := &duration;
+
+    e_invalid_principal EXCEPTION;
+    e_invalid_rate      EXCEPTION;
+    e_invalid_years     EXCEPTION;
+
+    v_interest NUMBER;
+BEGIN
+    IF v_principal <= 1000 THEN
+        RAISE e_invalid_principal;
+    END IF;
+
+    IF v_rate < 5 THEN
+        RAISE e_invalid_rate;
+    END IF;
+
+    IF v_years < 1 THEN
+        RAISE e_invalid_years;
+    END IF;
+
+    v_interest := (v_principal * v_rate * v_years) / 100;
+
+    DBMS_OUTPUT.PUT_LINE('Principal     : ' || v_principal);
+    DBMS_OUTPUT.PUT_LINE('Interest Rate : ' || v_rate || '%');
+    DBMS_OUTPUT.PUT_LINE('Duration      : ' || v_years || ' years');
+    DBMS_OUTPUT.PUT_LINE('Interest      : ' || v_interest);
+EXCEPTION
+    WHEN e_invalid_principal THEN
+        DBMS_OUTPUT.PUT_LINE('Error: Principal must be greater than 1000.');
+
+    WHEN e_invalid_rate THEN
+        DBMS_OUTPUT.PUT_LINE('Error: Interest rate must be 5% or greater.');
+
+    WHEN e_invalid_years THEN
+        DBMS_OUTPUT.PUT_LINE('Error: Duration must be at least 1 year.');
+END;
+/
+                                                                                                                                                                

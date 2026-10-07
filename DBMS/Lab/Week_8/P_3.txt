@@ -1,0 +1,48 @@
+SET SERVEROUTPUT ON
+
+DECLARE
+    v_empno   emp.empno%TYPE := &employee_no;
+    v_ename   emp.ename%TYPE;
+    v_sal     emp.sal%TYPE;
+
+    e_emp_not_found EXCEPTION;
+    e_high_salary   EXCEPTION;
+
+BEGIN
+    BEGIN
+        SELECT empno, ename, sal
+        INTO v_empno, v_ename, v_sal
+        FROM emp
+        WHERE empno = v_empno;
+
+    EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+            RAISE e_emp_not_found;
+    END;
+
+    IF v_sal > 25000 THEN
+        RAISE e_high_salary;
+
+    ELSIF v_sal < 25000 THEN
+
+        UPDATE emp
+        SET sal = 25000
+        WHERE empno = v_empno;
+
+        DBMS_OUTPUT.PUT_LINE('Salary updated successfully.');
+
+        v_sal := 25000;
+    END IF;
+
+    DBMS_OUTPUT.PUT_LINE('Employee No   : ' || v_empno);
+    DBMS_OUTPUT.PUT_LINE('Employee Name : ' || v_ename);
+    DBMS_OUTPUT.PUT_LINE('Salary        : ' || v_sal);
+
+EXCEPTION
+    WHEN e_emp_not_found THEN
+        DBMS_OUTPUT.PUT_LINE('Error: Employee with number ' || v_empno || ' does not exist.');
+
+    WHEN e_high_salary THEN
+        DBMS_OUTPUT.PUT_LINE('Error: Employee salary is already greater than 25000.');
+END;
+/
