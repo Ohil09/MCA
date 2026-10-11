@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas Drawing</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        canvas {
+            border: 1px solid black;
+            cursor: crosshair;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Freehand Drawing</h2>
+
+    <p id="xy">X: 0, Y: 0</p>
+
+    <canvas id="line" width="600" height="350"
+            onmousedown="draw(event)"
+            onmousemove="point_it(event)"
+            onmouseup="drawing=false"
+            onmouseleave="drawing=false"></canvas>
+
+    <br>
+    <button onclick="clearCanvas()">Clear Canvas</button>
+
+    <script>
+        var canvas = document.getElementById("line");
+        var context = canvas.getContext("2d");
+        var drawing = false;
+
+        function draw(event) {
+            drawing = true;
+            context.beginPath();
+            context.moveTo(event.offsetX, event.offsetY);
+        }
+
+        function point_it(event) {
+            var x = event.offsetX;
+            var y = event.offsetY;
+
+            document.getElementById("xy").innerHTML =
+                "X: " + x + ", Y: " + y;
+
+            if (drawing) {
+                context.lineTo(x, y);
+                context.stroke();
+            }
+        }
+
+        function clearCanvas() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+            background-color: black;
+        }
+
+        #clock {
+            font-size: 40px;
+            font-weight: bold;
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="color: red;">Digital Clock</h2>
+    <div>
+        <p id="clock"></p>
+    </div>
+    
+
+    <script>
+        function showTime() {
+            var now = new Date();
+
+            var hours = String(now.getHours()).padStart(2, "0");
+            var minutes = String(now.getMinutes()).padStart(2, "0");
+            var seconds = String(now.getSeconds()).padStart(2, "0");
+
+            document.getElementById("clock").textContent =
+                hours + ":" + minutes + ":" + seconds;
+
+            setTimeout(showTime, 1000);
+        }
+
+        showTime();
+    </script>
+</body>
+</html>

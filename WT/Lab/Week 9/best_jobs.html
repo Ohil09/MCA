@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best JOBs Registration</title>
+    <style>
+        body { font-family: Arial; margin: 30px; }
+        .step { display: none; }
+        input, select, textarea { margin: 6px; padding: 8px; }
+        button { padding: 8px 16px; margin: 8px; }
+        #summary { white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <h2>Best JOBs Registration</h2>
+    <form id="form">
+
+        <!-- Step 1 -->
+        <div class="step">
+            <h3>Step 1: Account Set-Up</h3>
+            <input name="Username" placeholder="Username" required minlength="3">
+            <input name="Password" type="password" id="pass"
+                   placeholder="Password" required minlength="8">
+            <input type="password" id="confirm" placeholder="Confirm Password" required>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step">
+            <h3>Step 2: Personal Details</h3>
+            <input name="First Name" placeholder="First Name" required>
+            <input name="Last Name" placeholder="Last Name" required>
+            <select name="Gender" required>
+                <option value="">Select Gender</option>
+                <option>Female</option><option>Male</option>
+                <option>Other</option><option>Prefer not to say</option>
+            </select>
+            <input name="Nationality" placeholder="Nationality" required>
+            <label>Date of Birth: <input name="DoB" type="date" required></label>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step">
+            <h3>Step 3: Contact Details</h3>
+            <input name="Email" type="email" placeholder="Email" required>
+            <input name="Phone" type="tel" placeholder="Phone (10 digits)"
+                   pattern="[0-9]{10}" required>
+            <textarea name="Address" placeholder="Address" required></textarea>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step">
+            <h3>Step 4: Social Profiles</h3>
+            <input name="Twitter" type="url" placeholder="Twitter URL">
+            <input name="Facebook" type="url" placeholder="Facebook URL">
+            <input name="Google" type="url" placeholder="Google Profile URL">
+        </div>
+
+        <!-- Step 5 -->
+        <div class="step">
+            <h3>Step 5: Academic Details</h3>
+            <label>UG CGPA (0–10):
+                <input name="UG CGPA" type="number" min="0" max="10"
+                       step="0.01" required>
+            </label><br>
+            <label>PG CGPA (0–10):
+                <input name="PG CGPA" type="number" min="0" max="10"
+                       step="0.01" required>
+            </label><br>
+            <h4>Project 1</h4>
+            <input name="Project 1 Title" placeholder="Project title" required>
+            <textarea name="Project 1 Abstract" placeholder="Abstract" required></textarea>
+            <h4>Project 2</h4>
+            <input name="Project 2 Title" placeholder="Project title" required>
+            <textarea name="Project 2 Abstract" placeholder="Abstract" required></textarea>
+            <h4>Project 3</h4>
+            <input name="Project 3 Title" placeholder="Project title" required>
+            <textarea name="Project 3 Abstract" placeholder="Abstract" required></textarea>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="step">
+            <h3>Step 6: Confirm Registration</h3>
+            <p>Please verify your details before registering.</p>
+            <div id="summary"></div>
+        </div>
+
+        <!-- Step 7 -->
+        <div class="step">
+            <h3>Registration Successful!</h3>
+            <p>Your Best JOBs registration is complete.</p>
+        </div>
+
+        <button type="button" id="prev" onclick="move(-1)">Previous</button>
+        <button type="button" id="next" onclick="move(1)">Next</button>
+        <button type="submit" id="finish" hidden>Confirm Registration</button>
+    </form>
+
+    <script>
+        var current = 0;
+        var steps = document.querySelectorAll(".step");
+        var form = document.getElementById("form");
+
+        function showStep() {
+            steps.forEach((s, i) => s.style.display = i === current ? "block" : "none");
+            document.getElementById("prev").hidden = current === 0 || current === 6;
+            document.getElementById("next").hidden = current >= 5;
+            document.getElementById("finish").hidden = current !== 5;
+        }
+
+        function move(n) {
+            if (n === 1 && current < 5) {
+                var fields = steps[current].querySelectorAll("input, select, textarea");
+
+                for (var field of fields) {
+                    if (!field.checkValidity()) {
+                        field.reportValidity();
+                        return;
+                    }
+                }
+
+                if (current === 0 &&
+                    document.getElementById("pass").value !==
+                    document.getElementById("confirm").value) {
+                    alert("Passwords do not match.");
+                    return;
+                }
+            }
+
+            current += n;
+
+            if (current === 5) showSummary();
+            showStep();
+        }
+
+        function showSummary() {
+            var output = "";
+            var fields = form.querySelectorAll("input, select, textarea");
+
+            fields.forEach(field => {
+                if (field.name && field.type !== "password" &&
+                    field.type !== "submit") {
+                    output += field.name + ": " +
+                        (field.value || "Not provided") + "\n";
+                }
+            });
+
+            document.getElementById("summary").textContent = output;
+        }
+
+        form.onsubmit = function(event) {
+            event.preventDefault();
+            current = 6;
+            showStep();
+        };
+
+        showStep();
+    </script>
+</body>
+</html>

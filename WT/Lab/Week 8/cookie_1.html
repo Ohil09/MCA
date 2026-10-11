@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Welcome Page</title>
+</head>
+<body>
+    <h1>Welcome to Our Website</h1>
+    <p id="message"></p>
+
+    <script>
+        // Function to set a cookie
+        function setCookie(name, value, days) {
+            let date = new Date();
+            date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+
+            document.cookie = name + "=" + encodeURIComponent(value) +
+                "; expires=" + date.toUTCString() + "; path=/";
+        }
+
+        // Function to get a cookie
+        function getCookie(name) {
+            let cookies = document.cookie.split("; ");
+
+            for (let cookie of cookies) {
+                let parts = cookie.split("="); 
+                if (parts[0] === name) {
+                    return decodeURIComponent(parts.slice(1).join("="));
+                }
+            }
+            return "";
+        }
+
+        // Run when the page loads
+        window.onload = function () {
+            let username = getCookie("username");
+            let lastAccess = getCookie("lastAccess");
+            let message = document.getElementById("message");
+
+            if (username === "") {
+                username = prompt("Please enter your name:");
+
+                if (username && username.trim() !== "") {
+                    username = username.trim();
+                    message.innerHTML =
+                        "Welcome, " + username + "! This is your first visit.";
+                    setCookie("username", username, 30);
+                } else {
+                    username = "";
+                    message.textContent = "Welcome, Guest!";
+                }
+            } else {
+                message.textContent =
+                    "Welcome back, " + username +
+                    "! Your last access was: " +
+                    (lastAccess || "Not available");
+            }
+
+            // Store the current access date and time
+            setCookie("lastAccess", new Date().toLocaleString(), 30);
+        };
+    </script>
+</body>
+</html>
