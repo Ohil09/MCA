@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +10,6 @@
     <p id="message"></p>
 
     <script>
-        // Function to set a cookie
         function setCookie(name, value, days) {
             let date = new Date();
             date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
@@ -20,7 +18,6 @@
                 "; expires=" + date.toUTCString() + "; path=/";
         }
 
-        // Function to get a cookie
         function getCookie(name) {
             let cookies = document.cookie.split("; ");
 
@@ -47,6 +44,7 @@
                     message.innerHTML =
                         "Welcome, " + username + "! This is your first visit.";
                     setCookie("username", username, 30);
+                    setCookie("lastAccess", new Date().toLocaleString(), 30);
                 } else {
                     username = "";
                     message.textContent = "Welcome, Guest!";
