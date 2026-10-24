@@ -1,0 +1,19 @@
+SET SERVEROUTPUT ON;
+
+DECLARE
+    CURSOR c_dept IS
+        SELECT dno, dname
+        FROM DEPT;
+
+    v_fund NUMBER;
+BEGIN
+    FOR r_dept IN c_dept LOOP
+        v_fund := get_total_dept_prj_fund(r_dept.dno);
+
+        DBMS_OUTPUT.PUT_LINE(
+            r_dept.dname || ' department has received Rs. ' ||
+            v_fund || '/-'
+        );
+    END LOOP;
+END;
+/

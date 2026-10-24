@@ -1,0 +1,32 @@
+SET SERVEROUTPUT ON
+
+DECLARE
+    V_AGE NUMBER;
+    V_EXP NUMBER;
+BEGIN
+    DBMS_OUTPUT.PUT_LINE(
+        RPAD('EMPNO', 7) ||
+        RPAD('NAME', 10) ||
+        RPAD('AGE', 6) ||
+        RPAD('EXPERIENCE', 10)
+    );
+
+    DBMS_OUTPUT.PUT_LINE(RPAD('-', 33, '-'));
+
+    FOR E IN (
+        SELECT EMPNO, ENAME
+        FROM EMP
+        ORDER BY EMPNO
+    )
+    LOOP
+        CALC_YEARS(E.EMPNO, V_AGE, V_EXP);
+
+        DBMS_OUTPUT.PUT_LINE(
+            RPAD(E.EMPNO, 7) ||
+            RPAD(E.ENAME, 10) ||
+            RPAD(V_AGE, 6) ||
+            RPAD(V_EXP, 10)
+        );
+    END LOOP;
+END;
+/

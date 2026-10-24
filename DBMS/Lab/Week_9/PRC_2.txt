@@ -1,0 +1,65 @@
+CREATE OR REPLACE PROCEDURE get_dept_proj_emp_details (
+    p_dname IN DEPT.dname%TYPE
+)
+IS
+    v_dno       DEPT.dno%TYPE;
+    v_emp_count NUMBER;
+
+    CURSOR c_proj IS
+        SELECT prj_no, prj_name
+        FROM PROJ
+        WHERE dno = v_dno;
+
+    CURSOR c_emp (cp_prj_no PROJ.prj_no%TYPE) IS
+        SELECT empno, ename, job
+        FROM EMP
+        WHERE deptno = v_dno
+          AND proj_id = cp_prj_no;
+
+BEGIN
+    SELECT dno
+    INTO v_dno
+    FROM DEPT
+    WHERE UPPER(dname) = UPPER(p_dname);
+
+    DBMS_OUTPUT.PUT_LINE('Department: ' || UPPER(p_dname));
+    DBMS_OUTPUT.PUT_LINE('Department No: ' || v_dno);
+    DBMS_OUTPUT.PUT_LINE('------------------------------------------');
+
+    FOR r_proj IN c_proj LOOP
+
+        DBMS_OUTPUT.PUT_LINE(
+            CHR(10) || 'Project: ' ||
+            r_proj.prj_no || ' - ' || r_proj.prj_name
+        );
+
+        DBMS_OUTPUT.PUT_LINE('Employees working on this project:');
+        v_emp_count := 0;
+
+        FOR r_emp IN c_emp(r_proj.prj_no) LOOP
+            v_emp_count := v_emp_count + 1;
+
+            DBMS_OUTPUT.PUT_LINE(
+                '  ' || r_emp.empno || ' - ' ||
+                r_emp.ename || ' (' || r_emp.job || ')'
+            );
+        END LOOP;
+
+        IF v_emp_count = 0 THEN
+            DBMS_OUTPUT.PUT_LINE(
+                '  No employees assigned to this project.'
+            );
+        END IF;
+
+    END LOOP;
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE(
+            'Error: Department "' || p_dname || '" not found.'
+        );
+
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('An error occurred: ' || SQLERRM);
+END;
+/

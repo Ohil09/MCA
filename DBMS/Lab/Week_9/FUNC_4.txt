@@ -1,0 +1,15 @@
+CREATE OR REPLACE FUNCTION get_total_dept_prj_fund (
+    p_dno IN DEPT.dno%TYPE
+)
+RETURN NUMBER
+IS
+    v_total_fund NUMBER;
+BEGIN
+    SELECT NVL(SUM(prj_fund), 0)
+    INTO v_total_fund
+    FROM PROJ
+    WHERE dno = p_dno;
+
+    RETURN v_total_fund;
+END;
+/

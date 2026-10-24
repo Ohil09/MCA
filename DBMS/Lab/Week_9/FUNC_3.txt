@@ -1,0 +1,41 @@
+CREATE OR REPLACE FUNCTION get_project_status (
+    p_dno    IN PROJ.dno%TYPE,
+    p_prj_no IN PROJ.prj_no%TYPE
+)
+RETURN VARCHAR2
+IS
+    v_total_tasks     NUMBER := 0;
+    v_completed_tasks NUMBER := 0;
+    v_in_prog_tasks   NUMBER := 0;
+    v_pending_tasks   NUMBER := 0;
+    v_status          VARCHAR2(15);
+BEGIN
+    SELECT COUNT(*),
+           COUNT(CASE WHEN UPPER(TRIM(status)) = 'COMPLETED' THEN 1 END),
+           COUNT(CASE WHEN UPPER(TRIM(status)) = 'IN-PROGRESS' THEN 1 END),
+           COUNT(CASE WHEN UPPER(TRIM(status)) = 'PENDING' THEN 1 END)
+    INTO v_total_tasks, v_completed_tasks, v_in_prog_tasks, v_pending_tasks
+    FROM TASK
+    WHERE prj_id = p_prj_no
+      AND dno = p_dno;
+
+    IF v_total_tasks = 0 THEN
+        v_status := 'NO TASKS';
+
+    ELSIF v_completed_tasks = v_total_tasks THEN
+        v_status := 'COMPLETED';
+
+    ELSIF v_pending_tasks = v_total_tasks THEN
+        v_status := 'PENDING';
+
+    ELSE
+        v_status := 'IN-PROGRESS';
+    END IF;
+
+    RETURN v_status;
+
+EXCEPTION
+    WHEN OTHERS THEN
+        RETURN 'ERROR';
+END;
+/
