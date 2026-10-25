@@ -1,161 +1,213 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Best JOBs Registration</title>
-    <style>
-        body { font-family: Arial; margin: 30px; }
-        .step { display: none; }
-        input, select, textarea { margin: 6px; padding: 8px; }
-        button { padding: 8px 16px; margin: 8px; }
-        #summary { white-space: pre-wrap; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Best JOBs Registration</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font:16px Arial;background:#f1f5f9;color:#1e293b}
+header{background:#17365d;color:white;padding:20px 8%}
+main{max-width:750px;margin:30px auto;background:white;padding:25px;border-radius:10px;width:94%}
+h2{color:#17365d}
+.progress{display:flex;gap:4px;margin-bottom:25px}
+.progress span{flex:1;text-align:center;padding:9px 2px;background:#e2e8f0;font-size:12px;border-radius:4px}
+.progress .active{background:#17365d;color:white}
+.step{display:none}.step.active{display:block}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.field{margin-bottom:16px;min-width:0}
+label{display:block;font-weight:bold;margin-bottom:6px;font-size:14px}
+input,select,textarea{width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:5px;font:inherit}
+textarea{min-height:85px;resize:vertical}
+.hint{font-size:12px;color:#64748b;margin:5px 0}
+.buttons{display:flex;justify-content:space-between;margin-top:20px;gap:10px}
+button{padding:11px 20px;border:0;border-radius:5px;cursor:pointer;font-weight:bold}
+.next{background:#2563eb;color:white;margin-left:auto}
+.previous{background:#e2e8f0}
+.group{border:1px solid #e2e8f0;padding:12px;margin:12px 0;border-radius:6px;overflow-wrap:anywhere}
+.group p{margin:8px 0}
+.success{text-align:center;color:#15803d;padding:25px}
+[hidden]{display:none!important}
+@media(max-width:550px){.grid{grid-template-columns:1fr;gap:0}.progress span{font-size:10px}main{padding:18px}}
+</style>
 </head>
 <body>
-    <h2>Best JOBs Registration</h2>
-    <form id="form">
+<header><h1>Best JOBs</h1><p>Create your job seeker profile</p></header>
+<main>
+<div class="progress" id="progress">
+<span class="active">1.Account</span><span>2.Personal</span>
+<span>3.Contact</span><span>4.Social</span><span>5.Academic</span>
+<span>6.Review</span><span>7.Finish</span>
+</div>
 
-        <!-- Step 1 -->
-        <div class="step">
-            <h3>Step 1: Account Set-Up</h3>
-            <input name="Username" placeholder="Username" required minlength="3">
-            <input name="Password" type="password" id="pass"
-                   placeholder="Password" required minlength="8">
-            <input type="password" id="confirm" placeholder="Confirm Password" required>
-        </div>
+<form id="form" novalidate>
+<!-- STEP 1 -->
+<section class="step active">
+<h2>Account Set-Up</h2>
+<div class="field"><label for="username" >Username</label>
+<input id="username" name="Username" required pattern="[A-Za-z0-9]{15,}" autofocus>
+<p class="hint">At least 15 letters or digits; no spaces.</p></div>
+<div class="field"><label for="password">Password</label>
+<input id="password" type="password" name="Password" required minlength="7" maxlength="12"
+pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[$._])[A-Za-z0-9$._]{7,12}">
+<p class="hint">7–12 characters; uppercase, lowercase, digit and $, . or _.</p></div>
+<div class="field"><label for="confirm">Confirm Password</label>
+<input id="confirm" type="password" required></div>
+</section>
 
-        <!-- Step 2 -->
-        <div class="step">
-            <h3>Step 2: Personal Details</h3>
-            <input name="First Name" placeholder="First Name" required>
-            <input name="Last Name" placeholder="Last Name" required>
-            <select name="Gender" required>
-                <option value="">Select Gender</option>
-                <option>Female</option><option>Male</option>
-                <option>Other</option><option>Prefer not to say</option>
-            </select>
-            <input name="Nationality" placeholder="Nationality" required>
-            <label>Date of Birth: <input name="DoB" type="date" required></label>
-        </div>
+<!-- STEP 2 -->
+<section class="step">
+<h2>Personal Details</h2><div class="grid">
+<div class="field"><label for="first" >First Name</label>
+<input id="first" name="First Name" required pattern="[A-Z][A-Za-z]*( [A-Za-z]+)?" autofocus></div>
+<div class="field"><label for="last">Last Name</label>
+<input id="last" name="Last Name" required pattern="[A-Z][A-Za-z]*( [A-Za-z]+)?"></div>
+<div class="field"><label for="gender">Gender</label>
+<select id="gender" name="Gender" required>
+<option value="">Select</option><option>Female</option><option>Male</option>
+<option>Other</option><option>Prefer not to say</option></select></div>
+<div class="field"><label for="nationality">Nationality</label>
+<input id="nationality" name="Nationality" required></div>
+<div class="field"><label for="dob">Date of Birth</label>
+<input id="dob" type="date" name="Date of Birth" required></div>
+</div></section>
 
-        <!-- Step 3 -->
-        <div class="step">
-            <h3>Step 3: Contact Details</h3>
-            <input name="Email" type="email" placeholder="Email" required>
-            <input name="Phone" type="tel" placeholder="Phone (10 digits)"
-                   pattern="[0-9]{10}" required>
-            <textarea name="Address" placeholder="Address" required></textarea>
-        </div>
+<!-- STEP 3 -->
+<section class="step">
+<h2>Contact Details</h2>
+<div class="field"><label for="email">Manipal Email</label>
+<input id="email" type="email" name="Email" required
+pattern="[A-Za-z0-9$._]{7,12}@manipal\.edu" autofocus>
+<p class="hint">The local part must also contain uppercase, lowercase, digit and $, . or _.</p></div>
+<div class="field"><label for="phone">Phone Number</label>
+<input id="phone" type="tel" name="Phone" required pattern="\+[0-9]{2}[0-9]{10}" placeholder="+911234567890">
+<p class="hint">+ followed by 2 country-code digits and 10 phone digits.</p></div>
+<div class="field"><label for="address">Address</label>
+<textarea id="address" name="Address" required minlength="5"></textarea></div>
+</section>
 
-        <!-- Step 4 -->
-        <div class="step">
-            <h3>Step 4: Social Profiles</h3>
-            <input name="Twitter" type="url" placeholder="Twitter URL">
-            <input name="Facebook" type="url" placeholder="Facebook URL">
-            <input name="Google" type="url" placeholder="Google Profile URL">
-        </div>
+<!-- STEP 4 -->
+<section class="step">
+<h2>Social Profiles</h2>
+<div class="field"><label for="twitter">Twitter / X</label>
+<input id="twitter" name="Twitter" type="url" pattern="https://(www\.)?(twitter\.com|x\.com)/[A-Za-z0-9_]+/?"
+placeholder="https://x.com/username" autofocus></div>
+<div class="field"><label for="facebook">Facebook</label>
+<input id="facebook" name="Facebook" type="url" pattern="https://(www\.)?facebook\.com/[A-Za-z0-9._-]+/?"
+placeholder="https://www.facebook.com/username"></div>
+<div class="field"><label for="google">Google Profile</label>
+<input id="google" name="Google" type="url"
+pattern="https://(www\.)?(profiles\.google\.com|aboutme\.google\.com)/[A-Za-z0-9._-]+/?"
+placeholder="https://profiles.google.com/username"></div>
+<p class="hint">Social profile fields are optional and use the specified URL formats.</p>
+</section>
 
-        <!-- Step 5 -->
-        <div class="step">
-            <h3>Step 5: Academic Details</h3>
-            <label>UG CGPA (0–10):
-                <input name="UG CGPA" type="number" min="0" max="10"
-                       step="0.01" required>
-            </label><br>
-            <label>PG CGPA (0–10):
-                <input name="PG CGPA" type="number" min="0" max="10"
-                       step="0.01" required>
-            </label><br>
-            <h4>Project 1</h4>
-            <input name="Project 1 Title" placeholder="Project title" required>
-            <textarea name="Project 1 Abstract" placeholder="Abstract" required></textarea>
-            <h4>Project 2</h4>
-            <input name="Project 2 Title" placeholder="Project title" required>
-            <textarea name="Project 2 Abstract" placeholder="Abstract" required></textarea>
-            <h4>Project 3</h4>
-            <input name="Project 3 Title" placeholder="Project title" required>
-            <textarea name="Project 3 Abstract" placeholder="Abstract" required></textarea>
-        </div>
+<!-- STEP 5 -->
+<section class="step">
+<h2>Academic Details</h2><div class="grid">
+<div class="field"><label for="ug">UG CGPA</label>
+<input id="ug" name="UG CGPA" type="number" required min="0" max="10" step="0.01" autofocus></div>
+<div class="field"><label for="pg">PG CGPA</label>
+<input id="pg" name="PG CGPA" type="number" min="0" max="10" step="0.01"></div>
+</div>
+<div id="projects"></div>
+</section>
 
-        <!-- Step 6 -->
-        <div class="step">
-            <h3>Step 6: Confirm Registration</h3>
-            <p>Please verify your details before registering.</p>
-            <div id="summary"></div>
-        </div>
+<!-- STEP 6 -->
+<section class="step">
+<h2>Confirm Your Details</h2>
+<p>Review the information before registering.</p>
+<div id="review"></div>
+<p class="hint">Passwords are never displayed.</p>
+</section>
 
-        <!-- Step 7 -->
-        <div class="step">
-            <h3>Registration Successful!</h3>
-            <p>Your Best JOBs registration is complete.</p>
-        </div>
+<!-- STEP 7 -->
+<section class="step">
+<div class="success"><h2>✓ Registration Successful!</h2>
+<p>Your Best JOBs registration has been completed.</p></div>
+</section>
 
-        <button type="button" id="prev" onclick="move(-1)">Previous</button>
-        <button type="button" id="next" onclick="move(1)">Next</button>
-        <button type="submit" id="finish" hidden>Confirm Registration</button>
-    </form>
+<div class="buttons" id="buttons">
+<button type="button" class="previous" id="prev" hidden>Previous</button>
+<button type="button" class="next" id="next">Next</button>
+</div>
+</form>
+</main>
 
-    <script>
-        var current = 0;
-        var steps = document.querySelectorAll(".step");
-        var form = document.getElementById("form");
+<script>
+const $=id=>document.getElementById(id);
+const steps=document.querySelectorAll(".step"),items=document.querySelectorAll(".progress span");
+let current=0;
 
-        function showStep() {
-            steps.forEach((s, i) => s.style.display = i === current ? "block" : "none");
-            document.getElementById("prev").hidden = current === 0 || current === 6;
-            document.getElementById("next").hidden = current >= 5;
-            document.getElementById("finish").hidden = current !== 5;
-        }
+// Add three project title and abstract pairs.
+for(let i=1;i<=3;i++){
+$("projects").insertAdjacentHTML("beforeend",`
+<h3>Project ${i}</h3>
+<div class="field"><label for="title${i}">Project Title</label>
+<input id="title${i}" name="Project ${i} Title" required minlength="3"></div>
+<div class="field"><label for="abstract${i}">Project Abstract</label>
+<textarea id="abstract${i}" name="Project ${i} Abstract" required minlength="20"></textarea></div>`);
+}
 
-        function move(n) {
-            if (n === 1 && current < 5) {
-                var fields = steps[current].querySelectorAll("input, select, textarea");
+const today=new Date();
+$("dob").max=new Date(today.getTime()-today.getTimezoneOffset()*60000).toISOString().split("T")[0];
 
-                for (var field of fields) {
-                    if (!field.checkValidity()) {
-                        field.reportValidity();
-                        return;
-                    }
-                }
+function showStep(){
+steps.forEach((s,i)=>s.classList.toggle("active",i===current));
+items.forEach((s,i)=>{s.classList.toggle("active",i===current);s.style.background=i<current?"#d1fae5":"";s.style.color=i<current?"#065f46":""});
+$("prev").hidden=current===0||current===6;
+$("buttons").hidden=current===6;
+$("next").textContent=current===5?"Register":"Next";
+}
 
-                if (current === 0 &&
-                    document.getElementById("pass").value !==
-                    document.getElementById("confirm").value) {
-                    alert("Passwords do not match.");
-                    return;
-                }
-            }
+function valid(){
+const fields=steps[current].querySelectorAll("input,select,textarea");
+for(const f of fields){
+if(!f.checkValidity()){f.reportValidity();return false;}
+}
+if(current===0&&$("password").value!==$("confirm").value){
+$("confirm").setCustomValidity("Passwords do not match.");
+$("confirm").reportValidity();$("confirm").setCustomValidity("");return false;
+}
+if(current===0&&!/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[$._])[A-Za-z0-9$._]{7,12}$/.test($("password").value)){
+$("password").setCustomValidity("Password does not meet the required rules.");
+$("password").reportValidity();$("password").setCustomValidity("");return false;
+}
+if(current===2){
+const local=$("email").value.split("@")[0];
+if(!/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[$._])[A-Za-z0-9$._]{7,12}$/.test(local)){
+$("email").setCustomValidity("Email local part must meet the password character rules.");
+$("email").reportValidity();$("email").setCustomValidity("");return false;
+}
+}
+return true;
+}
 
-            current += n;
+function escapeHTML(s){
+return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
 
-            if (current === 5) showSummary();
-            showStep();
-        }
+function review(){
+const groups=[
+["Account",["username"]],
+["Personal",["first","last","gender","nationality","dob"]],
+["Contact",["email","phone","address"]],
+["Social",["twitter","facebook","google"]],
+["Academic",["ug","pg","title1","abstract1","title2","abstract2","title3","abstract3"]]
+];
+$("review").innerHTML=groups.map(([title,ids])=>`<div class="group"><h3>${title}</h3>`+
+ids.map(id=>`<p><strong>${escapeHTML($(id).labels[0].textContent)}:</strong> ${escapeHTML($(id).value||"Not provided")}</p>`).join("")+
+"</div>").join("");
+}
 
-        function showSummary() {
-            var output = "";
-            var fields = form.querySelectorAll("input, select, textarea");
-
-            fields.forEach(field => {
-                if (field.name && field.type !== "password" &&
-                    field.type !== "submit") {
-                    output += field.name + ": " +
-                        (field.value || "Not provided") + "\n";
-                }
-            });
-
-            document.getElementById("summary").textContent = output;
-        }
-
-        form.onsubmit = function(event) {
-            event.preventDefault();
-            current = 6;
-            showStep();
-        };
-
-        showStep();
-    </script>
+$("next").onclick=()=>{
+if(!valid())return;
+if(current===4)review();
+if(current===5){current=6;showStep();return;}
+current++;showStep();
+};
+$("prev").onclick=()=>{current--;showStep();};
+showStep();
+</script>
 </body>
 </html>
