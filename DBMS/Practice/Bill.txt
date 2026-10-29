@@ -1,0 +1,80 @@
+
+CREATE TABLE BILL(
+    Bill_ID number(6) CONSTRAINT bill_pk Primary Key,
+    Appointment_ID NUMBER(6) CONSTRAINT bill_appt_fk REFERENCES Appointment(Appointment_ID),
+    Bill_Date DATE DEFAULT SYSDATE NOT NULL,
+    Consultation_amt NUMBER(8,2) CONSTRAINT const_chk check (Consultation_amt > 0),
+    Discount_per NUMBER(8,2) CONSTRAINT disct_chk check (Discount_per BETWEEN 0 AND 30),
+    Total_amt NUMBER(8,2) CONSTRAINT total_chk check (Total_amt > 0),
+    Payment_status varchar(10) CONSTRAINT bill_status_chk check(Payment_status IN ('PENDING','PARTIAL','PAID')),
+        CONSTRAINT one_bill_chk UNIQUE(Appointment_ID));
+
+
+
+INSERT INTO PATIENT
+    (PATIENT_ID, PATIENT_NAME, GENDER, DOB, PHONE, EMAIL)
+VALUES
+    (101, 'Rahul Sharma', 'M', TO_DATE('15-06-1998','DD-MM-YYYY'),
+     '9876543210', 'rahul@example.com');
+
+
+INSERT INTO PATIENT
+    (PATIENT_ID, PATIENT_NAME, GENDER, DOB, PHONE, EMAIL)
+VALUES
+    (102, 'Priya Nair', 'F', TO_DATE('20-03-2000','DD-MM-YYYY'),
+     '8765432109', 'priya@example.com');
+
+
+INSERT INTO PATIENT
+    (PATIENT_ID, PATIENT_NAME, GENDER, DOB, PHONE, EMAIL)
+VALUES
+    (103, 'Arjun Rao', 'M', TO_DATE('10-01-1985','DD-MM-YYYY'),
+     '7654321098', 'arjun@example.com');
+
+
+INSERT INTO DOCTOR
+    (DOCTOR_ID, DOCTOR_NAME, SPECIALIZATION, CONSULTATION_FEE,
+     EXPERIENCE, AVL_STATUS)
+VALUES
+    (201, 'Dr Meera', 'Cardiology', 1500, 12, 'AVAILABLE');
+
+
+INSERT INTO DOCTOR
+    (DOCTOR_ID, DOCTOR_NAME, SPECIALIZATION, CONSULTATION_FEE,
+     EXPERIENCE, AVL_STATUS)
+VALUES
+    (202, 'Dr Kumar', 'Orthopedics', 1000, 8, 'AVAILABLE');
+
+INSERT INTO DOCTOR
+    (DOCTOR_ID, DOCTOR_NAME, SPECIALIZATION, CONSULTATION_FEE,
+     EXPERIENCE, AVL_STATUS)
+VALUES
+    (203, 'Dr Anita', 'Dermatology', 800, 5, 'AVAILABLE');
+
+
+
+INSERT INTO PATIENT(Patient_ID,Patient_Name,Gender,Date_of_Birth,Phone,Email) VALUES(101,'Rahul Sharma','M',TO_DATE('15-JUN-1998','DD-MON-YYYY'),9876543210,'rahul@example.com');
+
+INSERT INTO DOCTOR(Doctor_ID,Doctor_Name,Specialization,Consultation_fee,Experience,Avl_status) VALUES(203,'Dr Anita','Dermotology',800,5,'AVAILABLE');
+
+INSERT INTO APPOINTMENT(Appointment_ID,Patient_ID,Doctor_ID,Appointment_date,Appointment_status) VALUES(1004,101,203,TO_DATE('13-NOV-2026','DD-MON-YYYY'),'COMPLETED');
+
+
+SELECT Doctor_name, specialization, count(*) as Appointment_Completed from doctor d JOIN Appointment a ON d.doctor_ID = a.doctor_ID Group by Doctor_ID HAVING Appointment_status = 'COMPLETED' ;
+
+SELECT Count(*) AS Completed_appt,Doctor_name,specialization from doctor where Doctor_ID IN(SELECT Doctor_ID from appointment where Appointment_status = 'COMPLETED');
+
+
+SELECT DISTINCT p.Patient_ID, p.Patient_Name , d.doctor_name FROM PATIENT p JOIN APPOINTMENT a ON p.Patient_ID = a.Patient_ID JOIN doctor d ON d.Doctor_ID = a.Doctor_ID WHERE a.Appointment_Status = 'COMPLETED';
+
+
+Select d.dname, d.specialization , COUNT(a.appointment_id) AS Completed_Appt FROM doctor d JOIN appointment a ON d.Doctor_ID = a.Doctor_ID AND a.appointment_status = 'COMPLETED' GROUP BY d.doctor_ID, d.doctor_name, d.Specializtion;
+
+
+Select d.doctor_name, d.specialization , COUNT(a.appointment_id) AS Completed_Appt FROM doctor d JOIN appointment a ON d.Doctor_ID = a.Doctor_ID AND a.appointment_status = 'COMPLETED' GROUP BY d.doctor_ID, d.doctor_name, d.Specialization;
+
+SELECT doctor_name from doctor WHERE consultation_fee > (SELECT AVG(consultation_fee) FROM Appointment);
+
+
+SELECT Appointment_status , COUNT(appointment_ID) as Total_Num_Appoint FROM appointment  GROUP BY Appointment_status ORDER BY Total_Num_Appoint DESC;
+

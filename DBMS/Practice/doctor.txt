@@ -1,0 +1,8 @@
+
+CREATE TABLE DOCTOR(
+    Doctor_ID number(4) Primary Key,
+    Doctor_Name Varchar(40) NOT NULL,
+    Specialization Varchar(30) NOT NULL,
+    Consultation_fee NUMBER(8,2) check(Consultation_fee > 0),
+    Experience NUMBER(2) check(Experience BETWEEN 0 AND 50),
+    avl_status varchar(10) check(avl_status IN ('AVAILABLE','UNAVAILABLE')));

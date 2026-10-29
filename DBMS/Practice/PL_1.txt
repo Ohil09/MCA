@@ -1,0 +1,35 @@
+SET SERVEROUTPUT ON
+
+DECLARE
+	v_appt_id appointment.Appointment_ID%TYPE;
+	v_disc_per NUMBER;
+	v_patient_id appointment.Patient_ID%TYPE;
+	v_doctor_id appointment.Doctor_ID%TYPE;
+	v_consultation_fee doctor.Consultation_fee%TYPE;
+	v_disc_amt NUMBER;
+	v_amt NUMBER;
+
+BEGIN
+	v_appt_id := '&appt_Id';
+	v_disc_per := '&Enter_Discount';	
+
+	IF v_disc_per < 0 OR v_disc_per > 30 THEN
+		DBMS_OUTPUT.PUT_LINE('Error: Invalid Discount, It should be Between 0 AND 30');
+	ELSE 
+		SELECT a.Patient_ID, a.Doctor_ID, d.Consultation_fee INTO v_patient_id, v_doctor_id, v_consultation_fee FROM appointment a JOIN doctor d ON a.doctor_ID = d.doctor_ID WHERE a.appointment_ID = v_appt_id AND a.appointment_status = 'COMPLETED';
+
+		v_disc_amt := (v_consultation_fee * v_disc_per ) / 100;
+		v_amt := v_consultation_fee - v_disc_amt;	
+
+		DBMS_OUTPUT.PUT_LINE('Appointment ID: ' || v_appt_id);
+		DBMS_OUTPUT.PUT_LINE('Consultation Fee: ' || v_consultation_fee);
+		DBMS_OUTPUT.PUT_LINE('Discount Amount : '|| v_disc_amt);
+		DBMS_OUTPUT.PUT_LINE('Final Amount : '|| v_amt);
+	END IF;
+EXCEPTION
+	WHEN NO_DATA_FOUND THEN 
+		DBMS_OUTPUT.PUT_LINE('No such Appointment ID Exists !');
+	 WHEN VALUE_ERROR THEN
+        	DBMS_OUTPUT.PUT_LINE('Invalid input. Enter numeric values.');
+END;	
+/

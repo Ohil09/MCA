@@ -1,0 +1,14 @@
+SET SERVEROUTPUT ON
+CREATE OR REPLACE TRIGGER TRG_VALIDATE_BILL BEFORE INSERT ON BILL
+FOR EACH ROW
+
+v_status appointment.appointment_status%TYPE;
+v_disc NUMBER;
+v_total NUMBER;
+BEGIN
+
+	SELECT appointment_status INTO v_status FROM appointment WHERE appointment_ID = :NEW.appointment_ID;
+	IF v_status <> 'COMPLETED' THEN 
+		RAISE_APPLICATION_ERROR('
+END;
+/

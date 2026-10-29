@@ -1,0 +1,82 @@
+CREATE OR REPLACE PROCEDURE PROCESS_PAYMENT (
+    p_bill_id IN NUMBER,
+    p_amount  IN NUMBER
+)
+IS
+    v_bill_amount BILL.TOTAL_AMT%TYPE;
+    v_total_paid  NUMBER(10,2);
+    v_new_total   NUMBER(10,2);
+    v_status      BILL.PAYMENT_STATUS%TYPE;
+
+BEGIN
+    -- 1. Validate payment amount
+    IF p_amount IS NULL OR p_amount <= 0 THEN
+        RAISE_APPLICATION_ERROR(
+            -20001,
+            'Payment amount must be greater than zero.'
+        );
+    END IF;
+
+    -- 2. Check whether bill exists and lock it
+    SELECT TOTAL_AMT
+    INTO v_bill_amount
+    FROM BILL
+    WHERE BILL_ID = p_bill_id
+    FOR UPDATE;
+
+    -- 3. Calculate previous payments
+    SELECT NVL(SUM(PAYMENT_AMOUNT), 0)
+    INTO v_total_paid
+    FROM PAYMENT
+    WHERE BILL_ID = p_bill_id;
+
+    -- 4. Calculate new total payment
+    v_new_total := v_total_paid + p_amount;
+
+    -- 5. Prevent overpayment
+    IF v_new_total > v_bill_amount THEN
+        RAISE_APPLICATION_ERROR(
+            -20002,
+            'Payment exceeds the outstanding balance.'
+        );
+    END IF;
+
+    -- 6. Insert payment record
+    INSERT INTO PAYMENT (
+        PAYMENT_ID,
+        BILL_ID,
+        PAYMENT_DATE,
+        PAYMENT_AMOUNT
+    )
+    VALUES (
+        PAYMENT_SEQ.NEXTVAL,
+        p_bill_id,
+        SYSDATE,
+        p_amount
+    );
+
+    -- 7. Determine payment status
+    IF v_new_total < v_bill_amount THEN
+        v_status := 'PARTIAL';
+    ELSE
+        v_status := 'PAID';
+    END IF;
+
+    -- 8. Update bill status
+    UPDATE BILL
+    SET PAYMENT_STATUS = v_status
+    WHERE BILL_ID = p_bill_id;
+
+    DBMS_OUTPUT.PUT_LINE('Payment recorded successfully.');
+    DBMS_OUTPUT.PUT_LINE('Bill Amount: ' || v_bill_amount);
+    DBMS_OUTPUT.PUT_LINE('Total Paid: ' || v_new_total);
+    DBMS_OUTPUT.PUT_LINE('Payment Status: ' || v_status);
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RAISE_APPLICATION_ERROR(
+            -20003,
+            'Invalid Bill ID or no payment data found.'
+        );
+END;
+/

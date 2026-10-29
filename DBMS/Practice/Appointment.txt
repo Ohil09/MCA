@@ -1,0 +1,10 @@
+
+CREATE TABLE APPOINTMENT(
+    Appointment_ID number(6) CONSTRAINT appt_pk Primary Key,
+    Patient_ID NUMBER(5) CONSTRAINT appt_patient_fk REFERENCES patient(Patient_ID),
+    Doctor_ID NUMBER(4) CONSTRAINT appt_doctor_fk REFERENCES doctor(Doctor_ID),
+    Appointment_Date DATE NOT NULL,
+    Appointment_status varchar(12) CONSTRAINT appt_status_chk check(Appointment_status IN ('SCHEDULED','COMPLETED','CANCELLED')),
+    Sysmptoms varchar(100),
+    CONSTRAINT appt_unique UNIQUE(Patient_ID,Doctor_ID,Appointment_Date)
+);

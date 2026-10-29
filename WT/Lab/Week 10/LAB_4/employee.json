@@ -1,0 +1,23 @@
+[
+    {
+        "emp_id": "E101",
+        "name": "Alice Smith",
+        "designation": "Software Engineer",
+        "department": "IT",
+        "salary": 75000
+    },
+    {
+        "emp_id": "E102",
+        "name": "Bob Jones",
+        "designation": "Project Manager",
+        "department": "Operations",
+        "salary": 85000
+    },
+    {
+        "emp_id": "E103",
+        "name": "Charlie Davis",
+        "designation": "HR Executive",
+        "department": "Human Resources",
+        "salary": 60000
+    }
+]

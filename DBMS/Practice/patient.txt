@@ -1,0 +1,9 @@
+
+CREATE TABLE PATIENT(
+    Patient_ID number(5) Primary Key,
+    Patient_Name Varchar(40) NOT NULL,
+    Gender CHAR(1) CONSTRAINT chk_gender check(Gender IN('M','F','O')),
+    DOB DATE CONSTRAINT chk_dob Check(DOB < TO_DATE('2026-10-26','YYYY-MM-DD')),
+    Phone varchar(10) Check(REGEXP_LIKE(Phone,'^[0-9]{10}$')),
+    email varchar(50) UNIQUE,
+    Reg_Date DATE DEFAULT SYSDATE NOT NULL );
