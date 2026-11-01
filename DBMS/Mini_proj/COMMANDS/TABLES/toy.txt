@@ -1,0 +1,11 @@
+CREATE TABLE TOY (
+    toy_id NUMBER(6),
+    toy_name VARCHAR2(100) NOT NULL,
+    category VARCHAR2(50),
+    description VARCHAR2(200),
+    current_stock NUMBER(8) DEFAULT 0 NOT NULL,
+    reorder_level NUMBER(8) DEFAULT 0 NOT NULL,
+    CONSTRAINT pk_toy PRIMARY KEY (toy_id),
+    CONSTRAINT chk_toy_stock CHECK (current_stock >= 0),
+    CONSTRAINT chk_reorder_level CHECK (reorder_level >= 0)
+);

@@ -1,0 +1,20 @@
+1.
+
+SELECT toy_id, toy_name, current_stock, reorder_level FROM TOY WHERE current_stock <= reorder_level;
+
+2.
+
+SELECT r.material_name, s.supplier_name, p.source_type, p.country_of_origin, p.unit_cost, p.availability_status FROM RAW_MATERIAL r JOIN SUPPLIES p ON r.material_id = p.material_id JOIN SUPPLIER s ON p.supplier_id = s.supplier_id ORDER BY r.material_name, p.unit_cost;
+
+3.
+
+SELECT t.toy_id, t.toy_name, COUNT(r.material_id) AS total_materials, COUNT(s.material_id) AS materials_with_source, SUM(r.quantity_required * s.min_cost) AS estimated_material_cost FROM TOY t JOIN REQUIRES r ON t.toy_id = r.toy_id LEFT JOIN (SELECT material_id, MIN(unit_cost) AS min_cost FROM SUPPLIES WHERE availability_status = 'AVAILABLE' GROUP BY material_id
+) s ON r.material_id = s.material_id GROUP BY t.toy_id, t.toy_name;
+
+4.
+
+SELECT t.toy_id, t.toy_name, COUNT(m.batch_id) AS total_batches, SUM(m.quantity_produced) AS total_quantity_produced, SUM(m.labour_cost) AS total_labour_cost, SUM(m.overhead_cost) AS total_overhead_cost, SUM(m.labour_cost + m.overhead_cost) AS total_production_cost FROM TOY t JOIN MANUFACTURING_BATCH m ON t.toy_id = m.toy_id GROUP BY t.toy_id, t.toy_name ORDER BY total_quantity_produced DESC;
+
+5.
+
+SELECT t.toy_id, t.toy_name, SUM(s.quantity_sold) AS total_quantity_sold, SUM(s.quantity_sold * s.unit_price) AS gross_revenue FROM TOY t JOIN SALE s ON t.toy_id = s.toy_id GROUP BY t.toy_id, t.toy_name HAVING SUM(s.quantity_sold * s.unit_price) > 1000 ORDER BY gross_revenue DESC;

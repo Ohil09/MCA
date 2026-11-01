@@ -1,0 +1,9 @@
+CREATE TABLE SUPPLIER (
+    supplier_id NUMBER(6),
+    supplier_name VARCHAR2(100) NOT NULL,
+    country VARCHAR2(50) NOT NULL,
+    phone VARCHAR2(15),
+    email VARCHAR2(100),
+    CONSTRAINT pk_supplier PRIMARY KEY (supplier_id),
+    CONSTRAINT uq_supplier_email UNIQUE (email)
+);

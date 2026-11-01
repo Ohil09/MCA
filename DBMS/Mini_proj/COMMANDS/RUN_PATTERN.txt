@@ -1,0 +1,36 @@
+1.Function Run pattern : 
+
+select * from sale;
+
+@ D:\MCA\DBMS\Mini_proj\COMMANDS\FN_1.txt;
+
+ SELECT sale_ID,Toy_ID,Quantity_sold,Unit_price, sale_amount(4001) AS total_amount from sale where sale_id = 4001;
+
+
+
+
+2.Procedure Run pattern : 
+
+SELECT toy_id, toy_name, current_stock FROM TOY WHERE toy_id = 201;
+
+@ D:\MCA\DBMS\Mini_proj\COMMANDS\PR_1.txt;
+
+EXEC record_sale(4013, 201, SYSDATE, 5, 250);
+
+SELECT * FROM SALE WHERE sale_id = 4013;
+
+SELECT toy_id, toy_name, current_stock FROM TOY WHERE toy_id = 201;
+
+
+
+3.Trigger Run pattern :
+
+select * from manufacturing_batch;
+
+SELECT toy_id, toy_name, current_stock FROM TOY WHERE toy_id = 201;
+
+@ D:\MCA\DBMS\Mini_proj\COMMANDS\TR_1.txt;
+
+INSERT INTO MANUFACTURING_BATCH (batch_id, toy_id, manufacturing_date, quantity_produced,labour_cost, overhead_cost )VALUES (3012,201,SYSDATE,50,2000,1000);
+
+SELECT toy_id, toy_name, current_stock FROM TOY WHERE toy_id = 201;

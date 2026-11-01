@@ -1,0 +1,17 @@
+CREATE OR REPLACE FUNCTION sale_amount(p_sale_id IN NUMBER)
+RETURN NUMBER
+IS
+    v_amount NUMBER(12,2);
+BEGIN
+    SELECT quantity_sold * unit_price
+    INTO v_amount
+    FROM SALE
+    WHERE sale_id = p_sale_id;
+
+    RETURN v_amount;
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RETURN NULL;
+END;
+/

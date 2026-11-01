@@ -1,0 +1,113 @@
+-- TOY MANUFACTURING AND IMPORT DEPENDENCY ANALYSIS SYSTEM
+-- SAMPLE DATA INSERTION SCRIPT
+-- Oracle Database 21c / SQL*Plus
+-- Run after creating all seven tables.
+-- Each table contains 8-10 sample records.
+-- Foreign-key dependency order is respected.
+
+SET SQLBLANKLINES ON;
+
+-- 1. SUPPLIER (8 records)
+INSERT INTO SUPPLIER VALUES (1, 'Bharat Polymers', 'India', '9876501001', 'sales@bharatpolymers.in');
+INSERT INTO SUPPLIER VALUES (2, 'Global Plastics Ltd', 'China', '9876501002', 'contact@globalplastics.cn');
+INSERT INTO SUPPLIER VALUES (3, 'Karnataka Wood Works', 'India', '9876501003', 'orders@kww.in');
+INSERT INTO SUPPLIER VALUES (4, 'Pacific Components', 'Vietnam', '9876501004', 'sales@pacificcomponents.vn');
+INSERT INTO SUPPLIER VALUES (5, 'Shakti Textiles', 'India', '9876501005', 'info@shaktitextiles.in');
+INSERT INTO SUPPLIER VALUES (6, 'Euro Metal Supplies', 'Germany', '9876501006', 'sales@eurometal.de');
+INSERT INTO SUPPLIER VALUES (7, 'Coastal Packaging', 'India', '9876501007', 'orders@coastalpack.in');
+INSERT INTO SUPPLIER VALUES (8, 'Bright Electronics', 'Taiwan', '9876501008', 'sales@brightelectronics.tw');
+
+-- 2. RAW_MATERIAL (8 records)
+INSERT INTO RAW_MATERIAL VALUES (101, 'Plastic Granules', 'Plastic', 'KG', 'Polymer granules used for moulded toy bodies');
+INSERT INTO RAW_MATERIAL VALUES (102, 'Wooden Blocks', 'Wood', 'KG', 'Processed wood for wooden toys and blocks');
+INSERT INTO RAW_MATERIAL VALUES (103, 'Cotton Fabric', 'Textile', 'METER', 'Fabric used for soft toys');
+INSERT INTO RAW_MATERIAL VALUES (104, 'Steel Springs', 'Metal', 'PIECE', 'Small springs used in mechanical toys');
+INSERT INTO RAW_MATERIAL VALUES (105, 'Cardboard Sheets', 'Packaging', 'SHEET', 'Sheets used for toy packaging');
+INSERT INTO RAW_MATERIAL VALUES (106, 'Electronic Modules', 'Electronics', 'PIECE', 'Basic sound and light modules');
+INSERT INTO RAW_MATERIAL VALUES (107, 'Non-toxic Paint', 'Chemical', 'LITRE', 'Child-safe paint for toy finishing');
+INSERT INTO RAW_MATERIAL VALUES (108, 'Rubber Wheels', 'Rubber', 'PIECE', 'Wheels used in toy vehicles');
+
+-- 3. TOY (8 records)
+-- current_stock represents opening stock before the sample sales.
+INSERT INTO TOY VALUES (201, 'Building Blocks Set', 'Educational', 'Colourful interlocking plastic construction blocks', 120, 30);
+INSERT INTO TOY VALUES (202, 'Wooden Puzzle', 'Educational', 'Wooden shape and pattern puzzle', 90, 20);
+INSERT INTO TOY VALUES (203, 'Soft Teddy Bear', 'Soft Toy', 'Cotton-filled soft teddy bear', 18, 25);
+INSERT INTO TOY VALUES (204, 'Wind-up Robot', 'Mechanical', 'Mechanical robot toy with spring mechanism', 75, 20);
+INSERT INTO TOY VALUES (205, 'Mini Toy Car', 'Vehicle', 'Small toy car with rubber wheels', 150, 40);
+INSERT INTO TOY VALUES (206, 'Musical Toy Phone', 'Electronic', 'Toy phone with basic sound and light features', 60, 15);
+INSERT INTO TOY VALUES (207, 'Colouring Toy Kit', 'Creative', 'Children painting and colouring activity kit', 45, 15);
+INSERT INTO TOY VALUES (208, 'Wooden Train Set', 'Vehicle', 'Wooden train set with multiple carriages', 80, 25);
+
+-- 4. SUPPLIES (10 records)
+-- Composite primary key: (supplier_id, material_id).
+-- Includes local/imported sources, different costs and availability statuses.
+INSERT INTO SUPPLIES VALUES (1, 101, 'LOCAL', 48.00, 'India', 'AVAILABLE');
+INSERT INTO SUPPLIES VALUES (2, 101, 'IMPORTED', 53.50, 'China', 'AVAILABLE');
+INSERT INTO SUPPLIES VALUES (3, 102, 'LOCAL', 32.00, 'India', 'AVAILABLE');
+INSERT INTO SUPPLIES VALUES (4, 102, 'IMPORTED', 29.50, 'Vietnam', 'LIMITED');
+INSERT INTO SUPPLIES VALUES (5, 103, 'LOCAL', 22.00, 'India', 'AVAILABLE');
+INSERT INTO SUPPLIES VALUES (6, 104, 'IMPORTED', 14.75, 'Germany', 'AVAILABLE');
+INSERT INTO SUPPLIES VALUES (7, 105, 'LOCAL', 8.50, 'India', 'LIMITED');
+INSERT INTO SUPPLIES VALUES (8, 106, 'IMPORTED', 95.00, 'Taiwan', 'AVAILABLE');
+INSERT INTO SUPPLIES VALUES (1, 107, 'LOCAL', 65.00, 'India', 'UNAVAILABLE');
+INSERT INTO SUPPLIES VALUES (7, 108, 'LOCAL', 12.00, 'India', 'AVAILABLE');
+
+-- 5. REQUIRES (10 records)
+-- Composite primary key: (toy_id, material_id).
+-- quantity_required is the amount needed to manufacture one toy,
+-- measured in the unit specified in RAW_MATERIAL.
+INSERT INTO REQUIRES VALUES (201, 101, 0.250);
+INSERT INTO REQUIRES VALUES (201, 107, 0.050);
+INSERT INTO REQUIRES VALUES (202, 102, 0.400);
+INSERT INTO REQUIRES VALUES (202, 107, 0.030);
+INSERT INTO REQUIRES VALUES (203, 103, 1.200);
+INSERT INTO REQUIRES VALUES (204, 104, 2.000);
+INSERT INTO REQUIRES VALUES (205, 101, 0.100);
+INSERT INTO REQUIRES VALUES (205, 108, 4.000);
+INSERT INTO REQUIRES VALUES (206, 106, 1.000);
+INSERT INTO REQUIRES VALUES (208, 102, 0.800);
+
+-- 6. MANUFACTURING_BATCH (10 records)
+INSERT INTO MANUFACTURING_BATCH VALUES (3001, 201, TO_DATE('2026-09-02','YYYY-MM-DD'), 50, 1200.00, 350.00);
+INSERT INTO MANUFACTURING_BATCH VALUES (3002, 202, TO_DATE('2026-09-04','YYYY-MM-DD'), 35, 900.00, 250.00);
+INSERT INTO MANUFACTURING_BATCH VALUES (3003, 203, TO_DATE('2026-09-06','YYYY-MM-DD'), 20, 700.00, 180.00);
+INSERT INTO MANUFACTURING_BATCH VALUES (3004, 204, TO_DATE('2026-09-08','YYYY-MM-DD'), 40, 1100.00, 300.00);
+INSERT INTO MANUFACTURING_BATCH VALUES (3005, 205, TO_DATE('2026-09-10','YYYY-MM-DD'), 60, 1000.00, 275.00);
+INSERT INTO MANUFACTURING_BATCH VALUES (3006, 206, TO_DATE('2026-09-12','YYYY-MM-DD'), 25, 850.00, 220.00);
+INSERT INTO MANUFACTURING_BATCH VALUES (3007, 207, TO_DATE('2026-09-14','YYYY-MM-DD'), 30, 650.00, 150.00);
+INSERT INTO MANUFACTURING_BATCH VALUES (3008, 208, TO_DATE('2026-09-16','YYYY-MM-DD'), 28, 950.00, 240.00);
+INSERT INTO MANUFACTURING_BATCH VALUES (3009, 201, TO_DATE('2026-10-02','YYYY-MM-DD'), 45, 1150.00, 325.00);
+INSERT INTO MANUFACTURING_BATCH VALUES (3010, 205, TO_DATE('2026-10-05','YYYY-MM-DD'), 55, 980.00, 260.00);
+
+-- 7. SALE (10 records)
+-- Sales link directly to TOY. Quantities are within opening stock.
+-- An AFTER INSERT stock trigger will decrement TOY.current_stock.
+INSERT INTO SALE VALUES (4001, 201, TO_DATE('2026-10-06','YYYY-MM-DD'), 12, 299.00);
+INSERT INTO SALE VALUES (4002, 202, TO_DATE('2026-10-07','YYYY-MM-DD'), 8, 249.00);
+INSERT INTO SALE VALUES (4003, 203, TO_DATE('2026-10-08','YYYY-MM-DD'), 5, 399.00);
+INSERT INTO SALE VALUES (4004, 204, TO_DATE('2026-10-09','YYYY-MM-DD'), 10, 499.00);
+INSERT INTO SALE VALUES (4005, 205, TO_DATE('2026-10-10','YYYY-MM-DD'), 20, 199.00);
+INSERT INTO SALE VALUES (4006, 206, TO_DATE('2026-10-11','YYYY-MM-DD'), 6, 599.00);
+INSERT INTO SALE VALUES (4007, 207, TO_DATE('2026-10-12','YYYY-MM-DD'), 4, 179.00);
+INSERT INTO SALE VALUES (4008, 208, TO_DATE('2026-10-13','YYYY-MM-DD'), 7, 349.00);
+INSERT INTO SALE VALUES (4009, 201, TO_DATE('2026-10-18','YYYY-MM-DD'), 15, 289.00);
+INSERT INTO SALE VALUES (4010, 205, TO_DATE('2026-10-20','YYYY-MM-DD'), 18, 189.00);
+
+COMMIT;
+
+-- 8. VERIFY INSERTED ROW COUNTS
+SELECT 'SUPPLIER' AS table_name, COUNT(*) AS total_records FROM SUPPLIER
+UNION ALL
+SELECT 'RAW_MATERIAL', COUNT(*) FROM RAW_MATERIAL
+UNION ALL
+SELECT 'TOY', COUNT(*) FROM TOY
+UNION ALL
+SELECT 'SUPPLIES', COUNT(*) FROM SUPPLIES
+UNION ALL
+SELECT 'REQUIRES', COUNT(*) FROM REQUIRES
+UNION ALL
+SELECT 'MANUFACTURING_BATCH', COUNT(*) FROM MANUFACTURING_BATCH
+UNION ALL
+SELECT 'SALE', COUNT(*) FROM SALE;
+
+-- End of sample data script.

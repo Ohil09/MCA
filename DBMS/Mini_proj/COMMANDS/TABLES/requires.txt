@@ -1,0 +1,15 @@
+CREATE TABLE REQUIRES (
+    toy_id NUMBER(6),
+    material_id NUMBER(6),
+    quantity_required NUMBER(10,3) NOT NULL,
+    CONSTRAINT pk_requires
+        PRIMARY KEY (toy_id, material_id),
+    CONSTRAINT fk_requires_toy
+        FOREIGN KEY (toy_id)
+        REFERENCES TOY(toy_id),
+    CONSTRAINT fk_requires_material
+        FOREIGN KEY (material_id)
+        REFERENCES RAW_MATERIAL(material_id),
+    CONSTRAINT chk_quantity_required
+        CHECK (quantity_required > 0)
+);

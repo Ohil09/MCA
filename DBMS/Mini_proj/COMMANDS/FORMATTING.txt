@@ -1,0 +1,100 @@
+-- ============================================================
+-- TOY MANUFACTURING DATABASE
+-- SQL*Plus DISPLAY FORMATTING SCRIPT
+-- Run this after connecting to your Oracle schema:
+-- @D:\MCA\DBMS\Mini_proj\COMMANDS\FORMAT_ALL.SQL
+--
+-- This script changes display settings only. It does not modify
+-- any table data or database objects.
+-- ============================================================
+
+-- General SQL*Plus display settings
+SET LINESIZE 220
+SET PAGESIZE 100
+SET WRAP OFF
+SET TAB OFF
+SET TRIMSPOOL ON
+SET FEEDBACK ON
+SET VERIFY OFF
+
+-- Clear any previous column formatting
+CLEAR COLUMNS
+
+-- ============================================================
+-- SUPPLIER
+-- ============================================================
+COLUMN supplier_id   FORMAT 999999
+COLUMN supplier_name FORMAT A28
+COLUMN country       FORMAT A18
+COLUMN phone         FORMAT A15
+COLUMN email         FORMAT A40
+
+-- ============================================================
+-- RAW_MATERIAL
+-- ============================================================
+COLUMN material_id       FORMAT 999999
+COLUMN material_name     FORMAT A25
+COLUMN material_category FORMAT A20
+COLUMN unit              FORMAT A12
+COLUMN description       FORMAT A45
+
+-- ============================================================
+-- TOY
+-- ============================================================
+COLUMN toy_id        FORMAT 999999
+COLUMN toy_name      FORMAT A25
+COLUMN category      FORMAT A16
+COLUMN description   FORMAT A48
+COLUMN current_stock FORMAT 999999
+COLUMN reorder_level FORMAT 999999
+
+-- ============================================================
+-- SUPPLIES
+-- Composite key: supplier_id + material_id
+-- ============================================================
+COLUMN supplier_id       FORMAT 999999
+COLUMN material_id       FORMAT 999999
+COLUMN source_type       FORMAT A12
+COLUMN unit_cost         FORMAT 999999.99
+COLUMN country_of_origin FORMAT A20
+COLUMN availability_status FORMAT A16
+
+-- ============================================================
+-- REQUIRES
+-- Composite key: toy_id + material_id
+-- ============================================================
+COLUMN toy_id          FORMAT 999999
+COLUMN material_id     FORMAT 999999
+COLUMN quantity_required FORMAT 999999.99
+
+-- ============================================================
+-- MANUFACTURING_BATCH
+-- ============================================================
+COLUMN batch_id          FORMAT 999999
+COLUMN toy_id            FORMAT 999999
+COLUMN manufacturing_date FORMAT A13
+COLUMN quantity_produced FORMAT 999999
+COLUMN labour_cost       FORMAT 99999999.99
+COLUMN overhead_cost     FORMAT 99999999.99
+
+-- ============================================================
+-- SALE
+-- ============================================================
+COLUMN sale_id       FORMAT 999999
+COLUMN toy_id        FORMAT 999999
+COLUMN sale_date     FORMAT A13
+COLUMN quantity_sold FORMAT 999999
+COLUMN unit_price    FORMAT 999999.99
+
+-- ============================================================
+-- NOTES
+-- 1. Run the relevant SELECT statement after this script.
+-- 2. Column formatting remains active for the current session.
+-- 3. If a date column appears in an unexpected format, use an
+--    explicit TO_CHAR(date_column, 'DD-MON-YYYY') in your query.
+-- 4. If a text value is longer than its assigned width, increase
+--    that column's A-width and increase LINESIZE if necessary.
+-- ============================================================
+
+PROMPT SQL*Plus display formatting has been configured.
+PROMPT Run SELECT * FROM SUPPLIER; or SELECT * FROM TOY; etc.

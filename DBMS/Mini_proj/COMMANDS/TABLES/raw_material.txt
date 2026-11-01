@@ -1,0 +1,9 @@
+CREATE TABLE RAW_MATERIAL (
+    material_id NUMBER(6),
+    material_name VARCHAR2(100) NOT NULL,
+    material_category VARCHAR2(50),
+    unit VARCHAR2(20) NOT NULL,
+    description VARCHAR2(200),
+    CONSTRAINT pk_raw_material PRIMARY KEY (material_id),
+    CONSTRAINT uq_material_name UNIQUE (material_name)
+);

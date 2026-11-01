@@ -1,0 +1,19 @@
+CREATE TABLE MANUFACTURING_BATCH (
+    batch_id NUMBER(6),
+    toy_id NUMBER(6) NOT NULL,
+    manufacturing_date DATE NOT NULL,
+    quantity_produced NUMBER(8) NOT NULL,
+    labour_cost NUMBER(12,2) DEFAULT 0 NOT NULL,
+    overhead_cost NUMBER(12,2) DEFAULT 0 NOT NULL,
+    CONSTRAINT pk_manufacturing_batch
+        PRIMARY KEY (batch_id),
+    CONSTRAINT fk_batch_toy
+        FOREIGN KEY (toy_id)
+        REFERENCES TOY(toy_id),
+    CONSTRAINT chk_quantity_produced
+        CHECK (quantity_produced > 0),
+    CONSTRAINT chk_labour_cost
+        CHECK (labour_cost >= 0),
+    CONSTRAINT chk_overhead_cost
+        CHECK (overhead_cost >= 0)
+);

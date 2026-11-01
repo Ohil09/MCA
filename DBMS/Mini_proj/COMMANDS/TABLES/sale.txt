@@ -1,0 +1,15 @@
+CREATE TABLE SALE (
+    sale_id NUMBER(6),
+    toy_id NUMBER(6) NOT NULL,
+    sale_date DATE NOT NULL,
+    quantity_sold NUMBER(8) NOT NULL,
+    unit_price NUMBER(10,2) NOT NULL,
+    CONSTRAINT pk_sale PRIMARY KEY (sale_id),
+    CONSTRAINT fk_sale_toy
+        FOREIGN KEY (toy_id)
+        REFERENCES TOY(toy_id),
+    CONSTRAINT chk_quantity_sold
+        CHECK (quantity_sold > 0),
+    CONSTRAINT chk_unit_price
+        CHECK (unit_price >= 0)
+);

@@ -1,0 +1,23 @@
+CREATE TABLE SUPPLIES (
+    supplier_id NUMBER(6),
+    material_id NUMBER(6),
+    source_type VARCHAR2(10) NOT NULL,
+    unit_cost NUMBER(10,2) NOT NULL,
+    country_of_origin VARCHAR2(50) NOT NULL,
+    availability_status VARCHAR2(20) NOT NULL,
+    CONSTRAINT pk_supplies
+        PRIMARY KEY (supplier_id, material_id),
+    CONSTRAINT fk_supplies_supplier
+        FOREIGN KEY (supplier_id)
+        REFERENCES SUPPLIER(supplier_id),
+    CONSTRAINT fk_supplies_material
+        FOREIGN KEY (material_id)
+        REFERENCES RAW_MATERIAL(material_id),
+    CONSTRAINT chk_source_type
+        CHECK (source_type IN ('LOCAL', 'IMPORTED')),
+    CONSTRAINT chk_unit_cost
+        CHECK (unit_cost >= 0),
+    CONSTRAINT chk_availability
+        CHECK (availability_status IN
+        ('AVAILABLE', 'LIMITED', 'UNAVAILABLE'))
+);
