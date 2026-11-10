@@ -15,9 +15,9 @@ SELECT toy_id, toy_name, current_stock FROM TOY WHERE toy_id = 201;
 
 @ D:\MCA\DBMS\Mini_proj\COMMANDS\PR_1.txt;
 
-EXEC record_sale(4013, 201, SYSDATE, 5, 250);
+EXEC record_sale(4022, 201, SYSDATE, 5, 250);
 
-SELECT * FROM SALE WHERE sale_id = 4013;
+SELECT * FROM SALE WHERE sale_id = 4022;
 
 SELECT toy_id, toy_name, current_stock FROM TOY WHERE toy_id = 201;
 
@@ -27,10 +27,10 @@ SELECT toy_id, toy_name, current_stock FROM TOY WHERE toy_id = 201;
 
 select * from manufacturing_batch;
 
-SELECT toy_id, toy_name, current_stock FROM TOY WHERE toy_id = 201;
+SELECT toy_id, toy_name, current_stock FROM TOY WHERE toy_id = 209;
 
 @ D:\MCA\DBMS\Mini_proj\COMMANDS\TR_1.txt;
 
-INSERT INTO MANUFACTURING_BATCH (batch_id, toy_id, manufacturing_date, quantity_produced,labour_cost, overhead_cost )VALUES (3012,201,SYSDATE,50,2000,1000);
+INSERT INTO MANUFACTURING_BATCH VALUES (3021, 209, SYSDATE, 5, 500, 150);
 
-SELECT toy_id, toy_name, current_stock FROM TOY WHERE toy_id = 201;
+SELECT toy_id, toy_name, current_stock FROM TOY WHERE toy_id = 209;

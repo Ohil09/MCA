@@ -1,0 +1,107 @@
+-- TOY MANUFACTURING AND IMPORT DEPENDENCY ANALYSIS SYSTEM
+-- ADDITIONAL SAMPLE DATA INSERTION SCRIPT
+-- Oracle Database 21c / SQL*Plus
+--
+-- Run AFTER the original sample data script. Run only ONCE.
+-- New IDs avoid the original data and previously used sale IDs 4011/4012.
+-- All seven tables receive additional records.
+-- If TRG_BATCH_ADD_STOCK is enabled, batch inserts increase TOY.CURRENT_STOCK.
+-- SALE rows are inserted directly; RECORD_SALE is not called here.
+-- If you have a separate AFTER INSERT trigger on SALE, it may also deduct stock.
+
+SET SQLBLANKLINES ON;
+
+-- 1. SUPPLIER: 4 additional records
+INSERT INTO SUPPLIER VALUES (9, 'Mysore Polymer Industries', 'India', '9876501009', 'sales@mysorepolymer.in');
+INSERT INTO SUPPLIER VALUES (10, 'Shenzhen Toy Components', 'China', '9876501010', 'export@sztoycomponents.cn');
+INSERT INTO SUPPLIER VALUES (11, 'Malnad Timber Crafts', 'India', '9876501011', 'orders@malnadtimber.in');
+INSERT INTO SUPPLIER VALUES (12, 'Southern Textile Solutions', 'India', '9876501012', 'sales@southerntextile.in');
+
+-- 2. RAW_MATERIAL: 4 additional records
+INSERT INTO RAW_MATERIAL VALUES (109, 'Silicone Rubber', 'Rubber', 'KG', 'Flexible rubber material used for soft and flexible toy components');
+INSERT INTO RAW_MATERIAL VALUES (110, 'Bamboo Wood', 'Wood', 'KG', 'Processed bamboo wood used for lightweight wooden toys');
+INSERT INTO RAW_MATERIAL VALUES (111, 'LED Sound Module', 'Electronics', 'PIECE', 'Compact electronic module used for light and sound effects');
+INSERT INTO RAW_MATERIAL VALUES (112, 'Recycled Cardboard', 'Packaging', 'SHEET', 'Recycled cardboard sheets used for environmentally friendly packaging');
+
+-- 3. TOY: 4 additional records. New toys start with zero stock.
+-- Manufacturing batches below add stock automatically if the batch trigger is enabled.
+INSERT INTO TOY VALUES (209, 'Flexible Animal Figures', 'Educational', 'Soft flexible animal-shaped figures made using rubber material', 0, 15);
+INSERT INTO TOY VALUES (210, 'Bamboo Building Kit', 'Educational', 'Lightweight construction kit made from processed bamboo pieces', 0, 12);
+INSERT INTO TOY VALUES (211, 'Light-up Toy Car', 'Electronic', 'Toy car with LED light and sound features', 0, 15);
+INSERT INTO TOY VALUES (212, 'Eco-friendly Toy House', 'Creative', 'Wooden toy house supplied in recycled cardboard packaging', 0, 10);
+
+-- 4. SUPPLIES: 10 additional records
+-- Includes local/imported options and different availability statuses.
+INSERT INTO SUPPLIES VALUES (9, 109, 'LOCAL', 42.00, 'India', 'AVAILABLE');
+INSERT INTO SUPPLIES VALUES (10, 109, 'IMPORTED', 46.50, 'China', 'AVAILABLE');
+INSERT INTO SUPPLIES VALUES (11, 110, 'LOCAL', 36.00, 'India', 'AVAILABLE');
+INSERT INTO SUPPLIES VALUES (3, 110, 'LOCAL', 34.50, 'India', 'LIMITED');
+INSERT INTO SUPPLIES VALUES (12, 103, 'LOCAL', 23.00, 'India', 'AVAILABLE');
+INSERT INTO SUPPLIES VALUES (10, 111, 'IMPORTED', 88.00, 'China', 'AVAILABLE');
+INSERT INTO SUPPLIES VALUES (8, 111, 'IMPORTED', 92.00, 'Taiwan', 'LIMITED');
+INSERT INTO SUPPLIES VALUES (7, 112, 'LOCAL', 7.50, 'India', 'AVAILABLE');
+INSERT INTO SUPPLIES VALUES (9, 101, 'LOCAL', 49.00, 'India', 'AVAILABLE');
+INSERT INTO SUPPLIES VALUES (11, 102, 'LOCAL', 31.00, 'India', 'AVAILABLE');
+
+-- 5. REQUIRES: 8 additional records
+-- quantity_required is the material quantity needed for ONE toy.
+INSERT INTO REQUIRES VALUES (209, 109, 0.300);
+INSERT INTO REQUIRES VALUES (209, 108, 2.000);
+INSERT INTO REQUIRES VALUES (210, 110, 0.600);
+INSERT INTO REQUIRES VALUES (210, 107, 0.020);
+INSERT INTO REQUIRES VALUES (211, 101, 0.150);
+INSERT INTO REQUIRES VALUES (211, 111, 1.000);
+INSERT INTO REQUIRES VALUES (212, 110, 0.900);
+INSERT INTO REQUIRES VALUES (212, 112, 2.000);
+
+-- 6. MANUFACTURING_BATCH: 8 additional records
+-- If TRG_BATCH_ADD_STOCK is enabled, these add produced quantities to toy stock.
+INSERT INTO MANUFACTURING_BATCH VALUES (3011, 209, TO_DATE('2026-10-22','YYYY-MM-DD'), 40, 920.00, 260.00);
+INSERT INTO MANUFACTURING_BATCH VALUES (3012, 209, TO_DATE('2026-10-28','YYYY-MM-DD'), 30, 720.00, 210.00);
+INSERT INTO MANUFACTURING_BATCH VALUES (3013, 210, TO_DATE('2026-10-23','YYYY-MM-DD'), 30, 840.00, 240.00);
+INSERT INTO MANUFACTURING_BATCH VALUES (3014, 210, TO_DATE('2026-10-29','YYYY-MM-DD'), 20, 590.00, 170.00);
+INSERT INTO MANUFACTURING_BATCH VALUES (3015, 211, TO_DATE('2026-10-24','YYYY-MM-DD'), 35, 1050.00, 310.00);
+INSERT INTO MANUFACTURING_BATCH VALUES (3016, 211, TO_DATE('2026-10-30','YYYY-MM-DD'), 28, 860.00, 255.00);
+INSERT INTO MANUFACTURING_BATCH VALUES (3017, 212, TO_DATE('2026-10-25','YYYY-MM-DD'), 32, 880.00, 245.00);
+INSERT INTO MANUFACTURING_BATCH VALUES (3018, 212, TO_DATE('2026-10-31','YYYY-MM-DD'), 18, 510.00, 155.00);
+
+-- 7. SALE: 8 additional records
+-- Sales per new toy are lower than the total quantity produced.
+INSERT INTO SALE VALUES (4013, 209, TO_DATE('2026-11-01','YYYY-MM-DD'), 15, 229.00);
+INSERT INTO SALE VALUES (4014, 209, TO_DATE('2026-11-02','YYYY-MM-DD'), 10, 219.00);
+INSERT INTO SALE VALUES (4015, 210, TO_DATE('2026-11-01','YYYY-MM-DD'), 8, 349.00);
+INSERT INTO SALE VALUES (4016, 210, TO_DATE('2026-11-02','YYYY-MM-DD'), 7, 329.00);
+INSERT INTO SALE VALUES (4017, 211, TO_DATE('2026-11-01','YYYY-MM-DD'), 12, 549.00);
+INSERT INTO SALE VALUES (4018, 211, TO_DATE('2026-11-02','YYYY-MM-DD'), 6, 529.00);
+INSERT INTO SALE VALUES (4019, 212, TO_DATE('2026-11-01','YYYY-MM-DD'), 9, 399.00);
+INSERT INTO SALE VALUES (4020, 212, TO_DATE('2026-11-02','YYYY-MM-DD'), 5, 379.00);
+
+COMMIT;
+
+-- 8. Verify total record counts in all seven tables
+SELECT 'SUPPLIER' AS table_name, COUNT(*) AS total_records FROM SUPPLIER
+UNION ALL
+SELECT 'RAW_MATERIAL', COUNT(*) FROM RAW_MATERIAL
+UNION ALL
+SELECT 'TOY', COUNT(*) FROM TOY
+UNION ALL
+SELECT 'SUPPLIES', COUNT(*) FROM SUPPLIES
+UNION ALL
+SELECT 'REQUIRES', COUNT(*) FROM REQUIRES
+UNION ALL
+SELECT 'MANUFACTURING_BATCH', COUNT(*) FROM MANUFACTURING_BATCH
+UNION ALL
+SELECT 'SALE', COUNT(*) FROM SALE;
+
+-- 9. Verify stock and sales for the four newly added toys
+SELECT t.toy_id,
+       t.toy_name,
+       t.current_stock,
+       NVL(SUM(s.quantity_sold), 0) AS total_quantity_sold
+FROM TOY t
+LEFT JOIN SALE s ON t.toy_id = s.toy_id
+WHERE t.toy_id BETWEEN 209 AND 212
+GROUP BY t.toy_id, t.toy_name, t.current_stock
+ORDER BY t.toy_id;
+
+-- End of additional sample data script.

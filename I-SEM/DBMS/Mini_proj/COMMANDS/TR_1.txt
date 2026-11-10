@@ -1,0 +1,33 @@
+CREATE OR REPLACE TRIGGER trg_batch_add_stock
+AFTER INSERT ON MANUFACTURING_BATCH
+FOR EACH ROW
+DECLARE
+    v_current_stock TOY.current_stock%TYPE;
+    v_reorder_level TOY.reorder_level%TYPE;
+BEGIN
+    -- Update stock after manufacturing
+    UPDATE TOY
+    SET current_stock = current_stock + :NEW.quantity_produced
+    WHERE toy_id = :NEW.toy_id;
+
+    -- Retrieve updated stock and reorder level
+    SELECT current_stock, reorder_level
+    INTO v_current_stock, v_reorder_level
+    FROM TOY
+    WHERE toy_id = :NEW.toy_id;
+
+    -- Check whether stock has reached the reorder level
+    IF v_current_stock <= v_reorder_level THEN
+        DBMS_OUTPUT.PUT_LINE(
+            'WARNING: Toy ID ' || :NEW.toy_id ||
+            ' has reached its reorder level. Current Stock: ' ||
+            v_current_stock
+        );
+    ELSE
+        DBMS_OUTPUT.PUT_LINE(
+            'Stock updated successfully. Current Stock: ' ||
+            v_current_stock
+        );
+    END IF;
+END;
+/

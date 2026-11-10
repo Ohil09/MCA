@@ -1,0 +1,38 @@
+CREATE OR REPLACE FUNCTION sale_amount(p_sale_id IN NUMBER)
+RETURN NUMBER
+IS
+    v_quantity SALE.quantity_sold%TYPE;
+    v_price SALE.unit_price%TYPE;
+    v_gross_amount NUMBER(12,2);
+    v_discount NUMBER(5,2);
+    v_final_amount NUMBER(12,2);
+BEGIN
+    -- Retrieve sale details
+    SELECT quantity_sold, unit_price
+    INTO v_quantity, v_price
+    FROM SALE
+    WHERE sale_id = p_sale_id;
+
+    -- Calculate gross sale amount
+    v_gross_amount := v_quantity * v_price;
+
+    -- Determine discount based on quantity
+    IF v_quantity >= 20 THEN
+        v_discount := 10;
+    ELSIF v_quantity >= 10 THEN
+        v_discount := 5;
+    ELSE
+        v_discount := 0;
+    END IF;
+
+    -- Calculate final amount after discount
+    v_final_amount := v_gross_amount -
+                      (v_gross_amount * v_discount / 100);
+
+    RETURN v_final_amount;
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RETURN NULL;
+END;
+/

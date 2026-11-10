@@ -1,9 +1,0 @@
-CREATE OR REPLACE TRIGGER trg_batch_add_stock
-AFTER INSERT ON MANUFACTURING_BATCH
-FOR EACH ROW
-BEGIN
-    UPDATE TOY
-    SET current_stock = current_stock + :NEW.quantity_produced
-    WHERE toy_id = :NEW.toy_id;
-END;
-/
