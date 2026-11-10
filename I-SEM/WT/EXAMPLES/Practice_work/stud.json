@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Ohil",
+        "roll": "101",
+        "sub": "Maths",
+        "marks": "56"
+    },
+    {
+        "name": "Rian",
+        "roll": "102",
+        "sub": "Science",
+        "marks": "78"
+    },
+    {
+        "name": "Kishan",
+        "roll": "103",
+        "sub": "Physics",
+        "marks": "80"
+    }
+]

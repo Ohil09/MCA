@@ -1,0 +1,42 @@
+[
+    {
+        "user": "User 1",
+        "message": "Hello",
+        "time": "05:18 PM"
+    },
+    {
+        "user": "User 1",
+        "message": "How are you",
+        "time": "05:19 PM"
+    },
+    {
+        "user": "User 2",
+        "message": "I am fine, how about you?",
+        "time": "05:19 PM"
+    },
+    {
+        "user": "User 2",
+        "message": "etet",
+        "time": "05:47 PM"
+    },
+    {
+        "user": "User 2",
+        "message": "etet",
+        "time": "05:47 PM"
+    },
+    {
+        "user": "User 2",
+        "message": "etetet",
+        "time": "05:47 PM"
+    },
+    {
+        "user": "User 2",
+        "message": "etetet",
+        "time": "05:47 PM"
+    },
+    {
+        "user": "User 2",
+        "message": "etet",
+        "time": "05:47 PM"
+    }
+]

@@ -1,18 +1,79 @@
-<?php
-$cookie_name = "user";
-$cookie_value = 2;
-?>
+<!DOCTYPE html>
 <html>
-    <body>
-        <?php
-            if ( isset( $_COOKIE[ $cookie_name ] ) ) {
-                setCookie($cookie_name, $cookie_value, time() + (86400 * 30), "/" );
-            }else{
-                $new_cookie = $COOKIE[$cookie_name] + 1;
-                setCookie( $cookie_name, $new_cookie_value, time() + (86400 * 30), "/" );
-                echo"Cookie : ". $cookie_name ."Is set !";
-                echo "Cookie values is : ".$_COOKIE[$cookie_name];
-            }
-        ?>
-    </body>
+<body>
+
+<h2>User Information</h2>
+
+Name:
+<input type="text" id="name"><br><br>
+
+Age:
+<input type="number" id="age"><br><br>
+
+<button onclick="saveInfo()">Save</button>
+<button onclick="displayInfo()">Display</button>
+
+<p id="result"></p>
+
+<script>
+
+function saveInfo(){
+
+    let name = document.getElementById("name").value;
+    let age = document.getElementById("age").value;
+
+    if(name.trim() == "" || age == ""){
+        alert("Enter all details!");
+        return;
+    }
+
+    document.cookie =
+        "name=" + encodeURIComponent(name) +
+        "; max-age=86400; path=/";
+
+    document.cookie =
+        "age=" + encodeURIComponent(age) +
+        "; max-age=86400; path=/";
+
+    alert("Information saved!");
+
+}
+
+function displayInfo(){
+
+    let cookies = document.cookie.split("; ");
+
+    let name = "";
+    let age = "";
+
+    cookies.forEach(function(c){
+
+        let parts = c.split("=");
+
+        if(parts[0] == "name"){
+            name = decodeURIComponent(parts.slice(1).join("="));
+        }
+
+        if(parts[0] == "age"){
+            age = decodeURIComponent(parts.slice(1).join("="));
+        }
+
+    });
+
+    if(name != "" && age != ""){
+
+        document.getElementById("result").innerHTML =
+            "Name: " + name + "<br>Age: " + age;
+
+    }
+    else{
+        document.getElementById("result").innerHTML =
+            "User information not found!";
+    }
+
+}
+
+</script>
+
+</body>
 </html>
