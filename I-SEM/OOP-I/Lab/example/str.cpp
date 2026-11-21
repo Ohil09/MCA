@@ -9,7 +9,8 @@ int main(){
     // }
     // else{
     //     cout<<"lesser";
-    // }
+    // } 
+    
     cout <<s<<endl;
     s.erase(0);
     s.replace(0,5,s1);
